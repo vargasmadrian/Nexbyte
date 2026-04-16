@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planes — Generador de Aulas Virtuales | NEXBYTE</title>
+<meta name="description" content="Plan de precios del Generador de Aulas Virtuales de NEXBYTE. Automatiza la configuracion de tus aulas Moodle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #E2E8F0;
+    background: #0F172A;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-left { display: flex; align-items: center; gap: 16px; }
+  .back-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: #94A3B8; text-decoration: none; font-size: 18px;
+    transition: all 0.3s;
+  }
+  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
+  .nav-logo { font-size: 22px; font-weight: 900; letter-spacing: 3px; color: white; text-decoration: none; }
+  .nav-logo span { color: #22D3EE; }
+
+  /* ===== MAIN ===== */
+  main { flex: 1; padding: 140px 24px 80px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+  /* ===== HEADER ===== */
+  .page-header { text-align: center; margin-bottom: 56px; }
+  .page-header .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+    padding: 8px 20px; border-radius: 50px;
+    font-size: 13px; font-weight: 500; color: #3B82F6;
+    margin-bottom: 24px;
+  }
+  .page-header .badge .dot { width: 6px; height: 6px; background: #22D3EE; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .page-header h1 {
+    font-size: 44px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 12px;
+  }
+  .page-header h1 .gradient {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .page-header p { font-size: 18px; color: #64748B; line-height: 1.6; }
+
+  /* ===== PLAN CARD ===== */
+  .plan-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .plan-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #3B82F6, #22D3EE);
+  }
+  .plan-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 36px; }
+  .plan-name { font-size: 28px; font-weight: 800; color: white; margin-bottom: 4px; }
+  .plan-sub { font-size: 14px; color: #64748B; }
+  .plan-price { text-align: right; }
+  .plan-price .amount {
+    font-size: 48px; font-weight: 900; letter-spacing: -2px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .plan-price .period { font-size: 15px; color: #64748B; font-weight: 500; }
+
+  /* ===== FEATURES LIST ===== */
+  .features-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; margin-bottom: 0; }
+  .features-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: #CBD5E1; font-weight: 400;
+  }
+  .features-list li .check {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 6px;
+    background: rgba(34,211,238,0.12); color: #22D3EE;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+
+  /* ===== TABLE ===== */
+  .table-section { margin-bottom: 40px; }
+  .table-section h2 {
+    font-size: 22px; font-weight: 700; color: white; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .table-section h2 .icon { font-size: 18px; }
+  .action-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; overflow: hidden;
+  }
+  .action-table thead th {
+    text-align: left; padding: 14px 20px;
+    font-size: 11px; font-weight: 700; color: #64748B;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .action-table thead th:last-child,
+  .action-table thead th:nth-child(2) { text-align: center; }
+  .action-table tbody tr { transition: background 0.2s; }
+  .action-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .action-table tbody td {
+    padding: 14px 20px; font-size: 14px; color: #CBD5E1;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .action-table tbody td:nth-child(2),
+  .action-table tbody td:last-child { text-align: center; font-weight: 600; color: #94A3B8; }
+  .action-table tbody tr:last-child td { border-bottom: none; }
+  .ia-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.15));
+    border: 1px solid rgba(59,130,246,0.25);
+    padding: 3px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; color: #22D3EE;
+  }
+
+  /* ===== PAYMENT SECTION ===== */
+  .payment-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 40px;
+  }
+  .payment-section h2 {
+    font-size: 22px; font-weight: 700; color: white; margin-bottom: 32px; text-align: center;
+  }
+
+  .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .payment-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .payment-card h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 16px; }
+
+  .btn-disabled {
+    background: rgba(255,255,255,0.06);
+    color: #475569; padding: 16px 32px; border-radius: 12px; border: none;
+    font-size: 15px; font-weight: 700; cursor: not-allowed;
+    width: 100%; margin-top: auto;
+  }
+
+  .qr-placeholder {
+    width: 200px; height: 200px; border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 2px dashed rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .qr-placeholder img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 14px;
+  }
+  .qr-placeholder .fallback { color: #475569; font-size: 13px; font-weight: 500; }
+
+  .steps { text-align: left; margin-top: 16px; }
+  .steps ol { padding-left: 20px; }
+  .steps li {
+    font-size: 13px; color: #94A3B8; line-height: 1.7; margin-bottom: 6px;
+  }
+
+  .email-box {
+    margin-top: 20px; padding: 14px 20px; border-radius: 10px;
+    background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .email-box .label { font-size: 12px; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .email-box .addr { font-size: 14px; color: #22D3EE; font-weight: 600; word-break: break-all; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 32px 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px; color: #475569;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    main { padding: 120px 16px 60px; }
+    .page-header h1 { font-size: 30px; }
+    .plan-card { padding: 28px 20px; }
+    .plan-top { flex-direction: column; }
+    .plan-price { text-align: left; }
+    .plan-price .amount { font-size: 36px; }
+    .features-list { grid-template-columns: 1fr; }
+    .payment-methods { grid-template-columns: 1fr; }
+    .payment-section { padding: 28px 20px; }
+    .action-table { font-size: 13px; }
+    .action-table thead th,
+    .action-table tbody td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="/" class="back-arrow" title="Volver al inicio">&larr;</a>
+    <a href="/" class="nav-logo">NEX<span>BYTE</span></a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="badge"><span class="dot"></span> Generador de Aulas Virtuales</div>
+    <h1>Elige tu <span class="gradient">Plan</span></h1>
+    <p>Automatiza la configuraci&oacute;n de tus aulas Moodle con inteligencia artificial.</p>
+  </div>
+
+  <!-- Plan Card -->
+  <div class="plan-card">
+    <div class="plan-top">
+      <div>
+        <div class="plan-name">Plan Completo</div>
+        <div class="plan-sub">Todo lo que necesitas para tus aulas Moodle</div>
+      </div>
+      <div class="plan-price">
+        <div class="amount">$30</div>
+        <div class="period">/ 4 meses</div>
+      </div>
+    </div>
+    <ul class="features-list">
+      <li><span class="check">&#10003;</span> Configura hasta 10 aulas Moodle</li>
+      <li><span class="check">&#10003;</span> 4 meses de acceso completo</li>
+      <li><span class="check">&#10003;</span> Generaci&oacute;n de r&uacute;bricas con IA</li>
+      <li><span class="check">&#10003;</span> Generaci&oacute;n de preguntas Aiken con IA</li>
+      <li><span class="check">&#10003;</span> Importaci&oacute;n autom&aacute;tica de s&iacute;labos</li>
+      <li><span class="check">&#10003;</span> Banners profesionales personalizados</li>
+      <li><span class="check">&#10003;</span> Soporte por email</li>
+    </ul>
+  </div>
+
+  <!-- Action Limits Table -->
+  <div class="table-section">
+    <h2><span class="icon">&#9889;</span> L&iacute;mites de acciones</h2>
+    <table class="action-table">
+      <thead>
+        <tr>
+          <th>Funcionalidad</th>
+          <th>Usos</th>
+          <th>IA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Importar plantilla Moodle</td>
+          <td>12</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Generar s&iacute;labo</td>
+          <td>12</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Editar banner</td>
+          <td>12</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Subir recursos (videos, Genially, PPTs, PDFs)</td>
+          <td>140</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Crear tarea</td>
+          <td>90</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Generar r&uacute;brica con IA</td>
+          <td>90</td>
+          <td><span class="ia-badge">&#10024; IA</span></td>
+        </tr>
+        <tr>
+          <td>Crear evaluaci&oacute;n</td>
+          <td>30</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Generar preguntas Aiken con IA</td>
+          <td>30</td>
+          <td><span class="ia-badge">&#10024; IA</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Payment Section -->
+  <div class="payment-section">
+    <h2>M&eacute;todos de pago</h2>
+    <div class="payment-methods">
+
+      <!-- Card payment -->
+      <div class="payment-card">
+        <h3>Pagar con tarjeta</h3>
+        <p style="font-size:13px; color:#64748B; margin-bottom:24px; flex:1;">Procesador de pagos en l&iacute;nea para tarjetas de cr&eacute;dito y d&eacute;bito.</p>
+        <button class="btn-disabled" disabled>Pr&oacute;ximamente</button>
+      </div>
+
+      <!-- QR De Una -->
+      <div class="payment-card">
+        <h3>QR De Una (Banco Pichincha)</h3>
+        <div class="qr-placeholder">
+          <img src="/qr-deuna.png" alt="QR De Una - Banco Pichincha" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=fallback>QR De Una</span>';">
+        </div>
+        <div class="steps">
+          <ol>
+            <li>Escanea el c&oacute;digo QR con tu app <strong>De Una</strong> (Banco Pichincha)</li>
+            <li>Realiza el pago de <strong>$30</strong> (Plan Completo &mdash; 4 meses)</li>
+            <li>Env&iacute;a el comprobante de pago al correo electr&oacute;nico indicado abajo</li>
+          </ol>
+        </div>
+        <div class="email-box">
+          <div>
+            <div class="label">Correo de contacto</div>
+            <div class="addr">vargasmadrian@gmail.com</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 NEXBYTE. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
