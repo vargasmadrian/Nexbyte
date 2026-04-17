@@ -131,6 +131,20 @@
   .success h2 { font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
   .success p { font-size: 16px; color: #94A3B8; max-width: 450px; margin: 0 auto; line-height: 1.6; }
 
+  /* Floating CTA */
+  .floating-cta {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; font-size: 15px; font-weight: 700;
+    padding: 16px 32px; border-radius: 50px; border: none;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(59,130,246,0.4);
+    display: flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .floating-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(59,130,246,0.5); }
+  .floating-cta svg { flex-shrink: 0; }
+
   /* Footer */
   footer { padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 12px; color: #475569; }
 
@@ -297,6 +311,12 @@
   <h2>¡Extension instalada!</h2>
   <p>Navega a tu aula en <strong>moodle.pucese.edu.ec</strong>, abre la extension y comienza a configurar tus aulas virtuales automaticamente.</p>
 </section>
+
+<!-- FLOATING CTA -->
+<a href="/planes/" class="floating-cta">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  Adquirir plan
+</a>
 
 <footer>
   <p>&copy; 2026 NEXBYTE. Todos los derechos reservados. — <a href="/privacidad/" style="color:#64748B;">Politica de privacidad</a></p>
