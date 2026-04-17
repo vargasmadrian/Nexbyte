@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Instalar — Generador de Aulas Virtuales | NEXBYTE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0F172A; color: #CBD5E1; }
+
+  /* Nav */
+  nav {
+    padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo { font-size: 20px; font-weight: 900; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .nav-logo span { color: #22D3EE; }
+  .nav-back { color: #64748B; text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-back:hover { color: white; }
+
+  /* Hero */
+  .hero {
+    text-align: center; padding: 60px 24px 40px;
+    background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, transparent 100%);
+  }
+  .hero h1 { font-size: 36px; font-weight: 800; color: white; margin-bottom: 12px; }
+  .hero p { font-size: 16px; color: #94A3B8; max-width: 500px; margin: 0 auto 30px; line-height: 1.6; }
+  .hero-time { display: inline-flex; align-items: center; gap: 8px; background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.2); padding: 8px 20px; border-radius: 50px; font-size: 14px; color: #22D3EE; font-weight: 600; }
+
+  /* Download button */
+  .download-section { text-align: center; padding: 20px 24px 50px; }
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE); color: white;
+    padding: 18px 40px; border-radius: 14px; text-decoration: none;
+    font-size: 17px; font-weight: 700; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn-download:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(59,130,246,0.35); }
+  .btn-download svg { width: 22px; height: 22px; }
+  .download-note { font-size: 13px; color: #64748B; margin-top: 12px; }
+
+  /* Steps */
+  .steps { max-width: 750px; margin: 0 auto; padding: 0 24px 80px; }
+  .step {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 36px; margin-bottom: 24px;
+    position: relative; overflow: hidden; transition: all 0.3s;
+  }
+  .step:hover { background: rgba(255,255,255,0.05); border-color: rgba(59,130,246,0.2); }
+  .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 800; color: white;
+  }
+  .step-title { font-size: 20px; font-weight: 700; color: white; }
+  .step-desc { font-size: 15px; color: #94A3B8; line-height: 1.7; margin-bottom: 16px; }
+  .step-desc strong { color: #E2E8F0; }
+  .step-visual {
+    background: #1E293B; border-radius: 12px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .step-visual code {
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; color: #22D3EE;
+  }
+  .step-visual .path {
+    display: flex; align-items: center; gap: 8px; padding: 10px 16px;
+    background: rgba(255,255,255,0.05); border-radius: 8px; margin-top: 10px;
+    font-size: 13px; color: #CBD5E1; font-family: monospace;
+  }
+  .step-tip {
+    display: flex; align-items: flex-start; gap: 10px; margin-top: 16px;
+    padding: 12px 16px; background: rgba(34,211,238,0.08);
+    border: 1px solid rgba(34,211,238,0.15); border-radius: 10px;
+    font-size: 13px; color: #22D3EE; line-height: 1.5;
+  }
+  .step-tip .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Mockup browser bar */
+  .browser-bar {
+    display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+    background: #0F172A; border-radius: 10px 10px 0 0;
+    border: 1px solid rgba(255,255,255,0.08); border-bottom: none;
+  }
+  .browser-dots { display: flex; gap: 5px; }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot:nth-child(1) { background: #EF4444; }
+  .browser-dot:nth-child(2) { background: #F59E0B; }
+  .browser-dot:nth-child(3) { background: #22C55E; }
+  .browser-url {
+    flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px;
+    padding: 6px 12px; font-size: 12px; color: #94A3B8; font-family: monospace;
+  }
+  .browser-content {
+    background: #1E293B; border-radius: 0 0 10px 10px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08); border-top: none;
+  }
+
+  /* Toggle visual */
+  .toggle-visual {
+    display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+    background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 12px;
+  }
+  .toggle {
+    width: 44px; height: 24px; background: #3B82F6; border-radius: 12px;
+    position: relative;
+  }
+  .toggle::after {
+    content: ''; position: absolute; right: 3px; top: 3px;
+    width: 18px; height: 18px; background: white; border-radius: 50%;
+  }
+  .toggle-label { font-size: 14px; color: #E2E8F0; font-weight: 600; }
+
+  /* Button visual */
+  .btn-visual {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, #3B82F6, #2563EB); color: white;
+    padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    border: none; cursor: default;
+  }
+
+  /* Success */
+  .success {
+    text-align: center; padding: 50px 24px 80px;
+    background: linear-gradient(180deg, transparent 0%, rgba(34,211,238,0.05) 100%);
+  }
+  .success-icon { font-size: 60px; margin-bottom: 16px; }
+  .success h2 { font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
+  .success p { font-size: 16px; color: #94A3B8; max-width: 450px; margin: 0 auto; line-height: 1.6; }
+
+  /* Footer */
+  footer { padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 12px; color: #475569; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 26px; }
+    .step { padding: 24px; }
+    nav { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="28" height="28">
+      <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3B82F6"/><stop offset="100%" style="stop-color:#22D3EE"/></linearGradient></defs>
+      <rect width="100" height="100" rx="22" fill="#0F172A"/>
+      <path d="M30 72 L30 28 L58 72 L58 28" stroke="url(#g)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="72" cy="28" r="5" fill="#22D3EE"/><circle cx="72" cy="72" r="5" fill="#3B82F6"/>
+      <line x1="72" y1="33" x2="72" y2="67" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
+      <circle cx="72" cy="50" r="2.5" fill="#22D3EE" opacity="0.6"/>
+    </svg>
+    NEX<span>BYTE</span>
+  </a>
+  <a href="/" class="nav-back">← Volver al inicio</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Instalar la extension</h1>
+  <p>Sigue estos 4 pasos sencillos para instalar el Generador de Aulas Virtuales en tu navegador Chrome.</p>
+  <div class="hero-time">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Tiempo estimado: 2 minutos
+  </div>
+</section>
+
+<!-- Download -->
+<section class="download-section">
+  <a href="/generador-aulas-v3.zip" download class="btn-download">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Descargar extension (.zip)
+  </a>
+  <p class="download-note">Archivo .zip — Compatible con Google Chrome y navegadores basados en Chromium</p>
+</section>
+
+<!-- Steps -->
+<section class="steps">
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Descomprime el archivo</div>
+    </div>
+    <p class="step-desc">
+      Busca el archivo <strong>generador-aulas-v3.zip</strong> en tu carpeta de descargas.
+      Haz <strong>clic derecho</strong> sobre el archivo y selecciona <strong>"Extraer todo..."</strong> (Windows)
+      o simplemente <strong>doble clic</strong> (Mac).
+    </p>
+    <div class="step-visual">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <div>
+          <div style="font-size:14px;color:white;font-weight:600;">generador-aulas-v3</div>
+          <div style="font-size:12px;color:#64748B;">Carpeta extraida</div>
+        </div>
+      </div>
+      <div class="path">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Descargas / generador-aulas-v3 /
+      </div>
+    </div>
+    <div class="step-tip">
+      <span class="tip-icon">💡</span>
+      <span>Recuerda donde extraes la carpeta — Chrome la necesitara para que la extension funcione. No la borres despues.</span>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Abre las extensiones de Chrome</div>
+    </div>
+    <p class="step-desc">
+      Escribe <strong>chrome://extensions</strong> en la barra de direcciones de Chrome y presiona <strong>Enter</strong>.
+    </p>
+    <div class="browser-bar">
+      <div class="browser-dots">
+        <div class="browser-dot"></div>
+        <div class="browser-dot"></div>
+        <div class="browser-dot"></div>
+      </div>
+      <div class="browser-url">chrome://extensions</div>
+    </div>
+    <div class="browser-content">
+      <p style="font-size:13px;color:#94A3B8;margin-bottom:16px;">Activa el <strong style="color:#E2E8F0;">Modo de desarrollador</strong> con el interruptor de la esquina superior derecha:</p>
+      <div class="toggle-visual">
+        <div class="toggle"></div>
+        <span class="toggle-label">Modo de desarrollador</span>
+      </div>
+      <p style="font-size:12px;color:#64748B;">Al activarlo, apareceran tres botones nuevos en la parte superior.</p>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Carga la extension</div>
+    </div>
+    <p class="step-desc">
+      Haz clic en el boton <strong>"Cargar descomprimida"</strong> que aparecio en la parte superior izquierda.
+    </p>
+    <div class="step-visual">
+      <div style="display:flex;gap:10px;margin-bottom:16px;">
+        <div class="btn-visual" style="background:linear-gradient(135deg,#3B82F6,#2563EB);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Cargar descomprimida
+        </div>
+        <div class="btn-visual" style="background:#475569;">Empaquetar extension</div>
+      </div>
+      <p style="font-size:13px;color:#94A3B8;">
+        Se abrira un explorador de archivos. Selecciona la <strong style="color:#E2E8F0;">carpeta</strong> que extrajiste en el Paso 1
+        (la carpeta <code style="color:#22D3EE;">generador-aulas-v3</code>, no el .zip).
+      </p>
+    </div>
+    <div class="step-tip">
+      <span class="tip-icon">⚠️</span>
+      <span>Selecciona la <strong>carpeta</strong>, no un archivo individual dentro de ella. La carpeta debe contener el archivo manifest.json.</span>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">¡Listo! Inicia sesion</div>
+    </div>
+    <p class="step-desc">
+      La extension aparecera en tu lista de extensiones. Haz clic en el icono de la extension
+      (el buho) en la barra de herramientas de Chrome e <strong>inicia sesion con Google</strong>.
+    </p>
+    <div class="step-visual" style="text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:12px;padding:14px 28px;background:rgba(255,255,255,0.05);border-radius:12px;border:1px solid rgba(255,255,255,0.1);">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span style="font-size:16px;color:white;font-weight:600;">Iniciar sesion con Google</span>
+      </div>
+      <p style="font-size:13px;color:#64748B;margin-top:14px;">Necesitas una suscripcion activa para usar la herramienta</p>
+    </div>
+    <div class="step-tip">
+      <span class="tip-icon">📌</span>
+      <span>Para fijar la extension en la barra de Chrome: haz clic en el icono de puzzle (🧩) y luego en el pin junto a "Generador de Aulas Virtuales".</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- Success -->
+<section class="success">
+  <div class="success-icon">🎉</div>
+  <h2>¡Extension instalada!</h2>
+  <p>Navega a tu aula en <strong>moodle.pucese.edu.ec</strong>, abre la extension y comienza a configurar tus aulas virtuales automaticamente.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 NEXBYTE. Todos los derechos reservados. — <a href="/privacidad/" style="color:#64748B;">Politica de privacidad</a></p>
+</footer>
+
+</body>
+</html>
