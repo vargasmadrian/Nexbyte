@@ -154,7 +154,7 @@
     font-size: 22px; font-weight: 700; color: white; margin-bottom: 32px; text-align: center;
   }
 
-  .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .payment-methods { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 480px; margin: 0 auto; }
 
   .payment-card {
     background: rgba(255,255,255,0.02);
@@ -327,12 +327,14 @@
     <h2>M&eacute;todos de pago</h2>
     <div class="payment-methods">
 
-      <!-- Card payment -->
+      <!-- Card payment (oculto hasta activar Payphone) -->
+      <!--
       <div class="payment-card">
         <h3>Pagar con tarjeta</h3>
         <p style="font-size:13px; color:#64748B; margin-bottom:24px; flex:1;">Procesador de pagos en l&iacute;nea para tarjetas de cr&eacute;dito y d&eacute;bito.</p>
         <button class="btn-disabled" disabled>Pr&oacute;ximamente</button>
       </div>
+      -->
 
       <!-- QR De Una -->
       <div class="payment-card">
