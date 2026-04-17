@@ -198,6 +198,20 @@
   .email-box .label { font-size: 12px; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .email-box .addr { font-size: 14px; color: #22D3EE; font-weight: 600; word-break: break-all; }
 
+  /* ===== FLOATING CTA ===== */
+  .floating-cta {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; font-size: 15px; font-weight: 700;
+    padding: 16px 32px; border-radius: 50px; border: none;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(59,130,246,0.4);
+    display: flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .floating-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(59,130,246,0.5); }
+  .floating-cta svg { flex-shrink: 0; }
+
   /* ===== FOOTER ===== */
   footer {
     text-align: center; padding: 32px 24px;
@@ -323,7 +337,7 @@
   </div>
 
   <!-- Payment Section -->
-  <div class="payment-section">
+  <div class="payment-section" id="pagar">
     <h2>M&eacute;todos de pago</h2>
     <div class="payment-methods">
 
@@ -361,6 +375,12 @@
   </div>
 
 </main>
+
+<!-- FLOATING CTA -->
+<a href="#pagar" class="floating-cta">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+  Adquirir plan
+</a>
 
 <!-- FOOTER -->
 <footer>
