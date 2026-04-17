@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Política de Privacidad — Generador de Aulas Virtuales | NEXBYTE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0F172A; color: #CBD5E1; line-height: 1.8; }
+  .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+  h1 { color: white; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { color: #64748B; font-size: 14px; margin-bottom: 40px; }
+  h2 { color: #E2E8F0; font-size: 20px; font-weight: 700; margin-top: 36px; margin-bottom: 12px; }
+  p, li { font-size: 15px; margin-bottom: 12px; }
+  ul { padding-left: 24px; }
+  a { color: #22D3EE; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 30px; }
+  .back:hover { color: white; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="back">← Volver a NEXBYTE</a>
+  <h1>Política de Privacidad</h1>
+  <p class="subtitle">Generador de Aulas Virtuales — Última actualización: abril 2026</p>
+
+  <h2>1. Información que recopilamos</h2>
+  <p>La extensión "Generador de Aulas Virtuales" recopila la siguiente información cuando el usuario inicia sesión:</p>
+  <ul>
+    <li><strong>Nombre completo y correo electrónico</strong> — proporcionados a través de la autenticación con Google OAuth.</li>
+    <li><strong>Foto de perfil</strong> — obtenida de la cuenta de Google del usuario.</li>
+  </ul>
+  <p>No recopilamos información personal adicional, datos de navegación ni historial de uso fuera de la plataforma Moodle.</p>
+
+  <h2>2. Cómo utilizamos la información</h2>
+  <p>La información recopilada se utiliza exclusivamente para:</p>
+  <ul>
+    <li>Autenticar al usuario y gestionar su sesión.</li>
+    <li>Asociar su cuenta con su suscripción activa.</li>
+    <li>Registrar el uso de créditos por acción (importar plantillas, generar contenido, etc.).</li>
+    <li>Mostrar el nombre del usuario dentro de la extensión.</li>
+  </ul>
+
+  <h2>3. Almacenamiento de datos</h2>
+  <p>Los datos de autenticación se almacenan de forma segura en Supabase (plataforma backend). Las credenciales de sesión se guardan localmente en el navegador mediante <code>chrome.storage</code> y se eliminan al cerrar sesión.</p>
+
+  <h2>4. Compartición de datos</h2>
+  <p>No compartimos, vendemos ni transferimos información personal del usuario a terceros. Los datos solo se transmiten entre la extensión y nuestro backend en Supabase para la autenticación y gestión de suscripciones.</p>
+
+  <h2>5. Permisos de la extensión</h2>
+  <ul>
+    <li><strong>activeTab</strong> — para interactuar con la pestaña de Moodle activa.</li>
+    <li><strong>identity</strong> — para autenticación con Google.</li>
+    <li><strong>scripting</strong> — para automatizar acciones en Moodle (crear tareas, subir recursos, etc.).</li>
+    <li><strong>storage</strong> — para guardar la sesión del usuario localmente.</li>
+    <li><strong>tabs</strong> — para detectar la pestaña de Moodle y coordinar acciones.</li>
+    <li><strong>host_permissions (moodle.pucese.edu.ec)</strong> — para ejecutar las automatizaciones en la plataforma Moodle.</li>
+    <li><strong>host_permissions (supabase.co)</strong> — para comunicarse con el backend de autenticación y suscripciones.</li>
+  </ul>
+
+  <h2>6. Seguridad</h2>
+  <p>Implementamos medidas de seguridad estándar de la industria:</p>
+  <ul>
+    <li>Autenticación segura mediante OAuth 2.0 con Google.</li>
+    <li>Comunicación cifrada (HTTPS) con el backend.</li>
+    <li>Row Level Security (RLS) en la base de datos para aislar los datos de cada usuario.</li>
+  </ul>
+
+  <h2>7. Eliminación de datos</h2>
+  <p>El usuario puede cerrar sesión en cualquier momento desde la extensión, lo cual elimina los datos de sesión almacenados localmente. Para solicitar la eliminación completa de su cuenta y datos asociados, puede contactarnos por correo electrónico.</p>
+
+  <h2>8. Contacto</h2>
+  <p>Si tiene preguntas sobre esta política de privacidad, puede contactarnos en:</p>
+  <p><a href="mailto:vargasmadrian@gmail.com">vargasmadrian@gmail.com</a></p>
+
+  <h2>9. Cambios a esta política</h2>
+  <p>Nos reservamos el derecho de actualizar esta política. Los cambios se publicarán en esta página con la fecha de actualización correspondiente.</p>
+</div>
+</body>
+</html>
