@@ -89,6 +89,38 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   .plan-price .period { font-size: 15px; color: #64748B; font-weight: 500; }
+  .plan-price .price-old {
+    display: block;
+    font-size: 16px; font-weight: 600;
+    color: #64748B; letter-spacing: 0;
+    text-decoration: line-through;
+    -webkit-text-fill-color: #64748B;
+    background: none;
+    margin-bottom: 2px;
+  }
+  .plan-card--free { border-color: rgba(34,197,94,0.25); }
+  .plan-card--free::before {
+    background: linear-gradient(90deg, #22C55E, #22D3EE);
+  }
+  .plan-card--free .plan-price .amount {
+    background: linear-gradient(135deg, #22C55E, #22D3EE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .free-badge {
+    display: inline-block; margin-left: 10px;
+    background: rgba(34,197,94,0.15); color: #22C55E;
+    border: 1px solid rgba(34,197,94,0.3);
+    padding: 4px 10px; border-radius: 50px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    vertical-align: middle;
+  }
+  .action-table .col-free { color: #22C55E; }
+  .free-hint-row td {
+    background: rgba(34,197,94,0.04);
+    font-size: 12px; color: #64748B;
+    font-style: italic; padding: 10px 20px;
+  }
 
   /* ===== FEATURES LIST ===== */
   .features-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; margin-bottom: 0; }
@@ -283,7 +315,7 @@
   <div class="page-header">
     <div class="badge"><span class="dot"></span> Generador de Aulas Virtuales</div>
     <h1>Elige tu <span class="gradient">Plan</span></h1>
-    <p>Automatiza la configuraci&oacute;n de tus aulas Moodle con inteligencia artificial.</p>
+    <p>Empieza <strong>gratis</strong> al registrarte &mdash; sin tarjeta. Cuando necesites m&aacute;s, activa el Plan Completo por $20 por lanzamiento.</p>
   </div>
 
   <!-- Plan Card -->
@@ -294,18 +326,38 @@
         <div class="plan-sub">Todo lo que necesitas para tus aulas Moodle</div>
       </div>
       <div class="plan-price">
-        <div class="amount">$30</div>
-        <div class="period">/ 4 meses</div>
+        <div class="amount"><span class="price-old">$30&nbsp;/&nbsp;4 meses</span> $20</div>
+        <div class="period">por lanzamiento</div>
       </div>
     </div>
     <ul class="features-list">
       <li><span class="check">&#10003;</span> Configura hasta 10 aulas Moodle</li>
-      <li><span class="check">&#10003;</span> 4 meses de acceso completo</li>
+      <li><span class="check">&#10003;</span> Acceso completo durante el lanzamiento</li>
       <li><span class="check">&#10003;</span> Generaci&oacute;n de r&uacute;bricas con IA</li>
       <li><span class="check">&#10003;</span> Generaci&oacute;n de preguntas Aiken con IA</li>
       <li><span class="check">&#10003;</span> Importaci&oacute;n autom&aacute;tica de s&iacute;labos</li>
       <li><span class="check">&#10003;</span> Banners profesionales personalizados</li>
       <li><span class="check">&#10003;</span> Soporte por email</li>
+    </ul>
+  </div>
+
+  <!-- Plan Gratuito Card -->
+  <div class="plan-card plan-card--free">
+    <div class="plan-top">
+      <div>
+        <div class="plan-name">Plan Gratuito <span class="free-badge">Por defecto</span></div>
+        <div class="plan-sub">Pru&eacute;balo sin pagar &mdash; se activa autom&aacute;ticamente al registrarte</div>
+      </div>
+      <div class="plan-price">
+        <div class="amount">$0</div>
+        <div class="period">siempre</div>
+      </div>
+    </div>
+    <ul class="features-list">
+      <li><span class="check">&#10003;</span> <strong>2 intentos</strong> por cada acci&oacute;n</li>
+      <li><span class="check">&#10003;</span> <strong>1 intento</strong> en acciones con IA</li>
+      <li><span class="check">&#10003;</span> Todas las funcionalidades disponibles</li>
+      <li><span class="check">&#10003;</span> Sin tarjeta de cr&eacute;dito</li>
     </ul>
   </div>
 
@@ -316,50 +368,62 @@
       <thead>
         <tr>
           <th>Funcionalidad</th>
-          <th>Usos</th>
+          <th>Gratuito</th>
+          <th>Completo</th>
           <th>IA</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Importar plantilla Moodle</td>
+          <td class="col-free">2</td>
           <td>12</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Generar s&iacute;labo</td>
+          <td class="col-free">2</td>
           <td>12</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Editar banner</td>
+          <td class="col-free">2</td>
           <td>12</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Subir recursos (videos, Genially, PPTs, PDFs)</td>
+          <td class="col-free">2</td>
           <td>140</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Crear tarea</td>
+          <td class="col-free">2</td>
           <td>90</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Generar r&uacute;brica con IA</td>
+          <td class="col-free">1</td>
           <td>90</td>
           <td><span class="ia-badge">&#10024; IA</span></td>
         </tr>
         <tr>
           <td>Crear evaluaci&oacute;n</td>
+          <td class="col-free">2</td>
           <td>30</td>
           <td>&mdash;</td>
         </tr>
         <tr>
           <td>Generar preguntas Aiken con IA</td>
+          <td class="col-free">1</td>
           <td>30</td>
           <td><span class="ia-badge">&#10024; IA</span></td>
+        </tr>
+        <tr class="free-hint-row">
+          <td colspan="4">&#128161; El <strong>Plan Gratuito</strong> te da 2 intentos por cada acci&oacute;n (1 en las de IA) para que pruebes todo antes de pagar.</td>
         </tr>
       </tbody>
     </table>
@@ -388,7 +452,7 @@
         <div class="steps">
           <ol>
             <li>Escanea el c&oacute;digo QR con tu app <strong>De Una</strong> (Banco Pichincha)</li>
-            <li>Realiza el pago de <strong>$30</strong> (Plan Completo &mdash; 4 meses)</li>
+            <li>Realiza el pago de <strong>$20</strong> (Plan Completo &mdash; por lanzamiento)</li>
             <li>Env&iacute;a el comprobante de pago al correo electr&oacute;nico indicado abajo</li>
             <li>Recibir&aacute;s un correo con la confirmaci&oacute;n de activaci&oacute;n de tu plan en un plazo m&aacute;ximo de 24 horas</li>
           </ol>
