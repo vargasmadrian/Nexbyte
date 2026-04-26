@@ -1,0 +1,14 @@
+{
+  "version_visible": "3.1.0",
+  "company": {
+    "name": "NEXBYTE",
+    "url": "https://nexbyte.pro"
+  },
+  "author": {
+    "name": "Adrián Vargas",
+    "role": "Creador y desarrollador"
+  },
+  "product_url": "https://nexbyte.pro/planes/",
+  "support_url": "https://nexbyte.pro/instalar/",
+  "announcement": null
+}
