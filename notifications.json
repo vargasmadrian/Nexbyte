@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "id": "v3-3-0-edit-before-inject",
+      "title": "Versión 3.3.0: edita antes de inyectar",
+      "body": "Ahora después de generar el sílabo (con o sin IA) puedes revisar y editar el contenido directamente — sílabo, materia, docente, horario — antes de aprobar e inyectar a Moodle. Click en cualquier texto del preview para editarlo.",
+      "date": "2026-04-26",
+      "type": "release",
+      "url": "https://nexbyte.pro/instalar/"
+    },
+    {
       "id": "v3-1-0-release",
       "title": "Versión 3.1.0 disponible",
       "body": "Soporte para subir el sílabo en Excel, integración con Moodle CR (moodlecr.pucese.edu.ec), y el botón 'Generar con IA' ahora usa Claude para mejor calidad.",
