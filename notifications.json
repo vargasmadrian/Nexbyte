@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "v3-1-0-release",
+      "title": "Versión 3.1.0 disponible",
+      "body": "Soporte para subir el sílabo en Excel, integración con Moodle CR (moodlecr.pucese.edu.ec), y el botón 'Generar con IA' ahora usa Claude para mejor calidad.",
+      "date": "2026-04-26",
+      "type": "release",
+      "url": "https://nexbyte.pro/instalar/"
+    },
+    {
+      "id": "premium-coming-soon",
+      "title": "🎉 Plan Premium en camino",
+      "body": "Generación completa de cursos con IA: 9 presentaciones, 9 PDFs, 9 tareas y 9 evaluaciones por curso. Pronto disponible.",
+      "date": "2026-04-26",
+      "type": "promo",
+      "url": "https://nexbyte.pro/planes/"
+    }
+  ]
+}
