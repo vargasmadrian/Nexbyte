@@ -1,5 +1,5 @@
 {
-  "version_visible": "3.1.0",
+  "_comment": "La versión se lee SIEMPRE del manifest.json de la extensión, NO de aquí. Edita company/author/links/announcement libremente; los cambios propagan a todos los popups en <1min.",
   "company": {
     "name": "NEXBYTE",
     "url": "https://nexbyte.pro"
