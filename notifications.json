@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "id": "v3-6-0-premium-launch",
+      "title": "🚀 Plan Premium disponible",
+      "body": "Suscriptores Premium: ya pueden generar 9 PPT (3 RdA × 3 slots) en minutos con IA. Sube tu sílabo y libros, y descarga los .pptx editables. PDFs, tareas y evaluaciones próximamente.",
+      "date": "2026-04-26",
+      "type": "release",
+      "url": "https://nexbyte.pro/planes/"
+    },
+    {
       "id": "v3-4-0-support-chat",
       "title": "Versión 3.4.0: chat de soporte",
       "body": "Ahora puedes enviarnos mensajes y capturas de pantalla directo desde el popup. Click en el ícono de chat junto a las notificaciones para abrir el panel.",
