@@ -6,7 +6,8 @@
       "body": "Suscriptores Premium: ya pueden generar 9 PPT (3 RdA × 3 slots) en minutos con IA. Sube tu sílabo y libros, y descarga los .pptx editables. PDFs, tareas y evaluaciones próximamente.",
       "date": "2026-04-26",
       "type": "release",
-      "url": "https://nexbyte.pro/planes/"
+      "url": "https://nexbyte.pro/planes/",
+      "audience": ["free", "completo"]
     },
     {
       "id": "v3-4-0-support-chat",
@@ -38,7 +39,8 @@
       "body": "Generación completa de cursos con IA: 9 presentaciones, 9 PDFs, 9 tareas y 9 evaluaciones por curso. Pronto disponible.",
       "date": "2026-04-26",
       "type": "promo",
-      "url": "https://nexbyte.pro/planes/"
+      "url": "https://nexbyte.pro/planes/",
+      "audience": ["free", "completo"]
     }
   ]
 }
