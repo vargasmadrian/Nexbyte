@@ -244,7 +244,38 @@
     font-size: 22px; font-weight: 700; color: white; margin-bottom: 32px; text-align: center;
   }
 
-  .payment-methods { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 480px; margin: 0 auto; }
+  .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; align-items: start; }
+  @media (max-width: 768px) { .payment-methods { grid-template-columns: 1fr; max-width: 480px; } }
+
+  /* PayPhone form */
+  .pp-form { width: 100%; margin-top: 8px; text-align: left; }
+  .pp-form label { display: block; color: #CBD5E1; font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pp-form input {
+    width: 100%; padding: 12px 14px; background: #0F172A;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+    color: white; font-size: 14px; font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .pp-form input:focus { outline: none; border-color: #22D3EE; }
+  .pp-form .hint { color: #64748B; font-size: 11px; margin-top: 6px; line-height: 1.4; }
+  .pp-form .error {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    color: #FCA5A5; padding: 10px 12px; border-radius: 8px;
+    font-size: 12px; line-height: 1.4; margin-top: 10px; display: none;
+  }
+  .pp-form .error.show { display: block; }
+  .btn-pay-card {
+    width: 100%; margin-top: 14px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; border: none; padding: 14px 20px;
+    border-radius: 12px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+  .btn-pay-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,0.35); }
+  .btn-pay-card:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .pp-secure { text-align: center; color: #64748B; font-size: 11px; margin-top: 10px; }
+  .pp-instant { display: inline-block; margin-top: 10px; background: rgba(34,197,94,0.12); color: #22C55E; border: 1px solid rgba(34,197,94,0.25); padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
   .payment-card {
     background: rgba(255,255,255,0.02);
@@ -373,7 +404,7 @@
   <div class="page-header">
     <div class="badge"><span class="dot"></span> Generador de Aulas Virtuales</div>
     <h1>Elige tu <span class="gradient">Plan</span></h1>
-    <p>Empieza <strong>gratis</strong> al registrarte &mdash; sin tarjeta. Cuando necesites m&aacute;s, activa el Plan Completo por $20 por lanzamiento.</p>
+    <p>Empieza <strong>gratis</strong> al registrarte &mdash; sin tarjeta. Cuando necesites m&aacute;s, activa el Plan Completo por $30 trimestral.</p>
   </div>
 
   <!-- Plan Card -->
@@ -384,13 +415,13 @@
         <div class="plan-sub">Todo lo que necesitas para tus aulas Moodle</div>
       </div>
       <div class="plan-price">
-        <div class="amount"><span class="price-old">$30&nbsp;/&nbsp;4 meses</span> $20</div>
-        <div class="period">por lanzamiento</div>
+        <div class="amount">$30</div>
+        <div class="period">cada 3 meses</div>
       </div>
     </div>
     <ul class="features-list">
       <li><span class="check">&#10003;</span> Configura hasta 10 aulas Moodle</li>
-      <li><span class="check">&#10003;</span> Acceso completo durante el lanzamiento</li>
+      <li><span class="check">&#10003;</span> Acceso completo por 90 d&iacute;as</li>
       <li><span class="check">&#10003;</span> Generaci&oacute;n de r&uacute;bricas con IA</li>
       <li><span class="check">&#10003;</span> Generaci&oacute;n de preguntas Aiken con IA</li>
       <li><span class="check">&#10003;</span> Importaci&oacute;n autom&aacute;tica de s&iacute;labos</li>
@@ -500,14 +531,24 @@
     <h2>M&eacute;todos de pago</h2>
     <div class="payment-methods">
 
-      <!-- Card payment (oculto hasta activar Payphone) -->
-      <!--
+      <!-- Pago con tarjeta (PayPhone) -->
       <div class="payment-card">
         <h3>Pagar con tarjeta</h3>
-        <p style="font-size:13px; color:#64748B; margin-bottom:24px; flex:1;">Procesador de pagos en l&iacute;nea para tarjetas de cr&eacute;dito y d&eacute;bito.</p>
-        <button class="btn-disabled" disabled>Pr&oacute;ximamente</button>
+        <span class="pp-instant">&#9889; Activaci&oacute;n autom&aacute;tica</span>
+        <p style="font-size:13px; color:#94A3B8; margin: 16px 0 12px; line-height:1.5;">
+          Tarjeta de cr&eacute;dito o d&eacute;bito v&iacute;a PayPhone. Tu plan se activa autom&aacute;ticamente al confirmar el pago.
+        </p>
+        <form id="pp-form" class="pp-form">
+          <label for="pp-email">Email de tu cuenta Google</label>
+          <input type="email" id="pp-email" name="email" placeholder="tu.correo@gmail.com" required autocomplete="email">
+          <div class="hint">
+            Debe ser una cuenta <strong>Google</strong> (Gmail o Workspace). Es el mismo email con el que iniciar&aacute;s sesi&oacute;n en la extensi&oacute;n.
+          </div>
+          <div id="pp-error" class="error"></div>
+          <button type="submit" class="btn-pay-card" id="pp-btn">Pagar $30 con PayPhone</button>
+          <div class="pp-secure">&#128274; Procesado por PayPhone</div>
+        </form>
       </div>
-      -->
 
       <!-- QR De Una -->
       <div class="payment-card">
@@ -518,7 +559,7 @@
         <div class="steps">
           <ol>
             <li>Escanea el c&oacute;digo QR con tu app <strong>De Una</strong> (Banco Pichincha)</li>
-            <li>Realiza el pago de <strong>$20</strong> (Plan Completo &mdash; por lanzamiento)</li>
+            <li>Realiza el pago de <strong>$30</strong> (Plan Completo &mdash; trimestral)</li>
             <li>Env&iacute;a el comprobante de pago al correo electr&oacute;nico indicado abajo</li>
             <li>Recibir&aacute;s un correo con la confirmaci&oacute;n de activaci&oacute;n de tu plan en un plazo m&aacute;ximo de 24 horas</li>
           </ol>
@@ -565,5 +606,54 @@
 </footer>
 
 <script defer src="/notifications.js"></script>
+<script>
+  (function() {
+    var SUPABASE_URL = "https://wbgqdrhfvikiciwqrdec.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ3FkcmhmdmlraWNpd3FyZGVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjEzNjgsImV4cCI6MjA5MTY5NzM2OH0.gB7T0FZrTad_xUnNjPADkptTbDhOQI3DBRNnDsvYNkk";
+    var BLOCKED = ["hotmail.com","hotmail.es","outlook.com","outlook.es","live.com","live.es","msn.com","yahoo.com","yahoo.es","icloud.com","me.com","aol.com"];
+
+    var form = document.getElementById("pp-form");
+    var emailInput = document.getElementById("pp-email");
+    var errorDiv = document.getElementById("pp-error");
+    var btn = document.getElementById("pp-btn");
+    if (!form) return;
+
+    function showError(msg) { errorDiv.textContent = msg; errorDiv.classList.add("show"); }
+    function clearError() { errorDiv.classList.remove("show"); errorDiv.textContent = ""; }
+    emailInput.addEventListener("input", clearError);
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      clearError();
+      var email = emailInput.value.trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Formato de email inválido"); return; }
+      var domain = email.split("@")[1];
+      if (BLOCKED.indexOf(domain) >= 0) {
+        showError("Tu email no es de Google. Crea un Gmail personal gratis en accounts.google.com/signup y vuelve aquí.");
+        return;
+      }
+      btn.disabled = true; btn.textContent = "Procesando...";
+      try {
+        var resp = await fetch(SUPABASE_URL + "/functions/v1/payphone-create-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await resp.json();
+        if (!resp.ok || !data.paymentUrl) {
+          showError(data.error || "No se pudo iniciar el pago. Intenta de nuevo.");
+          btn.disabled = false; btn.textContent = "Pagar $30 con PayPhone";
+          return;
+        }
+        try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch(_) {}
+        window.location.href = data.paymentUrl;
+      } catch (err) {
+        console.error(err);
+        showError("Error de red. Verifica tu conexión e intenta de nuevo.");
+        btn.disabled = false; btn.textContent = "Pagar $30 con PayPhone";
+      }
+    });
+  })();
+</script>
 </body>
 </html>

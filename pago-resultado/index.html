@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Resultado de pago — NEXBYTE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #E2E8F0; background: #0F172A; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  a { color: #22D3EE; text-decoration: none; }
+  .card { max-width: 560px; width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px 36px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+  .icon { width: 88px; height: 88px; margin: 0 auto 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 800; }
+  .icon.success { background: rgba(34,197,94,0.15); color: #22C55E; border: 2px solid rgba(34,197,94,0.3); }
+  .icon.fail { background: rgba(239,68,68,0.15); color: #EF4444; border: 2px solid rgba(239,68,68,0.3); }
+  .icon.loading { background: rgba(34,211,238,0.15); border: 2px solid rgba(34,211,238,0.3); }
+  h1 { color: white; font-size: 28px; font-weight: 800; margin-bottom: 14px; }
+  p { color: #CBD5E1; font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+  .small { color: #94A3B8; font-size: 13px; }
+  .steps { text-align: left; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 22px; margin: 28px 0; }
+  .steps h3 { color: white; font-size: 15px; margin-bottom: 14px; font-weight: 700; }
+  .steps ol { padding-left: 22px; }
+  .steps li { color: #CBD5E1; font-size: 14px; line-height: 1.9; }
+  .btn { display: inline-block; background: linear-gradient(135deg, #3B82F6, #22D3EE); color: white !important; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px; margin-top: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,0.35); }
+  .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #CBD5E1 !important; }
+  .spinner { border: 3px solid rgba(34,211,238,0.2); border-top-color: #22D3EE; border-radius: 50%; width: 44px; height: 44px; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hidden { display: none; }
+  code { background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #22D3EE; font-family: monospace; }
+  .brand { color: #94A3B8; font-size: 13px; letter-spacing: 2px; margin-top: 32px; font-weight: 700; }
+  .brand span { color: #22D3EE; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div id="state-loading">
+    <div class="icon loading"><div class="spinner"></div></div>
+    <h1>Verificando pago...</h1>
+    <p class="small">Estamos confirmando tu transacci&oacute;n con PayPhone. Esto toma unos segundos.</p>
+  </div>
+
+  <div id="state-success" class="hidden">
+    <div class="icon success">&#10003;</div>
+    <h1>&iexcl;Pago confirmado!</h1>
+    <p>Tu plan trimestral est&aacute; activo. Te enviamos un email a <strong id="success-email"></strong> con las instrucciones.</p>
+    <div class="steps">
+      <h3>Pr&oacute;ximos pasos</h3>
+      <ol>
+        <li>Instala la <a href="https://chrome.google.com/webstore/detail/fihhakohgaigfkgpmigfgpaiagfopnko" target="_blank">extensi&oacute;n desde la Chrome Web Store</a> (o desde <a href="/planes/">/planes</a> con el .zip).</li>
+        <li>&Aacute;brela y haz clic en <strong>"Iniciar sesi&oacute;n con Google"</strong>.</li>
+        <li>Inicia sesi&oacute;n con el email <strong id="success-email-2"></strong>.</li>
+      </ol>
+    </div>
+    <a href="https://chrome.google.com/webstore/detail/fihhakohgaigfkgpmigfgpaiagfopnko" target="_blank" class="btn">Instalar extensi&oacute;n</a>
+  </div>
+
+  <div id="state-cancelled" class="hidden">
+    <div class="icon fail">&times;</div>
+    <h1>Pago cancelado</h1>
+    <p>Cancelaste el pago antes de completarlo. No se hizo ning&uacute;n cargo a tu cuenta.</p>
+    <a href="/planes/" class="btn">Volver a intentar</a>
+  </div>
+
+  <div id="state-error" class="hidden">
+    <div class="icon fail">&times;</div>
+    <h1>Pago no aprobado</h1>
+    <p id="error-message">No pudimos confirmar tu pago. Si fue un error y se hizo el cargo, escr&iacute;benos.</p>
+    <p class="small">Si el dinero sali&oacute; de tu cuenta y no aparece confirmaci&oacute;n, contacta a <a href="mailto:adrianmengym@gmail.com">adrianmengym@gmail.com</a> con el ID de transacci&oacute;n: <code id="error-intent-id">&mdash;</code></p>
+    <a href="/planes/" class="btn btn-secondary">Volver a planes</a>
+  </div>
+
+  <div class="brand">NEX<span>BYTE</span></div>
+</div>
+
+<script>
+  var SUPABASE_URL = "https://wbgqdrhfvikiciwqrdec.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ3FkcmhmdmlraWNpd3FyZGVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjEzNjgsImV4cCI6MjA5MTY5NzM2OH0.gB7T0FZrTad_xUnNjPADkptTbDhOQI3DBRNnDsvYNkk";
+
+  function show(id) {
+    ["state-loading","state-success","state-cancelled","state-error"].forEach(function(s){ document.getElementById(s).classList.add("hidden"); });
+    document.getElementById(id).classList.remove("hidden");
+  }
+  function getQuery(name) { return new URLSearchParams(window.location.search).get(name); }
+
+  (async function() {
+    if (getQuery("cancelled")) { show("state-cancelled"); return; }
+    var id = getQuery("id");
+    var clientTransactionId = getQuery("clientTransactionId");
+    var intentId = getQuery("intent");
+
+    if (!id || !clientTransactionId) {
+      document.getElementById("error-message").textContent = "No se recibieron los parámetros del pago. Si pagaste, escríbenos.";
+      document.getElementById("error-intent-id").textContent = intentId || "—";
+      show("state-error");
+      return;
+    }
+
+    try {
+      var resp = await fetch(SUPABASE_URL + "/functions/v1/payphone-confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY },
+        body: JSON.stringify({ id: id, clientTransactionId: clientTransactionId, intentId: intentId })
+      });
+      var data = await resp.json();
+      if (data.status === "confirmed" || data.status === "linked" || data.alreadyProcessed) {
+        document.getElementById("success-email").textContent = data.email || "tu correo";
+        document.getElementById("success-email-2").textContent = data.email || "tu correo";
+        show("state-success");
+        try { localStorage.removeItem("nexbyte_payment_intent"); } catch(_){}
+        return;
+      }
+      document.getElementById("error-message").textContent = data.message || data.error || "No pudimos confirmar tu pago.";
+      document.getElementById("error-intent-id").textContent = intentId || data.intentId || "—";
+      show("state-error");
+    } catch (err) {
+      console.error(err);
+      document.getElementById("error-message").textContent = "Error de red al confirmar el pago. Si el cargo salió, escríbenos.";
+      document.getElementById("error-intent-id").textContent = intentId || "—";
+      show("state-error");
+    }
+  })();
+</script>
+
+</body>
+</html>
