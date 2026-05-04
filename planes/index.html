@@ -536,7 +536,7 @@
         <h3>Pagar con tarjeta</h3>
         <span class="pp-instant">&#9889; Activaci&oacute;n autom&aacute;tica</span>
         <p style="font-size:13px; color:#94A3B8; margin: 16px 0 12px; line-height:1.5;">
-          Tarjeta de cr&eacute;dito o d&eacute;bito v&iacute;a PayPhone. Tu plan se activa autom&aacute;ticamente al confirmar el pago.
+          Tarjeta de cr&eacute;dito o d&eacute;bito. Tu plan se activa autom&aacute;ticamente al confirmar el pago.
         </p>
         <form id="pp-form" class="pp-form">
           <label for="pp-email">Email de tu cuenta Google</label>
@@ -545,7 +545,7 @@
             Debe ser una cuenta <strong>Google</strong> (Gmail o Workspace). Es el mismo email con el que iniciar&aacute;s sesi&oacute;n en la extensi&oacute;n.
           </div>
           <div id="pp-error" class="error"></div>
-          <button type="submit" class="btn-pay-card" id="pp-btn">Pagar $30 con PayPhone</button>
+          <button type="submit" class="btn-pay-card" id="pp-btn">Pagar $30</button>
           <div class="pp-secure">&#128274; Procesado por PayPhone</div>
         </form>
       </div>
@@ -641,7 +641,7 @@
         var data = await resp.json();
         if (!resp.ok || !data.paymentUrl) {
           showError(data.error || "No se pudo iniciar el pago. Intenta de nuevo.");
-          btn.disabled = false; btn.textContent = "Pagar $30 con PayPhone";
+          btn.disabled = false; btn.textContent = "Pagar $30";
           return;
         }
         try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch(_) {}
@@ -649,7 +649,7 @@
       } catch (err) {
         console.error(err);
         showError("Error de red. Verifica tu conexión e intenta de nuevo.");
-        btn.disabled = false; btn.textContent = "Pagar $30 con PayPhone";
+        btn.disabled = false; btn.textContent = "Pagar $30";
       }
     });
   })();
