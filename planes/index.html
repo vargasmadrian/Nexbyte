@@ -611,15 +611,46 @@
     var PAYPHONE_API_URL = "https://dashboard-three-kohl-42.vercel.app/api/payphone";
     var BLOCKED = ["hotmail.com","hotmail.es","outlook.com","outlook.es","live.com","live.es","msn.com","yahoo.com","yahoo.es","icloud.com","me.com","aol.com"];
 
+    // Typos comunes → dominio correcto sugerido
+    var TYPO_MAP = {
+      "gmai.com": "gmail.com", "gmial.com": "gmail.com", "gmal.com": "gmail.com",
+      "gnail.com": "gmail.com", "gmail.cm": "gmail.com", "gmail.co": "gmail.com",
+      "gmail.con": "gmail.com", "gmaill.com": "gmail.com", "gamil.com": "gmail.com",
+      "gmil.com": "gmail.com", "gmail.om": "gmail.com",
+      "hotmial.com": "hotmail.com", "hotmal.com": "hotmail.com",
+      "yaho.com": "yahoo.com", "yhoo.com": "yahoo.com",
+      "outlok.com": "outlook.com", "iclud.com": "icloud.com"
+    };
+
     var form = document.getElementById("pp-form");
     var emailInput = document.getElementById("pp-email");
     var errorDiv = document.getElementById("pp-error");
     var btn = document.getElementById("pp-btn");
     if (!form) return;
 
-    function showError(msg) { errorDiv.textContent = msg; errorDiv.classList.add("show"); }
-    function clearError() { errorDiv.classList.remove("show"); errorDiv.textContent = ""; }
-    emailInput.addEventListener("input", clearError);
+    var lastConfirmedEmail = null;  // Si el usuario confirmó un email sospechoso, ya no lo bloqueamos
+    function showError(msg) { errorDiv.innerHTML = msg; errorDiv.classList.add("show"); }
+    function clearError() { errorDiv.classList.remove("show"); errorDiv.innerHTML = ""; }
+    emailInput.addEventListener("input", function() { clearError(); lastConfirmedEmail = null; });
+
+    function suggestCorrectEmail(email) {
+      var parts = email.split("@");
+      if (parts.length !== 2) return null;
+      var domain = parts[1];
+      if (TYPO_MAP[domain]) return parts[0] + "@" + TYPO_MAP[domain];
+      return null;
+    }
+
+    // Click en la sugerencia "¿Quisiste decir...?"
+    form.addEventListener("click", function(e) {
+      var sug = e.target.closest("[data-fix-email]");
+      if (sug) {
+        e.preventDefault();
+        emailInput.value = sug.getAttribute("data-fix-email");
+        clearError();
+        lastConfirmedEmail = null;
+      }
+    });
 
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -627,6 +658,19 @@
       var email = emailInput.value.trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Formato de email inválido"); return; }
       var domain = email.split("@")[1];
+
+      // Detectar typo común y sugerir corrección (bloquea hasta que el user confirme/corrija)
+      var suggested = suggestCorrectEmail(email);
+      if (suggested && lastConfirmedEmail !== email) {
+        showError(
+          '⚠️ <strong>"' + domain + '" parece un error.</strong> ' +
+          '¿Quisiste decir <a href="#" data-fix-email="' + suggested + '" style="color:#22D3EE;text-decoration:underline;font-weight:600;">' + suggested + '</a>?<br>' +
+          '<span style="font-size:11px;opacity:0.75;">Si tu email es realmente con "' + domain + '", presiona "Pagar $30" otra vez para continuar.</span>'
+        );
+        lastConfirmedEmail = email;  // Próximo submit con el mismo email lo deja pasar
+        return;
+      }
+
       if (BLOCKED.indexOf(domain) >= 0) {
         showError("Tu email no es de Google. Crea un Gmail personal gratis en accounts.google.com/signup y vuelve aquí.");
         return;
