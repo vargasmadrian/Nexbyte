@@ -87,15 +87,13 @@
   function getQuery(name) { return new URLSearchParams(window.location.search).get(name); }
 
   (async function() {
-    if (getQuery("cancelled")) { show("state-cancelled"); return; }
     var id = getQuery("id");
     var clientTransactionId = getQuery("clientTransactionId");
-    var intentId = getQuery("intent");
+    var intentId = getQuery("intent") || (function(){ try { return localStorage.getItem("nexbyte_payment_intent"); } catch(_){ return null; }})();
 
+    // Sin id ni clientTransactionId = cancelado por el usuario en PayPhone (cancellationUrl)
     if (!id || !clientTransactionId) {
-      document.getElementById("error-message").textContent = "No se recibieron los parámetros del pago. Si pagaste, escríbenos.";
-      document.getElementById("error-intent-id").textContent = intentId || "—";
-      show("state-error");
+      show("state-cancelled");
       return;
     }
 
