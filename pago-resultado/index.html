@@ -77,8 +77,7 @@
 </div>
 
 <script>
-  var SUPABASE_URL = "https://wbgqdrhfvikiciwqrdec.supabase.co";
-  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ3FkcmhmdmlraWNpd3FyZGVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjEzNjgsImV4cCI6MjA5MTY5NzM2OH0.gB7T0FZrTad_xUnNjPADkptTbDhOQI3DBRNnDsvYNkk";
+  var PAYPHONE_API_URL = "https://dashboard-three-kohl-42.vercel.app/api/payphone";
 
   function show(id) {
     ["state-loading","state-success","state-cancelled","state-error"].forEach(function(s){ document.getElementById(s).classList.add("hidden"); });
@@ -98,9 +97,9 @@
     }
 
     try {
-      var resp = await fetch(SUPABASE_URL + "/functions/v1/payphone-confirm", {
+      var resp = await fetch(PAYPHONE_API_URL + "/confirm", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: id, clientTransactionId: clientTransactionId, intentId: intentId })
       });
       var data = await resp.json();
