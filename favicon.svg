@@ -10,13 +10,8 @@
   <rect width="100" height="100" rx="22" fill="#0F172A"/>
 
   <!-- N shape -->
-  <path d="M30 72 L30 28 L58 72 L58 28" stroke="url(#grad)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26 72 L26 28 L60 72 L60 28" stroke="url(#grad)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Circuit dots -->
-  <circle cx="72" cy="28" r="5" fill="#22D3EE"/>
-  <circle cx="72" cy="72" r="5" fill="#3B82F6"/>
-  <line x1="72" y1="33" x2="72" y2="67" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
-
-  <!-- Small data dots -->
-  <circle cx="72" cy="50" r="2.5" fill="#22D3EE" opacity="0.6"/>
+  <!-- Small x subindex (white) -->
+  <text x="75" y="77" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#FFFFFF">x</text>
 </svg>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Instalar — Generador de Aulas Virtuales | NEXBYTE</title>
+<title>Instalar — Generador de Aulas Virtuales | NEXBYTE.pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -194,21 +194,30 @@
     .floating-cta { bottom: 16px; right: 16px; padding: 12px 20px; font-size: 13px; }
     footer { padding: 20px 16px; font-size: 11px; }
   }
+
+  /* ===== Logo v4 NEXBYTE.pro — X palpitante ===== */
+  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
+  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
+  @keyframes nbPearlSvg  { 0%,100% {fill:#FFFFFF;} 20% {fill:#E0F7FA;} 40% {fill:#FFFFFF;} 60% {fill:#F3E8FF;} 80% {fill:#FFF5E1;} }
+  @keyframes nbGlowSvg   { 0%,100% {filter:drop-shadow(0 0 1px rgba(255,255,255,0.4));} 50% {filter:drop-shadow(0 0 4px rgba(255,255,255,0.8)) drop-shadow(0 0 8px rgba(224,247,250,0.4));} }
+  .nx-brand { display: inline-flex; align-items: center; gap: 10px; line-height: 1; letter-spacing: -0.5px; }
+  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
+  .nx-brand .nx-byte { color: #22D3EE; }
+  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
+  .nx-logo-x { animation: nbPearlSvg 4s ease-in-out infinite, nbGlowSvg 4s ease-in-out infinite; }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="28" height="28">
-      <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3B82F6"/><stop offset="100%" style="stop-color:#22D3EE"/></linearGradient></defs>
+  <a href="/" class="nav-logo nx-brand">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
+      <defs><linearGradient id="nxgInst" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#22D3EE"/></linearGradient></defs>
       <rect width="100" height="100" rx="22" fill="#0F172A"/>
-      <path d="M30 72 L30 28 L58 72 L58 28" stroke="url(#g)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="72" cy="28" r="5" fill="#22D3EE"/><circle cx="72" cy="72" r="5" fill="#3B82F6"/>
-      <line x1="72" y1="33" x2="72" y2="67" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
-      <circle cx="72" cy="50" r="2.5" fill="#22D3EE" opacity="0.6"/>
+      <path d="M26 72 L26 28 L60 72 L60 28" stroke="url(#nxgInst)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="75" y="77" font-family="Inter, sans-serif" font-size="32" font-weight="900" text-anchor="middle" class="nx-logo-x">x</text>
     </svg>
-    NEX<span>BYTE</span>
+    NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span>
   </a>
   <a href="/" class="nav-back">← Volver al inicio</a>
 </nav>
@@ -389,7 +398,7 @@
 </a>
 
 <footer>
-  <p>&copy; 2026 NEXBYTE. Todos los derechos reservados. — <a href="/privacidad/" style="color:#64748B;">Politica de privacidad</a></p>
+  <p>&copy; 2026 NEXBYTE.pro. Todos los derechos reservados. — <a href="/privacidad/" style="color:#64748B;">Politica de privacidad</a></p>
 </footer>
 
 <script defer src="/notifications.js"></script>
