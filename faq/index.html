@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Preguntas frecuentes &mdash; Generador de Aulas Virtuales | NEXBYTE.pro</title>
+<meta name="description" content="Respuestas a las dudas m&aacute;s comunes sobre el Generador de Aulas Virtuales: producto, pagos, instalaci&oacute;n y soporte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #E2E8F0;
+    background: #0F172A;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    padding: 18px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-left { display: flex; align-items: center; gap: 14px; }
+  .back-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: #94A3B8; text-decoration: none; font-size: 17px;
+    transition: all 0.3s;
+  }
+  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
+  .nav-logo { font-size: 20px; font-weight: 900; color: white; text-decoration: none; }
+  .nav-links { display: flex; gap: 18px; align-items: center; font-size: 13px; }
+  .nav-links a { color: #94A3B8; text-decoration: none; transition: color 0.2s; font-weight: 500; }
+  .nav-links a:hover { color: white; }
+
+  /* ===== HEADER ===== */
+  header.page-header {
+    padding: 60px 24px 30px;
+    text-align: center;
+    max-width: 760px; margin: 0 auto;
+  }
+  header.page-header .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+    padding: 7px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 600; color: #3B82F6;
+    margin-bottom: 18px; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  header.page-header h1 {
+    font-size: 44px; font-weight: 800; color: white;
+    letter-spacing: -1px; margin-bottom: 14px;
+  }
+  header.page-header h1 .gradient {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header.page-header p { font-size: 17px; color: #94A3B8; line-height: 1.6; }
+
+  /* ===== SEARCH ===== */
+  .search-wrap {
+    max-width: 600px; margin: 24px auto 0;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%; padding: 14px 16px 14px 44px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: white; font-size: 15px; font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { outline: none; border-color: #22D3EE; }
+  .search-wrap input::placeholder { color: #475569; }
+  .search-wrap .search-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: #64748B; font-size: 18px; pointer-events: none;
+  }
+
+  /* ===== TABS (chips) ===== */
+  .tabs {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin: 28px auto 0; max-width: 760px;
+  }
+  .tab-chip {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #94A3B8;
+    padding: 8px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .tab-chip:hover { color: white; border-color: rgba(34,211,238,0.4); }
+  .tab-chip.active {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; border-color: transparent;
+  }
+
+  /* ===== MAIN ===== */
+  main {
+    flex: 1;
+    max-width: 780px; margin: 0 auto;
+    padding: 30px 24px 60px;
+    width: 100%;
+  }
+
+  /* ===== SECTION ===== */
+  .faq-section { margin-bottom: 36px; }
+  .faq-section h2 {
+    font-size: 13px; font-weight: 800; color: #22D3EE;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin: 0 0 14px 4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .faq-section h2 .num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(34,211,238,0.15);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #22D3EE;
+  }
+
+  /* ===== FAQ ITEM (acordeón) ===== */
+  details {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  details[open] {
+    border-color: rgba(34,211,238,0.3);
+    background: rgba(255,255,255,0.04);
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+    font-size: 15px; font-weight: 600; color: white;
+    line-height: 1.45;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+';
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(34,211,238,0.12);
+    color: #22D3EE;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 400;
+    transition: transform 0.2s, background 0.2s;
+  }
+  details[open] summary::after {
+    content: '−';
+    background: rgba(34,211,238,0.2);
+    transform: rotate(180deg);
+  }
+  .answer {
+    padding: 0 24px 22px;
+    font-size: 14px; line-height: 1.65; color: #CBD5E1;
+  }
+  .answer p { margin: 8px 0; }
+  .answer ul, .answer ol { margin: 10px 0 10px 20px; }
+  .answer li { margin: 4px 0; }
+  .answer code {
+    background: #0F172A;
+    color: #22D3EE; padding: 2px 6px; border-radius: 4px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 12.5px;
+  }
+  .answer a { color: #22D3EE; text-decoration: none; font-weight: 600; }
+  .answer a:hover { text-decoration: underline; }
+  .answer strong { color: white; }
+
+  /* ===== CTA FINAL ===== */
+  .cta-final {
+    max-width: 780px; margin: 50px auto 0;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.05));
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 20px;
+    text-align: center;
+  }
+  .cta-final h3 { color: white; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .cta-final p { color: #94A3B8; font-size: 14px; margin-bottom: 18px; }
+  .cta-final .ctas { display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .cta-final a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 10px;
+    text-decoration: none; font-size: 14px; font-weight: 700;
+    transition: transform 0.2s;
+  }
+  .cta-final .btn-primary {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white;
+  }
+  .cta-final .btn-secondary {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+  }
+  .cta-final a:hover { transform: translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 28px 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px; color: #475569;
+  }
+  footer a { color: #64748B; text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: #22D3EE; }
+
+  /* Logo */
+  @keyframes nbPearl { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
+  .nx-brand { display: inline-flex; align-items: center; line-height: 1; letter-spacing: -0.5px; }
+  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.6em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.12em); animation: nbPearl 4s ease-in-out infinite; }
+  .nx-brand .nx-byte { color: #22D3EE; }
+  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    .nav-links { display: none; }
+    header.page-header { padding: 36px 16px 20px; }
+    header.page-header h1 { font-size: 30px; }
+    header.page-header p { font-size: 15px; }
+    main { padding: 20px 14px 40px; }
+    summary { padding: 16px 18px; font-size: 14px; }
+    .answer { padding: 0 18px 18px; font-size: 13px; }
+    .tab-chip { padding: 6px 14px; font-size: 12px; }
+  }
+
+  /* Hidden when filtered out */
+  details.hidden, .faq-section.hidden { display: none !important; }
+  .no-results {
+    text-align: center; padding: 40px 20px;
+    color: #64748B; font-size: 14px;
+    display: none;
+  }
+  .no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="back-arrow" title="Volver al inicio">&larr;</a>
+    <a href="/" class="nav-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+  </div>
+  <div class="nav-links">
+    <a href="/planes/">Planes</a>
+    <a href="/instalar/">Instalar</a>
+    <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="badge"><span>?</span> Preguntas frecuentes</div>
+  <h1>Resolvemos tus <span class="gradient">dudas</span></h1>
+  <p>Todo lo que necesitas saber sobre el Generador de Aulas Virtuales: producto, pagos, instalaci&oacute;n y soporte.</p>
+
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="faq-search" placeholder="Busca una pregunta &mdash; ej. &quot;cancelar&quot;, &quot;factura&quot;, &quot;Chrome&quot;...">
+  </div>
+
+  <div class="tabs">
+    <button type="button" class="tab-chip active" data-cat="all">Todas</button>
+    <button type="button" class="tab-chip" data-cat="producto">Producto</button>
+    <button type="button" class="tab-chip" data-cat="pagos">Planes y pagos</button>
+    <button type="button" class="tab-chip" data-cat="instalacion">Instalaci&oacute;n</button>
+    <button type="button" class="tab-chip" data-cat="soporte">Soporte y privacidad</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ PRODUCTO ============ -->
+  <section class="faq-section" data-cat="producto">
+    <h2><span class="num">1</span> Producto</h2>
+
+    <details>
+      <summary>&iquest;Qu&eacute; hace exactamente la extensi&oacute;n?</summary>
+      <div class="answer">
+        <p>El Generador de Aulas Virtuales automatiza la configuraci&oacute;n de tu aula Moodle PUCESE.
+        Con un solo s&iacute;labo PDF y unos pocos clics, configura <strong>hasta 10 aulas completas por ciclo</strong>:</p>
+        <ul>
+          <li>Importa la plantilla institucional (<code>.mbz</code>).</li>
+          <li>Lee tu s&iacute;labo PDF y genera banner, datos del docente, horario, descripciones de RDAs.</li>
+          <li>Sube recursos por RDA: videos YouTube, Genially, PPTs, PDFs.</li>
+          <li>Crea tareas con r&uacute;bricas generadas por IA.</li>
+          <li>Crea evaluaciones con preguntas Aiken generadas por IA.</li>
+          <li>Crea foros de discusi&oacute;n.</li>
+        </ul>
+        <p>Lo que un docente tarda 3 a 5 horas por aula, la extensi&oacute;n lo hace en 15 a 20 minutos.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Con qu&eacute; Moodles funciona?</summary>
+      <div class="answer">
+        <p>Con los Moodles oficiales de PUCE Esmeraldas:</p>
+        <ul>
+          <li><code>moodle.pucese.edu.ec</code></li>
+          <li><code>moodlecr.pucese.edu.ec</code></li>
+        </ul>
+        <p>Si est&aacute;s en PUCE Quito (<code>eva.puce.edu.ec</code>), necesitas la <a href="/planes-puce/">versi&oacute;n para PUCE Quito</a>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Funciona en Windows, Mac y Linux?</summary>
+      <div class="answer">
+        <p>S&iacute;. La extensi&oacute;n se carga en <strong>Google Chrome</strong> (o navegadores basados en Chromium: Brave, Edge, Opera, Arc).
+        Funciona id&eacute;ntico en Windows 10/11, macOS 11+ y distribuciones Linux modernas.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;La IA usa mis datos para entrenarse?</summary>
+      <div class="answer">
+        <p><strong>No.</strong> Las acciones de IA env&iacute;an tus PDFs a <strong>Google Gemini</strong> (API). Google los procesa seg&uacute;n su pol&iacute;tica oficial y <strong>NEXBYTE no guarda copias</strong> de tus archivos.</p>
+        <p>Los archivos que subes a Moodle (PPTs, PDFs, sílabos) viajan <strong>directamente</strong> a tu Moodle PUCESE desde tu navegador. No pasan por servidores de NEXBYTE.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Puedo deshacer los cambios si me equivoco?</summary>
+      <div class="answer">
+        <p>Cada tipo de recurso (videos, Genially, PPTs, PDFs) tiene su bot&oacute;n <strong>&quot;Borrar&quot;</strong> en el popup que limpia esa categor&iacute;a del aula.</p>
+        <p>Para reverter completamente: importa de nuevo la plantilla <code>.mbz</code> sobre un aula vac&iacute;a.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Qu&eacute; pasa si Moodle PUCESE cambia de versi&oacute;n?</summary>
+      <div class="answer">
+        <p>Cuando PUCESE actualiza Moodle, probamos y publicamos una actualizaci&oacute;n de la extensi&oacute;n en menos de 48 horas. Recibir&aacute;s un aviso autom&aacute;tico dentro del popup.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ PAGOS ============ -->
+  <section class="faq-section" data-cat="pagos">
+    <h2><span class="num">2</span> Planes y pagos</h2>
+
+    <details>
+      <summary>&iquest;Cu&aacute;nto cuesta?</summary>
+      <div class="answer">
+        <p>Dos planes:</p>
+        <ul>
+          <li><strong>Plan Gratuito &mdash; $0</strong>: 2 intentos por cada acci&oacute;n (1 en acciones con IA). Se activa autom&aacute;ticamente al iniciar sesi&oacute;n.</li>
+          <li><strong>Plan Completo &mdash; $30 cada 90 d&iacute;as</strong>: hasta 10 aulas Moodle, 90 r&uacute;bricas con IA, 30 evaluaciones con preguntas Aiken IA, 140 subidas de recursos, soporte por email.</li>
+        </ul>
+        <p>Ver <a href="/planes/">comparativa completa</a>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;C&oacute;mo funciona la renovaci&oacute;n autom&aacute;tica?</summary>
+      <div class="answer">
+        <p>Si pagaste con tarjeta v&iacute;a PayPhone, al expirar los 90 d&iacute;as se cobra autom&aacute;ticamente $30 a la misma tarjeta.</p>
+        <p>Puedes <strong>cancelar en cualquier momento</strong> desde tu cuenta &mdash; mantienes acceso hasta el fin del per&iacute;odo pagado.</p>
+        <p>Si pagaste con QR De Una, no hay renovaci&oacute;n autom&aacute;tica: al expirar te avisamos por email para pagar de nuevo.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Puedo cancelar en cualquier momento?</summary>
+      <div class="answer">
+        <p>S&iacute;. Inicia sesi&oacute;n en la extensi&oacute;n, abre el panel de tu cuenta y haz clic en <strong>&quot;Cancelar suscripci&oacute;n&quot;</strong>. Tu plan sigue activo hasta que terminen los 90 d&iacute;as pagados &mdash; no se te cobra de nuevo.</p>
+        <p>Si tienes problemas para cancelar, escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Qu&eacute; m&eacute;todos de pago aceptan?</summary>
+      <div class="answer">
+        <p>Dos opciones:</p>
+        <ol>
+          <li><strong>Tarjeta de cr&eacute;dito o d&eacute;bito</strong> (Visa o Mastercard) v&iacute;a <strong>PayPhone Ecuador</strong>. Activaci&oacute;n inmediata.</li>
+          <li><strong>QR De Una</strong> (Banco Pichincha). Env&iacute;as el comprobante a soporte y activamos en m&aacute;ximo 24 horas h&aacute;biles.</li>
+        </ol>
+        <p>Tambi&eacute;n aceptamos transferencias bancarias para departamentos completos &mdash; escr&iacute;benos.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Es seguro pagar con tarjeta aqu&iacute;?</summary>
+      <div class="answer">
+        <p>S&iacute;. Tu tarjeta <strong>nunca pasa por servidores de NEXBYTE</strong>. Todo el procesamiento corre en <strong>PayPhone Ecuador</strong>, que est&aacute; certificado PCI-DSS &mdash; el est&aacute;ndar internacional de seguridad para pagos con tarjeta.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Aceptan facturas con RUC?</summary>
+      <div class="answer">
+        <p>S&iacute;. Despu&eacute;s del pago, escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a> con tu RUC, raz&oacute;n social, direcci&oacute;n y el correo de tu cuenta. Emitimos factura electr&oacute;nica en m&aacute;ximo 48 horas h&aacute;biles.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Hay descuento para departamentos o varios docentes?</summary>
+      <div class="answer">
+        <p>S&iacute;. Para <strong>5 o m&aacute;s docentes</strong> de un mismo departamento, escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a> indicando cantidad y emails. Aplicamos hasta <strong>30 % de descuento</strong> seg&uacute;n volumen.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Pagu&eacute; con un email, pero inici&eacute; sesi&oacute;n con otro. &iquest;Qu&eacute; hago?</summary>
+      <div class="answer">
+        <p>Si te equivocaste de email al pagar:</p>
+        <ol>
+          <li>Cierra sesi&oacute;n en la extensi&oacute;n.</li>
+          <li>Inicia sesi&oacute;n con el email <strong>correcto</strong> (el que usaste al pagar).</li>
+        </ol>
+        <p>Si ya creaste cuenta con el email equivocado, escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a> con el comprobante de pago y los dos emails &mdash; fusionamos las cuentas.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Puedo pedir un reembolso?</summary>
+      <div class="answer">
+        <p>S&iacute;, dentro de los primeros <strong>7 d&iacute;as</strong> del primer pago, si no has usado m&aacute;s del 20 % de tus cuotas de IA. Escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ INSTALACIÓN ============ -->
+  <section class="faq-section" data-cat="instalacion">
+    <h2><span class="num">3</span> Instalaci&oacute;n</h2>
+
+    <details>
+      <summary>&iquest;C&oacute;mo cargo la extensi&oacute;n en Chrome?</summary>
+      <div class="answer">
+        <p>Resumen r&aacute;pido:</p>
+        <ol>
+          <li>Descarga <code>generador-aulas-v3.zip</code> en <a href="/instalar/">la p&aacute;gina de instalaci&oacute;n</a>.</li>
+          <li>Descomprime el archivo.</li>
+          <li>Abre <code>chrome://extensions</code> y activa el <strong>Modo desarrollador</strong>.</li>
+          <li>Haz clic en <strong>&quot;Cargar descomprimida&quot;</strong> y selecciona la carpeta.</li>
+          <li>Fija el icono del b&uacute;ho con el rompecabezas (&#129513;).</li>
+        </ol>
+        <p>Ver <a href="/instalar/">gu&iacute;a completa paso a paso</a> con capturas.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Por qu&eacute; Chrome muestra advertencia &quot;Esta extensi&oacute;n puede leer y modificar todos los datos&quot;?</summary>
+      <div class="answer">
+        <p>Es el aviso est&aacute;ndar de Chrome para extensiones en <strong>modo desarrollador</strong>. La extensi&oacute;n solo se ejecuta en <code>*.pucese.edu.ec</code> y <code>nexbyte.pro</code> (definido en su <code>manifest.json</code>).</p>
+        <p>Puedes ignorar el aviso o pulsar &quot;Mantener&quot;.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Funciona en Edge, Brave, Opera o Arc?</summary>
+      <div class="answer">
+        <p>S&iacute;. Todos son navegadores basados en Chromium &mdash; mismo motor que Chrome. El proceso de instalaci&oacute;n es id&eacute;ntico (cada uno tiene su propia URL: <code>edge://extensions</code>, <code>brave://extensions</code>, etc.).</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;La extensi&oacute;n deja de funcionar si reinicio Chrome?</summary>
+      <div class="answer">
+        <p>No, siempre que <strong>NO muevas ni borres</strong> la carpeta <code>generador-aulas-v3</code> donde la descomprimiste. Chrome la lee de esa ubicaci&oacute;n cada vez que arranca.</p>
+        <p>Si la moviste, ve a <code>chrome://extensions</code>, elim&iacute;nala y vuelve a hacer &quot;Cargar descomprimida&quot; apuntando a la nueva ruta.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Sale &quot;No se pudo conectar con Moodle&quot;. &iquest;Qu&eacute; hago?</summary>
+      <div class="answer">
+        <p>Causas comunes y soluci&oacute;n:</p>
+        <ul>
+          <li><strong>Modo edici&oacute;n desactivado:</strong> activa el toggle de la barra superior de Moodle.</li>
+          <li><strong>Pesta&ntilde;a expirada:</strong> recarga la pesta&ntilde;a con <kbd>F5</kbd>.</li>
+          <li><strong>No est&aacute;s en una URL de curso:</strong> debe ser de tipo <code>/course/view.php?id=...</code>.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ SOPORTE Y PRIVACIDAD ============ -->
+  <section class="faq-section" data-cat="soporte">
+    <h2><span class="num">4</span> Soporte y privacidad</h2>
+
+    <details>
+      <summary>&iquest;C&oacute;mo abro un ticket de soporte?</summary>
+      <div class="answer">
+        <p>Dos opciones:</p>
+        <ol>
+          <li><strong>Chat in-app</strong>: dentro del popup de la extensi&oacute;n hay un bot&oacute;n de Soporte NEXBYTE. Tus mensajes quedan vinculados a tu cuenta y puedes pegar capturas con Ctrl+V.</li>
+          <li><strong>Email</strong>: escribe a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>. Incluye tu email Google, versi&oacute;n de la extensi&oacute;n (mira el footer del popup) y una captura del problema.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;En qu&eacute; horario responden y cu&aacute;nto tardan?</summary>
+      <div class="answer">
+        <p>Respondemos de lunes a viernes, 8:00 &mdash; 18:00 (UTC-5, hora Ecuador).</p>
+        <p>Tiempo medio de primera respuesta: <strong>4 horas h&aacute;biles</strong>. Casos urgentes (pago no procesado, p&eacute;rdida de acceso): m&aacute;ximo <strong>1 hora h&aacute;bil</strong>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;C&oacute;mo recupero acceso si perd&iacute; mi cuenta Google?</summary>
+      <div class="answer">
+        <p>Si tu cuenta Google a&uacute;n existe pero la perdiste de vista: ve a <a href="https://accounts.google.com/signin/recovery" target="_blank">accounts.google.com/signin/recovery</a>.</p>
+        <p>Si Google la elimin&oacute;: escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a> con tu comprobante de pago y el nuevo email donde quieras vincular tu suscripci&oacute;n.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;Qu&eacute; datos guarda NEXBYTE sobre m&iacute;?</summary>
+      <div class="answer">
+        <p>Solamente:</p>
+        <ul>
+          <li>Tu <strong>email</strong> de Google.</li>
+          <li>Tu <strong>nombre y foto</strong> que devuelve Google OAuth (para mostrarlos en el popup).</li>
+          <li><strong>Contadores de uso</strong> (cu&aacute;ntas r&uacute;bricas con IA has generado, cu&aacute;ntas evaluaciones, etc.) &mdash; necesarios para los l&iacute;mites del plan.</li>
+          <li><strong>Pagos</strong> (monto, fecha, ID de transacci&oacute;n PayPhone).</li>
+        </ul>
+        <p>NO guardamos tus s&iacute;labos, PPTs, PDFs ni datos de tus aulas Moodle.</p>
+        <p>Ver pol&iacute;tica completa en <a href="/privacidad/">/privacidad</a>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>&iquest;D&oacute;nde se almacenan mis datos?</summary>
+      <div class="answer">
+        <p>En servidores de <strong>Supabase</strong> en la Uni&oacute;n Europea. Cumplimos GDPR y la <strong>Ley Org&aacute;nica de Protecci&oacute;n de Datos Personales del Ecuador</strong>.</p>
+        <p>Puedes solicitar la eliminaci&oacute;n total de tus datos en cualquier momento escribiendo a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
+      </div>
+    </details>
+  </section>
+
+  <div class="no-results" id="no-results">
+    No encontramos preguntas que coincidan con tu b&uacute;squeda.<br>
+    Escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro" style="color:#22D3EE;font-weight:600;">soporte@nexbyte.pro</a> y te respondemos directo.
+  </div>
+
+  <div class="cta-final">
+    <h3>&iquest;Tu pregunta no est&aacute; aqu&iacute;?</h3>
+    <p>Escr&iacute;benos. Documentamos cada caso real reportado para mejorar este FAQ.</p>
+    <div class="ctas">
+      <a href="mailto:soporte@nexbyte.pro" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Escribir a soporte
+      </a>
+      <a href="/planes/" class="btn-secondary">
+        Ver planes
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 NEXBYTE.pro &middot;
+  <a href="/">Inicio</a> &middot;
+  <a href="/planes/">Planes</a> &middot;
+  <a href="/instalar/">Instalar</a> &middot;
+  <a href="/privacidad/">Privacidad</a>
+</footer>
+
+<script>
+  (function() {
+    var searchInput = document.getElementById('faq-search');
+    var noResults = document.getElementById('no-results');
+    var allDetails = document.querySelectorAll('details');
+    var allSections = document.querySelectorAll('.faq-section');
+    var tabs = document.querySelectorAll('.tab-chip');
+
+    function normalize(s) {
+      return (s || '').toString().toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, ''); // strip accents
+    }
+
+    var activeCat = 'all';
+    var query = '';
+
+    function applyFilters() {
+      var q = normalize(query.trim());
+      var anyVisible = false;
+
+      allDetails.forEach(function(d) {
+        var section = d.closest('.faq-section');
+        var cat = section ? section.getAttribute('data-cat') : '';
+        var textContent = normalize(d.textContent);
+
+        var matchCat = (activeCat === 'all' || activeCat === cat);
+        var matchQuery = (q === '' || textContent.indexOf(q) >= 0);
+
+        if (matchCat && matchQuery) {
+          d.classList.remove('hidden');
+          anyVisible = true;
+        } else {
+          d.classList.add('hidden');
+        }
+      });
+
+      // Hide sections with all items hidden
+      allSections.forEach(function(s) {
+        var visible = s.querySelectorAll('details:not(.hidden)');
+        if (visible.length === 0) {
+          s.classList.add('hidden');
+        } else {
+          s.classList.remove('hidden');
+        }
+      });
+
+      if (anyVisible) noResults.classList.remove('show');
+      else noResults.classList.add('show');
+    }
+
+    searchInput.addEventListener('input', function(e) {
+      query = e.target.value;
+      // Auto-open matching items if there's a query
+      applyFilters();
+      if (query.trim().length >= 2) {
+        document.querySelectorAll('details:not(.hidden)').forEach(function(d) { d.open = true; });
+      }
+    });
+
+    tabs.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        btn.classList.add('active');
+        activeCat = btn.getAttribute('data-cat');
+        applyFilters();
+      });
+    });
+  })();
+</script>
+</body>
+</html>

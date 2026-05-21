@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Pagar Plan Completo &mdash; Generador de Aulas Virtuales | NEXBYTE.pro</title>
+<meta name="description" content="Checkout seguro del Plan Completo del Generador de Aulas Virtuales. Procesado por PayPhone Ecuador.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #E2E8F0;
+    background: #0F172A;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+
+  /* ===== NAV mínimo (solo logo + back) ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    padding: 18px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-left { display: flex; align-items: center; gap: 14px; }
+  .back-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: #94A3B8; text-decoration: none; font-size: 17px;
+    transition: all 0.3s;
+  }
+  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
+  .nav-logo { font-size: 20px; font-weight: 900; letter-spacing: 0; color: white; text-decoration: none; }
+  .secure-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: #94A3B8;
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.18);
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .secure-pill .lock { color: #22C55E; font-size: 14px; }
+
+  /* ===== MAIN ===== */
+  main {
+    flex: 1; padding: 48px 24px 60px;
+    max-width: 1000px; margin: 0 auto; width: 100%;
+  }
+
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 28px; align-items: start;
+  }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 32px;
+  }
+  .card h2 {
+    font-size: 14px; font-weight: 700; color: #94A3B8;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card h2 .num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; font-size: 13px; font-weight: 800;
+    display: inline-flex; align-items: center; justify-content: center;
+    letter-spacing: 0;
+  }
+
+  /* ===== Resumen del pedido ===== */
+  .summary-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .summary-row:last-of-type { border-bottom: none; }
+  .summary-row .lbl { color: #94A3B8; font-size: 14px; font-weight: 500; }
+  .summary-row .val { color: white; font-size: 14px; font-weight: 600; }
+  .summary-total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 18px; padding-top: 18px;
+    border-top: 2px solid rgba(255,255,255,0.1);
+  }
+  .summary-total .lbl { color: white; font-size: 16px; font-weight: 700; }
+  .summary-total .val {
+    font-size: 36px; font-weight: 900;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+  }
+  .summary-total .currency { font-size: 14px; color: #64748B; margin-left: 4px; font-weight: 500; }
+
+  .summary-features { margin-top: 22px; }
+  .summary-features li {
+    list-style: none;
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0; font-size: 13px; color: #CBD5E1;
+  }
+  .summary-features .check {
+    flex-shrink: 0; width: 18px; height: 18px; border-radius: 6px;
+    background: rgba(34,211,238,0.12); color: #22D3EE;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+
+  .summary-note {
+    margin-top: 18px;
+    background: rgba(34,211,238,0.06);
+    border: 1px solid rgba(34,211,238,0.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px; color: #94A3B8; line-height: 1.5;
+  }
+  .summary-note strong { color: #22D3EE; }
+
+  /* ===== Form PayPhone ===== */
+  .pp-form { width: 100%; }
+  .pp-form label {
+    display: block; color: #CBD5E1; font-size: 12px; font-weight: 600;
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .pp-form input {
+    width: 100%; padding: 14px 16px; background: #0F172A;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+    color: white; font-size: 15px; font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .pp-form input:focus { outline: none; border-color: #22D3EE; }
+  .pp-form .hint { color: #64748B; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+
+  .pp-form .checkbox-row {
+    margin-top: 18px;
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: #94A3B8; line-height: 1.5;
+  }
+  .pp-form .checkbox-row input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 2px;
+    accent-color: #22D3EE;
+  }
+  .pp-form .checkbox-row a { color: #22D3EE; text-decoration: none; font-weight: 600; }
+  .pp-form .checkbox-row a:hover { text-decoration: underline; }
+
+  .pp-form .error {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    color: #FCA5A5; padding: 12px 14px; border-radius: 10px;
+    font-size: 13px; line-height: 1.5; margin-top: 14px; display: none;
+  }
+  .pp-form .error.show { display: block; }
+  .pp-form .error a { color: #22D3EE; }
+
+  .btn-pay-card {
+    width: 100%; margin-top: 20px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; border: none; padding: 16px 20px;
+    border-radius: 14px; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-pay-card:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(59,130,246,0.4); }
+  .btn-pay-card:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-pay-card svg { width: 16px; height: 16px; }
+
+  .pay-meta {
+    margin-top: 14px;
+    display: flex; justify-content: center; align-items: center; gap: 8px;
+    font-size: 12px; color: #64748B;
+  }
+  .pay-meta .lock-mini { color: #22C55E; }
+
+  /* ===== Pago alternativo ===== */
+  .alt-payment {
+    margin-top: 36px;
+    text-align: center;
+    padding: 28px;
+    background: rgba(255,255,255,0.02);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 16px;
+  }
+  .alt-payment h3 {
+    font-size: 14px; font-weight: 700; color: #94A3B8;
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .alt-payment p { font-size: 14px; color: #CBD5E1; margin-bottom: 16px; line-height: 1.5; }
+  .alt-payment .btn-alt {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: white; padding: 12px 22px; border-radius: 10px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .alt-payment .btn-alt:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(34,211,238,0.3);
+  }
+  .alt-payment .timing { display: block; margin-top: 10px; font-size: 11px; color: #64748B; }
+
+  /* ===== Trust strip ===== */
+  .trust {
+    max-width: 700px; margin: 40px auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    text-align: center;
+  }
+  @media (max-width: 600px) { .trust { grid-template-columns: 1fr; } }
+  .trust-item {
+    padding: 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+  }
+  .trust-item .ico { font-size: 22px; margin-bottom: 6px; }
+  .trust-item .ttl { color: white; font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .trust-item .sub { color: #64748B; font-size: 11px; line-height: 1.4; }
+
+  /* ===== Footer mínimo ===== */
+  footer {
+    text-align: center; padding: 28px 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px; color: #475569;
+  }
+  footer a { color: #64748B; text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: #22D3EE; }
+
+  /* ===== Logo NEXBYTE ===== */
+  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
+  .nx-brand { display: inline-flex; align-items: center; line-height: 1; letter-spacing: -0.5px; }
+  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.6em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.12em); animation: nbPearlHtml 4s ease-in-out infinite; }
+  .nx-brand .nx-byte { color: #22D3EE; }
+  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    main { padding: 28px 14px 40px; }
+    .card { padding: 24px 18px; }
+    .summary-total .val { font-size: 30px; }
+    .btn-pay-card { font-size: 15px; padding: 14px; }
+    .secure-pill { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV minimal -->
+<nav>
+  <div class="nav-left">
+    <a href="/planes/" class="back-arrow" title="Volver a planes">&larr;</a>
+    <a href="/" class="nav-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+  </div>
+  <span class="secure-pill"><span class="lock">&#128274;</span> Pago seguro</span>
+</nav>
+
+<main>
+
+  <div class="grid">
+
+    <!-- RESUMEN DEL PEDIDO -->
+    <div class="card">
+      <h2><span class="num">1</span> Resumen del pedido</h2>
+
+      <div class="summary-row">
+        <span class="lbl">Producto</span>
+        <span class="val">Generador de Aulas Virtuales</span>
+      </div>
+      <div class="summary-row">
+        <span class="lbl">Plan</span>
+        <span class="val">Completo &mdash; PUCESE</span>
+      </div>
+      <div class="summary-row">
+        <span class="lbl">Duraci&oacute;n</span>
+        <span class="val">90 d&iacute;as</span>
+      </div>
+      <div class="summary-row">
+        <span class="lbl">Renovaci&oacute;n</span>
+        <span class="val">Autom&aacute;tica, cancelable</span>
+      </div>
+
+      <div class="summary-total">
+        <span class="lbl">Total a pagar</span>
+        <span class="val">$30<span class="currency">.00 USD</span></span>
+      </div>
+
+      <ul class="summary-features">
+        <li><span class="check">&#10003;</span> Configura hasta 10 aulas Moodle</li>
+        <li><span class="check">&#10003;</span> Rúbricas con IA (90 usos)</li>
+        <li><span class="check">&#10003;</span> Preguntas Aiken con IA (30 usos)</li>
+        <li><span class="check">&#10003;</span> Banners profesionales personalizados</li>
+        <li><span class="check">&#10003;</span> Soporte por email</li>
+        <li><span class="check">&#10003;</span> Cancela cuando quieras</li>
+      </ul>
+
+      <div class="summary-note">
+        <strong>Renovaci&oacute;n autom&aacute;tica:</strong> al expirar los 90 d&iacute;as se cobrar&aacute; $30 a la misma tarjeta.
+        Puedes <strong>cancelar en cualquier momento</strong> desde tu cuenta &mdash; mantienes acceso hasta el fin del per&iacute;odo pagado.
+      </div>
+    </div>
+
+    <!-- DATOS Y PAGO -->
+    <div class="card">
+      <h2><span class="num">2</span> Tu cuenta y pago</h2>
+
+      <form id="pp-form" class="pp-form">
+        <label for="pp-email">Email Google institucional</label>
+        <input type="email" id="pp-email" name="email" placeholder="docente@pucese.edu.ec o @gmail.com" required autocomplete="email">
+        <div class="hint">
+          Debe ser una cuenta <strong>Google</strong> (Gmail o Workspace).
+          Este es el mismo email con el que iniciar&aacute;s sesi&oacute;n en la extensi&oacute;n.
+          <br><strong style="color:#FCA5A5">Si te equivocas, soporte tendr&aacute; que vincular tu pago a mano.</strong>
+        </div>
+
+        <label class="checkbox-row" for="pp-terms">
+          <input type="checkbox" id="pp-terms" required>
+          <span>Acepto los <a href="/terminos/" target="_blank">t&eacute;rminos de uso</a> y la <a href="/privacidad/" target="_blank">pol&iacute;tica de privacidad</a>.</span>
+        </label>
+
+        <div id="pp-error" class="error"></div>
+
+        <button type="submit" class="btn-pay-card" id="pp-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Pagar $30 con tarjeta
+        </button>
+
+        <div class="pay-meta">
+          <span class="lock-mini">&#128274;</span>
+          <span>Procesado por <strong style="color:#94A3B8">PayPhone Ecuador</strong> &middot; Visa &middot; Mastercard</span>
+        </div>
+      </form>
+
+      <!-- Pago alternativo -->
+      <div class="alt-payment">
+        <h3>&iquest;Prefieres pago manual?</h3>
+        <p>Paga con <strong>QR De Una</strong> desde tu app de Banco Pichincha.</p>
+        <a href="/planes/#qr-deuna" class="btn-alt">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+          Ver instrucciones QR De Una
+        </a>
+        <span class="timing">Activaci&oacute;n manual en m&aacute;ximo 24 horas h&aacute;biles</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Trust strip -->
+  <div class="trust">
+    <div class="trust-item">
+      <div class="ico">&#128274;</div>
+      <div class="ttl">Tu tarjeta nunca pasa por NEXBYTE</div>
+      <div class="sub">PayPhone Ecuador es PCI-DSS certified</div>
+    </div>
+    <div class="trust-item">
+      <div class="ico">&#9889;</div>
+      <div class="ttl">Activaci&oacute;n instant&aacute;nea</div>
+      <div class="sub">Tu plan queda activo en menos de 1 minuto</div>
+    </div>
+    <div class="trust-item">
+      <div class="ico">&#128231;</div>
+      <div class="ttl">Confirmaci&oacute;n por email</div>
+      <div class="sub">Recibes recibo + instrucciones de instalaci&oacute;n</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 NEXBYTE.pro &middot;
+  <a href="/terminos/">T&eacute;rminos</a> &middot;
+  <a href="/privacidad/">Privacidad</a> &middot;
+  <a href="/faq/">FAQ</a> &middot;
+  <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+</footer>
+
+<script>
+  (function() {
+    var PAYPHONE_API_URL = "https://dashboard-three-kohl-42.vercel.app/api/payphone";
+    var BLOCKED = ["hotmail.com","hotmail.es","outlook.com","outlook.es","live.com","live.es","msn.com","yahoo.com","yahoo.es","icloud.com","me.com","aol.com"];
+
+    // Typos comunes → dominio correcto sugerido
+    var TYPO_MAP = {
+      "gmai.com": "gmail.com", "gmial.com": "gmail.com", "gmal.com": "gmail.com",
+      "gnail.com": "gmail.com", "gmail.cm": "gmail.com", "gmail.co": "gmail.com",
+      "gmail.con": "gmail.com", "gmaill.com": "gmail.com", "gamil.com": "gmail.com",
+      "gmil.com": "gmail.com", "gmail.om": "gmail.com",
+      "hotmial.com": "hotmail.com", "hotmal.com": "hotmail.com",
+      "yaho.com": "yahoo.com", "yhoo.com": "yahoo.com",
+      "outlok.com": "outlook.com", "iclud.com": "icloud.com"
+    };
+
+    var form = document.getElementById("pp-form");
+    var emailInput = document.getElementById("pp-email");
+    var termsInput = document.getElementById("pp-terms");
+    var errorDiv = document.getElementById("pp-error");
+    var btn = document.getElementById("pp-btn");
+    if (!form) return;
+
+    var lastConfirmedEmail = null;
+    function showError(msg) { errorDiv.innerHTML = msg; errorDiv.classList.add("show"); }
+    function clearError() { errorDiv.classList.remove("show"); errorDiv.innerHTML = ""; }
+    emailInput.addEventListener("input", function() { clearError(); lastConfirmedEmail = null; });
+    termsInput.addEventListener("change", clearError);
+
+    function suggestCorrectEmail(email) {
+      var parts = email.split("@");
+      if (parts.length !== 2) return null;
+      var domain = parts[1];
+      if (TYPO_MAP[domain]) return parts[0] + "@" + TYPO_MAP[domain];
+      return null;
+    }
+
+    form.addEventListener("click", function(e) {
+      var sug = e.target.closest("[data-fix-email]");
+      if (sug) {
+        e.preventDefault();
+        emailInput.value = sug.getAttribute("data-fix-email");
+        clearError();
+        lastConfirmedEmail = null;
+      }
+    });
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      clearError();
+
+      if (!termsInput.checked) {
+        showError("Debes aceptar los términos para continuar.");
+        return;
+      }
+
+      var email = emailInput.value.trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Formato de email inválido"); return; }
+      var domain = email.split("@")[1];
+
+      var suggested = suggestCorrectEmail(email);
+      if (suggested && lastConfirmedEmail !== email) {
+        showError(
+          '⚠️ <strong>"' + domain + '" parece un error.</strong> ' +
+          '¿Quisiste decir <a href="#" data-fix-email="' + suggested + '">' + suggested + '</a>?<br>' +
+          '<span style="font-size:11px;opacity:0.75;">Si tu email es realmente con "' + domain + '", presiona "Pagar $30" otra vez para continuar.</span>'
+        );
+        lastConfirmedEmail = email;
+        return;
+      }
+
+      if (BLOCKED.indexOf(domain) >= 0) {
+        showError("Tu email no es de Google. Crea un Gmail personal gratis en <a href='https://accounts.google.com/signup' target='_blank'>accounts.google.com/signup</a> y vuelve aquí.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg> Procesando...';
+
+      try {
+        var resp = await fetch(PAYPHONE_API_URL + "/create-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email })
+        });
+        var data = await resp.json();
+        if (!resp.ok || !data.paymentUrl) {
+          showError(data.error || "No se pudo iniciar el pago. Intenta de nuevo o escr&iacute;benos a soporte@nexbyte.pro.");
+          btn.disabled = false;
+          btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Pagar $30 con tarjeta';
+          return;
+        }
+        try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch(_) {}
+        window.location.href = data.paymentUrl;
+      } catch (err) {
+        console.error(err);
+        showError("Error de red. Verifica tu conexión e intenta de nuevo.");
+        btn.disabled = false;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Pagar $30 con tarjeta';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

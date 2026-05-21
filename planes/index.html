@@ -441,10 +441,14 @@
       <li><span class="check">&#10003;</span> Banners profesionales personalizados</li>
       <li><span class="check">&#10003;</span> Soporte por email</li>
     </ul>
-    <a href="#pagar" class="plan-cta plan-cta--paid">
-      Comenzar
+    <a href="/pagar/" class="plan-cta plan-cta--paid">
+      Suscribirme &mdash; $30
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
+    <div style="margin-top:14px;text-align:center;font-size:12px;color:#64748B;">
+      &#128274; Procesado por PayPhone Ecuador &middot; Visa &middot; Mastercard<br>
+      <span style="color:#22C55E;">Activaci&oacute;n autom&aacute;tica en menos de 1 minuto</span>
+    </div>
   </div>
 
   <!-- Plan Gratuito Card -->
@@ -539,31 +543,13 @@
     </table>
   </div>
 
-  <!-- Payment Section -->
-  <div class="payment-section" id="pagar">
-    <h2>M&eacute;todos de pago</h2>
-    <div class="payment-methods">
-
-      <!-- Pago con tarjeta (PayPhone) -->
-      <div class="payment-card">
-        <h3>Pagar con tarjeta</h3>
-        <span class="pp-instant">&#9889; Activaci&oacute;n autom&aacute;tica</span>
-        <p style="font-size:13px; color:#94A3B8; margin: 16px 0 12px; line-height:1.5;">
-          Tarjeta de cr&eacute;dito o d&eacute;bito. Tu plan se activa autom&aacute;ticamente al confirmar el pago.
-        </p>
-        <form id="pp-form" class="pp-form">
-          <label for="pp-email">Email de tu cuenta Google</label>
-          <input type="email" id="pp-email" name="email" placeholder="tu.correo@gmail.com" required autocomplete="email">
-          <div class="hint">
-            Debe ser una cuenta <strong>Google</strong> (Gmail o Workspace). Es el mismo email con el que iniciar&aacute;s sesi&oacute;n en la extensi&oacute;n.
-          </div>
-          <div id="pp-error" class="error"></div>
-          <button type="submit" class="btn-pay-card" id="pp-btn">Pagar $30</button>
-          <div class="pp-secure">&#128274; Procesado por PayPhone</div>
-        </form>
-      </div>
-
-      <!-- QR De Una -->
+  <!-- QR alternativo (solo info, no checkout embebido) -->
+  <div class="payment-section" id="qr-deuna">
+    <h2>&iquest;Prefieres pagar sin tarjeta?</h2>
+    <p style="text-align:center;color:#94A3B8;font-size:14px;margin:-14px auto 28px;max-width:520px;line-height:1.5;">
+      Tambi&eacute;n aceptamos pago manual con QR <strong>De Una</strong> (Banco Pichincha). Activaci&oacute;n en m&aacute;ximo 24 horas h&aacute;biles.
+    </p>
+    <div class="payment-methods" style="max-width:480px;margin:0 auto;grid-template-columns:1fr;">
       <div class="payment-card">
         <h3>QR De Una (Banco Pichincha)</h3>
         <div class="qr-placeholder">
@@ -573,44 +559,37 @@
           <ol>
             <li>Escanea el c&oacute;digo QR con tu app <strong>De Una</strong> (Banco Pichincha)</li>
             <li>Realiza el pago de <strong>$30</strong> (Plan Completo &mdash; trimestral)</li>
-            <li>Env&iacute;a el comprobante de pago al correo electr&oacute;nico indicado abajo</li>
-            <li>Recibir&aacute;s un correo con la confirmaci&oacute;n de activaci&oacute;n de tu plan en un plazo m&aacute;ximo de 24 horas</li>
+            <li>Env&iacute;a el comprobante a <strong>soporte@nexbyte.pro</strong> incluyendo tu email Google</li>
+            <li>Recibir&aacute;s confirmaci&oacute;n de activaci&oacute;n en un plazo m&aacute;ximo de 24 horas h&aacute;biles</li>
           </ol>
         </div>
         <div class="email-box">
           <div>
-            <div class="label">Correo de contacto</div>
-            <div class="addr">vargasmadrian@gmail.com</div>
+            <div class="label">Enviar comprobante a</div>
+            <div class="addr">soporte@nexbyte.pro</div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Download Section -->
-  <div class="download-section">
-    <h2>&#128229; Descarga la extensi&oacute;n</h2>
-    <p>Instala el Generador de Aulas Virtuales en Chrome y empieza gratis en menos de 2 minutos.</p>
-    <a href="/generador-aulas-v3.zip" download class="btn-download-big">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      Descargar extensi&oacute;n (.zip)
+  <!-- FAQ link -->
+  <div style="max-width:680px;margin:32px auto 0;text-align:center;padding:28px 24px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.15);border-radius:16px;">
+    <div style="font-size:13px;color:#22D3EE;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Preguntas frecuentes</div>
+    <h3 style="color:white;font-size:20px;font-weight:700;margin:0 0 8px;">&iquest;Dudas sobre planes, pagos o renovaci&oacute;n?</h3>
+    <p style="color:#94A3B8;font-size:14px;margin:0 0 16px;line-height:1.5;">Cancelaci&oacute;n, facturas con RUC, descuentos por bloque, reembolsos y m&aacute;s.</p>
+    <a href="/faq/" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:white;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;">
+      Ver FAQ completo
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
-    <span class="download-note">
-      &iquest;Primera vez? Revisa la <a href="/instalar/">gu&iacute;a de instalaci&oacute;n</a> paso a paso.
-    </span>
   </div>
 
 </main>
 
 <!-- FLOATING CTA -->
-<a href="#pagar" class="floating-cta">
+<a href="/pagar/" class="floating-cta">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-  Adquirir
+  Suscribirme
 </a>
 
 <!-- FOOTER -->
@@ -619,97 +598,5 @@
 </footer>
 
 <script defer src="/notifications.js"></script>
-<script>
-  (function() {
-    var PAYPHONE_API_URL = "https://dashboard-three-kohl-42.vercel.app/api/payphone";
-    var BLOCKED = ["hotmail.com","hotmail.es","outlook.com","outlook.es","live.com","live.es","msn.com","yahoo.com","yahoo.es","icloud.com","me.com","aol.com"];
-
-    // Typos comunes → dominio correcto sugerido
-    var TYPO_MAP = {
-      "gmai.com": "gmail.com", "gmial.com": "gmail.com", "gmal.com": "gmail.com",
-      "gnail.com": "gmail.com", "gmail.cm": "gmail.com", "gmail.co": "gmail.com",
-      "gmail.con": "gmail.com", "gmaill.com": "gmail.com", "gamil.com": "gmail.com",
-      "gmil.com": "gmail.com", "gmail.om": "gmail.com",
-      "hotmial.com": "hotmail.com", "hotmal.com": "hotmail.com",
-      "yaho.com": "yahoo.com", "yhoo.com": "yahoo.com",
-      "outlok.com": "outlook.com", "iclud.com": "icloud.com"
-    };
-
-    var form = document.getElementById("pp-form");
-    var emailInput = document.getElementById("pp-email");
-    var errorDiv = document.getElementById("pp-error");
-    var btn = document.getElementById("pp-btn");
-    if (!form) return;
-
-    var lastConfirmedEmail = null;  // Si el usuario confirmó un email sospechoso, ya no lo bloqueamos
-    function showError(msg) { errorDiv.innerHTML = msg; errorDiv.classList.add("show"); }
-    function clearError() { errorDiv.classList.remove("show"); errorDiv.innerHTML = ""; }
-    emailInput.addEventListener("input", function() { clearError(); lastConfirmedEmail = null; });
-
-    function suggestCorrectEmail(email) {
-      var parts = email.split("@");
-      if (parts.length !== 2) return null;
-      var domain = parts[1];
-      if (TYPO_MAP[domain]) return parts[0] + "@" + TYPO_MAP[domain];
-      return null;
-    }
-
-    // Click en la sugerencia "¿Quisiste decir...?"
-    form.addEventListener("click", function(e) {
-      var sug = e.target.closest("[data-fix-email]");
-      if (sug) {
-        e.preventDefault();
-        emailInput.value = sug.getAttribute("data-fix-email");
-        clearError();
-        lastConfirmedEmail = null;
-      }
-    });
-
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-      clearError();
-      var email = emailInput.value.trim().toLowerCase();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Formato de email inválido"); return; }
-      var domain = email.split("@")[1];
-
-      // Detectar typo común y sugerir corrección (bloquea hasta que el user confirme/corrija)
-      var suggested = suggestCorrectEmail(email);
-      if (suggested && lastConfirmedEmail !== email) {
-        showError(
-          '⚠️ <strong>"' + domain + '" parece un error.</strong> ' +
-          '¿Quisiste decir <a href="#" data-fix-email="' + suggested + '" style="color:#22D3EE;text-decoration:underline;font-weight:600;">' + suggested + '</a>?<br>' +
-          '<span style="font-size:11px;opacity:0.75;">Si tu email es realmente con "' + domain + '", presiona "Pagar $30" otra vez para continuar.</span>'
-        );
-        lastConfirmedEmail = email;  // Próximo submit con el mismo email lo deja pasar
-        return;
-      }
-
-      if (BLOCKED.indexOf(domain) >= 0) {
-        showError("Tu email no es de Google. Crea un Gmail personal gratis en accounts.google.com/signup y vuelve aquí.");
-        return;
-      }
-      btn.disabled = true; btn.textContent = "Procesando...";
-      try {
-        var resp = await fetch(PAYPHONE_API_URL + "/create-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email })
-        });
-        var data = await resp.json();
-        if (!resp.ok || !data.paymentUrl) {
-          showError(data.error || "No se pudo iniciar el pago. Intenta de nuevo.");
-          btn.disabled = false; btn.textContent = "Pagar $30";
-          return;
-        }
-        try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch(_) {}
-        window.location.href = data.paymentUrl;
-      } catch (err) {
-        console.error(err);
-        showError("Error de red. Verifica tu conexión e intenta de nuevo.");
-        btn.disabled = false; btn.textContent = "Pagar $30";
-      }
-    });
-  })();
-</script>
 </body>
 </html>
