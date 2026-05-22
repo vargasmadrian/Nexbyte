@@ -282,7 +282,291 @@
   }
   .install-frame.active { opacity: 1; transform: translateY(0); }
 
-  /* Frame 1: ZIP descomprime */
+  /* ===== Frame 1: DESCARGA ZIP ===== */
+  .frame-download { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .frame-download .dl-btn {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE); color: white;
+    padding: 12px 22px; border-radius: 10px;
+    font-size: 13px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+  }
+  .frame-download .file-name { font-size: 11px; color: #94A3B8; font-family: monospace; }
+  .frame-download .progress-bar {
+    width: 220px; height: 6px; border-radius: 999px;
+    background: rgba(255,255,255,0.08); overflow: hidden;
+  }
+  .frame-download .progress-fill {
+    height: 100%; width: 0;
+    background: linear-gradient(90deg, #3B82F6, #22D3EE);
+    animation: dlProgress 1.4s ease-out forwards;
+  }
+  @keyframes dlProgress { from { width: 0; } to { width: 100%; } }
+
+  /* ===== Frame 2: WinRAR descomprimiendo ===== */
+  .frame-winrar { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .frame-winrar .winrar-window {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    min-width: 280px; overflow: hidden;
+  }
+  .frame-winrar .winrar-header {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, #7C2D12, #92400E);
+    color: white; font-size: 11px; font-weight: 700;
+  }
+  .frame-winrar .winrar-body {
+    padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .frame-winrar .winrar-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: #CBD5E1;
+  }
+  .frame-winrar .winrar-row .ico { font-size: 14px; }
+  .frame-winrar .winrar-bar {
+    height: 5px; border-radius: 999px;
+    background: rgba(255,255,255,0.08); overflow: hidden;
+    margin-top: 4px;
+  }
+  .frame-winrar .winrar-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #F59E0B, #FBBF24);
+    width: 0;
+    animation: dlProgress 1.6s ease-out forwards;
+  }
+  .frame-winrar .extract-action {
+    font-size: 10px; color: #22D3EE; font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  /* ===== Frame 3: Chrome 3-dot menu ===== */
+  .frame-menu { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-right: 24px; }
+  .frame-menu .three-dots {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px; font-weight: 700;
+    animation: clickPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes clickPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(34,211,238,0); }
+  }
+  .frame-menu .menu-popup {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; min-width: 220px; overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+  }
+  .frame-menu .menu-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 12px; font-size: 11px; color: #CBD5E1;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .frame-menu .menu-item:last-child { border-bottom: none; }
+  .frame-menu .menu-item.highlight {
+    background: rgba(34,211,238,0.1); color: #22D3EE; font-weight: 700;
+  }
+  .frame-menu .menu-item .arrow { color: #64748B; font-size: 10px; }
+
+  /* ===== Frame 4: submenu extensiones ===== */
+  .frame-submenu { display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .frame-submenu .submenu {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; min-width: 220px; overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+  }
+  .frame-submenu .submenu-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; font-size: 11px; color: #CBD5E1;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .frame-submenu .submenu-item:last-child { border-bottom: none; }
+  .frame-submenu .submenu-item.highlight {
+    background: rgba(34,211,238,0.1); color: #22D3EE; font-weight: 700;
+  }
+  .frame-submenu .submenu-item .ico { font-size: 13px; }
+
+  /* ===== Frame 5: modo developer toggle ===== */
+  .frame-devmode { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .frame-devmode .toggle-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 14px;
+    background: rgba(255,255,255,0.04); border-radius: 8px;
+    font-size: 12px; color: #CBD5E1;
+  }
+  .frame-devmode .toggle-row .tgl {
+    width: 32px; height: 18px; border-radius: 999px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    position: relative;
+  }
+  .frame-devmode .toggle-row .tgl::after {
+    content: ''; position: absolute;
+    top: 2px; right: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: white;
+    animation: toggleSlide 1.4s ease-out forwards;
+  }
+  @keyframes toggleSlide { 0% { right: 16px; } 100% { right: 2px; } }
+  .frame-devmode .activated { color: #22C55E; font-weight: 700; }
+
+  /* ===== Frame 6: cargar desempaquetado ===== */
+  .frame-load { display: flex; align-items: center; justify-content: center; }
+  .frame-load .load-btn {
+    background: rgba(34,211,238,0.12);
+    border: 1px solid rgba(34,211,238,0.5);
+    color: #22D3EE;
+    padding: 11px 22px; border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 10px;
+    animation: pulseGlow 1.4s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(34,211,238,0); }
+  }
+
+  /* ===== Frame 7: file picker carpeta ===== */
+  .frame-picker { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .frame-picker .picker-window {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 12px 16px; min-width: 280px;
+  }
+  .frame-picker .picker-window .head {
+    font-size: 10px; color: #64748B;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
+  }
+  .frame-picker .picker-window .item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 5px;
+    font-size: 12px; color: #CBD5E1;
+    border: 1px solid transparent; transition: all 0.3s;
+  }
+  .frame-picker .picker-window .item.selected {
+    background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3);
+    color: #22D3EE; font-weight: 600;
+  }
+  .frame-picker .picker-window .item .ico { font-size: 14px; }
+  .frame-picker .confirm-btn {
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    color: white; padding: 7px 16px; border-radius: 6px;
+    font-size: 11px; font-weight: 700;
+  }
+
+  /* ===== Frame 8: extension card aparece ===== */
+  .frame-card { display: flex; align-items: center; justify-content: center; }
+  .frame-card .ext-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(34,211,238,0.4);
+    border-radius: 12px; padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 10px 30px rgba(59,130,246,0.2);
+    min-width: 320px;
+    animation: cardSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes cardSlide {
+    0% { transform: translateY(15px) scale(0.95); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .frame-card .ext-card .ico {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .frame-card .ext-card .meta { flex: 1; }
+  .frame-card .ext-card .name { font-size: 13px; font-weight: 700; color: white; margin-bottom: 2px; }
+  .frame-card .ext-card .ver { font-size: 11px; color: #64748B; }
+  .frame-card .ext-card .toggle {
+    width: 32px; height: 18px; border-radius: 999px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    position: relative; flex-shrink: 0;
+  }
+  .frame-card .ext-card .toggle::after {
+    content: ''; position: absolute;
+    top: 2px; right: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: white;
+  }
+
+  /* ===== Frame 9: rompecabezas + anclar ===== */
+  .frame-pin { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-right: 18px; }
+  .frame-pin .puzzle-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .frame-pin .pin-menu {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; min-width: 250px; overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
+  }
+  .frame-pin .pin-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    font-size: 11px; color: #CBD5E1;
+  }
+  .frame-pin .pin-row .ext-ico {
+    width: 18px; height: 18px; border-radius: 5px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+  }
+  .frame-pin .pin-row .name { flex: 1; font-weight: 600; color: white; }
+  .frame-pin .pin-row .pin-btn {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(34,211,238,0.15);
+    border: 1px solid rgba(34,211,238,0.5);
+    color: #22D3EE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    animation: clickPulse 1.2s ease-in-out infinite;
+  }
+
+  /* ===== Frame 10: login Google ===== */
+  .frame-login { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .frame-login .popup-mini {
+    background: linear-gradient(180deg, #0F172A, #1E293B);
+    border: 1px solid rgba(34,211,238,0.25);
+    border-radius: 10px; padding: 14px 16px;
+    min-width: 240px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .frame-login .popup-mini .ext-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .frame-login .popup-mini .ttl { font-size: 11px; color: white; font-weight: 700; }
+  .frame-login .gbtn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; color: #1f2937;
+    padding: 8px 14px; border-radius: 6px;
+    font-size: 11px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    animation: clickPulse 1.4s ease-in-out infinite;
+  }
+  .frame-login .gbtn .g-logo {
+    width: 14px; height: 14px;
+    background: conic-gradient(from -45deg, #4285F4 0% 25%, #34A853 25% 50%, #FBBC05 50% 75%, #EA4335 75% 100%);
+    border-radius: 50%; position: relative;
+  }
+  .frame-login .gbtn .g-logo::after {
+    content: 'G'; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 9px;
+  }
+  .frame-login .account-hint { font-size: 10px; color: #64748B; }
+
+  /* (unused legacy classes — keeping just in case) */
   .frame-zip { display: flex; align-items: center; gap: 24px; justify-content: center; }
   .frame-zip .zip-box {
     width: 80px; height: 80px; border-radius: 12px;
@@ -500,45 +784,96 @@
     </div>
     <div class="install-canvas">
 
-      <!-- Frame 1: zip → carpeta -->
-      <div class="install-frame frame-zip" data-frame="1">
-        <div class="zip-box">
-          <span class="ico">&#128230;</span>
-          <span class="lbl">.zip</span>
+      <!-- Frame 1: Descarga .zip -->
+      <div class="install-frame frame-download" data-frame="1">
+        <div class="dl-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar (.zip)
         </div>
-        <span class="arrow">&rarr;</span>
-        <div class="folder-box">
-          <span class="ico">&#128193;</span>
-          <span class="lbl">extra&iacute;da</span>
+        <div class="file-name">generador-aulas-v3.zip</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+      </div>
+
+      <!-- Frame 2: WinRAR descomprime -->
+      <div class="install-frame frame-winrar" data-frame="2">
+        <div class="winrar-window">
+          <div class="winrar-header">
+            <span>&#128218;</span>
+            <span>WinRAR &mdash; generador-aulas-v3.zip</span>
+          </div>
+          <div class="winrar-body">
+            <div class="winrar-row">
+              <span class="ico">&#128193;</span>
+              <span>Extrayendo a:</span>
+              <span style="color:#22D3EE;font-family:monospace;">C:\Descargas\</span>
+            </div>
+            <div class="winrar-bar"><div class="winrar-bar-fill"></div></div>
+            <div class="winrar-row" style="justify-content:space-between;">
+              <span class="extract-action">EXTRAER AQU&Iacute;</span>
+              <span style="color:#64748B;font-size:10px;">23 archivos</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Frame 2: chrome://extensions con modo dev -->
-      <div class="install-frame frame-extensions" data-frame="2">
+      <!-- Frame 3: Chrome 3-dot menu → Extensiones -->
+      <div class="install-frame frame-menu" data-frame="3">
+        <div class="three-dots">&#8942;</div>
+        <div class="menu-popup">
+          <div class="menu-item">Nueva pesta&ntilde;a <span class="arrow">Ctrl+T</span></div>
+          <div class="menu-item">Historial <span class="arrow">&rsaquo;</span></div>
+          <div class="menu-item">Descargas <span class="arrow">Ctrl+J</span></div>
+          <div class="menu-item highlight">
+            <span>Extensiones</span> <span class="arrow">&rsaquo;</span>
+          </div>
+          <div class="menu-item">Configuraci&oacute;n</div>
+        </div>
+      </div>
+
+      <!-- Frame 4: Submenu Extensiones → Administrar extensiones -->
+      <div class="install-frame frame-submenu" data-frame="4">
+        <div class="submenu">
+          <div class="submenu-item highlight">
+            <span class="ico">&#9881;</span>
+            <span>Administrar extensiones</span>
+          </div>
+          <div class="submenu-item">
+            <span class="ico">&#127760;</span>
+            <span>Visitar Chrome Web Store</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 5: Modo desarrollador toggle -->
+      <div class="install-frame frame-devmode" data-frame="5">
         <div class="toggle-row">
           <span>Modo de desarrollador</span>
           <span class="tgl"></span>
-          <span style="color:#22C55E;font-weight:700;">ACTIVADO</span>
-        </div>
-        <div class="load-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Cargar descomprimida
+          <span class="activated">ACTIVADO</span>
         </div>
       </div>
 
-      <!-- Frame 3: file picker -->
-      <div class="install-frame frame-picker" data-frame="3">
+      <!-- Frame 6: Cargar desempaquetado btn -->
+      <div class="install-frame frame-load" data-frame="6">
+        <div class="load-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Cargar desempaquetado
+        </div>
+      </div>
+
+      <!-- Frame 7: File picker selecciona carpeta -->
+      <div class="install-frame frame-picker" data-frame="7">
         <div class="picker-window">
           <div class="head">Selecciona la carpeta</div>
           <div class="item"><span class="ico">&#128193;</span> Documentos</div>
           <div class="item selected"><span class="ico">&#128193;</span> generador-aulas-v3 &#10003;</div>
           <div class="item"><span class="ico">&#128462;</span> manifest.json</div>
         </div>
-        <div class="confirm"><span>&#10003;</span> Seleccionar carpeta</div>
+        <div class="confirm-btn">Seleccionar carpeta</div>
       </div>
 
-      <!-- Frame 4: extension card aparece -->
-      <div class="install-frame frame-card" data-frame="4">
+      <!-- Frame 8: Extension card aparece -->
+      <div class="install-frame frame-card" data-frame="8">
         <div class="ext-card">
           <div class="ico">&#129417;</div>
           <div class="meta">
@@ -549,11 +884,36 @@
         </div>
       </div>
 
-      <!-- Frame 5: ready -->
-      <div class="install-frame frame-ready" data-frame="5">
+      <!-- Frame 9: Rompecabezas → click pin -->
+      <div class="install-frame frame-pin" data-frame="9">
+        <div class="puzzle-icon">&#129513;</div>
+        <div class="pin-menu">
+          <div class="pin-row">
+            <span class="ext-ico">&#129417;</span>
+            <span class="name">Generador de Aulas Virtuales</span>
+            <span class="pin-btn">&#128204;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 10: Login Google -->
+      <div class="install-frame frame-login" data-frame="10">
+        <div class="popup-mini">
+          <div class="ext-logo">&#129417;</div>
+          <div class="ttl">Asistente de Aulas Virtuales</div>
+          <div class="gbtn">
+            <span class="g-logo"></span>
+            <span>Iniciar sesi&oacute;n con Google</span>
+          </div>
+          <div class="account-hint">docente@pucese.edu.ec</div>
+        </div>
+      </div>
+
+      <!-- Frame 11: ready -->
+      <div class="install-frame frame-ready" data-frame="11">
         <div class="check">&#10003;</div>
-        <div class="ready-text">&iexcl;Listo para usar!</div>
-        <div class="ready-sub">Fija el icono del b&uacute;ho en la barra y abre tu aula Moodle PUCESE.</div>
+        <div class="ready-text">&iexcl;Todo listo!</div>
+        <div class="ready-sub">Tu extensi&oacute;n est&aacute; instalada, anclada y con sesi&oacute;n iniciada. Abre tu aula Moodle.</div>
       </div>
 
     </div>
@@ -745,20 +1105,32 @@
   if (!stage || frames.length === 0) return;
 
   var captions = [
-    'PASO 1 · Descomprime el .zip',
-    'PASO 2 · Abre chrome://extensions y activa Modo desarrollador',
-    'PASO 3 · Selecciona la carpeta extraída',
-    'PASO 4 · Tu extensión queda activada',
-    'PASO 5 · ¡Lista! Empieza a usarla'
+    'PASO 1 · Descarga el archivo .zip',
+    'PASO 2 · Descomprime con WinRAR (clic derecho → Extraer aquí)',
+    'PASO 3 · En Chrome, abre el menú ⋮ → Extensiones',
+    'PASO 4 · Entra a "Administrar extensiones"',
+    'PASO 5 · Activa el Modo de desarrollador',
+    'PASO 6 · Clic en "Cargar desempaquetado"',
+    'PASO 7 · Selecciona la carpeta descomprimida',
+    'PASO 8 · La extensión queda activada',
+    'PASO 9 · Clic en 🧩 y ancla la extensión',
+    'PASO 10 · Abre el búho e inicia sesión con Google',
+    '✓ ¡Listo! Tu extensión está instalada'
   ];
   var urls = [
-    'Descargas / generador-aulas-v3.zip',
+    'nexbyte.pro/instalar',
+    'C:\\Descargas\\generador-aulas-v3.zip',
+    'Nueva pestaña',
     'chrome://extensions',
     'chrome://extensions',
     'chrome://extensions',
+    'chrome://extensions',
+    'chrome://extensions',
+    'chrome://extensions',
+    'Pop-up extensión 🦉',
     'moodlecr.pucese.edu.ec/course/view.php?id=29'
   ];
-  var durations = [2200, 2400, 2400, 2400, 2600];
+  var durations = [2000, 2200, 2200, 1900, 2000, 1900, 2200, 2100, 2200, 2400, 2600];
 
   var i = 0;
 
@@ -767,7 +1139,8 @@
     frames[idx].classList.add('active');
     caption.textContent = captions[idx];
     urlEl.textContent = urls[idx];
-    if (idx >= 3) bar.classList.add('show-ext'); else bar.classList.remove('show-ext');
+    // Mostrar búho en toolbar a partir del PASO 9 (anclar) en adelante
+    if (idx >= 8) bar.classList.add('show-ext'); else bar.classList.remove('show-ext');
   }
 
   function loop() {
@@ -780,7 +1153,7 @@
 
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
-    show(4); // estado final
+    show(frames.length - 1); // estado final
   } else {
     loop();
   }
