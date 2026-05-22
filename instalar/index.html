@@ -201,7 +201,270 @@
   .nx-brand { display: inline-flex; align-items: center; line-height: 1; letter-spacing: -0.5px; }
   .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
   .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }</style>
+  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
+
+  /* =========================================================== */
+  /* === ANIMACIÓN del flujo de instalación (sintética CSS+JS) === */
+  /* =========================================================== */
+  .install-anim-wrap {
+    max-width: 760px; margin: 10px auto 30px;
+    padding: 0 24px;
+  }
+  .install-anim-label {
+    text-align: center; font-size: 11px; font-weight: 700;
+    color: #22D3EE; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .install-stage {
+    background: linear-gradient(135deg, #1E293B, #0F172A);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 280px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .install-bar {
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .install-bar .dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+  .install-bar .dot.r { background: #EF4444; }
+  .install-bar .dot.y { background: #F59E0B; }
+  .install-bar .dot.g { background: #22C55E; }
+  .install-bar .url {
+    flex: 1; margin: 0 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 11px; color: #64748B;
+    font-family: 'SF Mono', Menlo, monospace;
+    transition: color 0.4s;
+  }
+  .install-bar.show-ext .url { color: #22D3EE; }
+  .install-bar .toolbar-icons {
+    display: flex; gap: 4px;
+  }
+  .install-bar .toolbar-icons .puzzle {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+  .install-bar .toolbar-icons .owl {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    transform: scale(0);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .install-bar.show-ext .toolbar-icons .owl { transform: scale(1); }
+
+  .install-canvas {
+    position: relative;
+    height: calc(100% - 38px);
+    overflow: hidden;
+  }
+  .install-frame {
+    position: absolute; inset: 0;
+    padding: 18px 22px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+    display: flex; flex-direction: column;
+    justify-content: center;
+  }
+  .install-frame.active { opacity: 1; transform: translateY(0); }
+
+  /* Frame 1: ZIP descomprime */
+  .frame-zip { display: flex; align-items: center; gap: 24px; justify-content: center; }
+  .frame-zip .zip-box {
+    width: 80px; height: 80px; border-radius: 12px;
+    background: rgba(245,158,11,0.15);
+    border: 2px dashed rgba(245,158,11,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #F59E0B; gap: 4px;
+  }
+  .frame-zip .zip-box .ico { font-size: 28px; }
+  .frame-zip .zip-box .lbl { font-size: 9px; font-weight: 700; }
+  .frame-zip .arrow {
+    color: #22D3EE; font-size: 22px;
+    animation: arrowSlide 1.2s ease-in-out infinite;
+  }
+  @keyframes arrowSlide {
+    0%, 100% { transform: translateX(-4px); opacity: 0.6; }
+    50% { transform: translateX(4px); opacity: 1; }
+  }
+  .frame-zip .folder-box {
+    width: 80px; height: 80px; border-radius: 12px;
+    background: rgba(34,211,238,0.1);
+    border: 2px solid rgba(34,211,238,0.4);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #22D3EE; gap: 4px;
+  }
+  .frame-zip .folder-box .ico { font-size: 28px; }
+  .frame-zip .folder-box .lbl { font-size: 9px; font-weight: 700; }
+
+  /* Frame 2: chrome://extensions */
+  .frame-extensions {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center;
+  }
+  .frame-extensions .toggle-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.04); border-radius: 8px;
+    font-size: 12px; color: #CBD5E1;
+  }
+  .frame-extensions .toggle-row .tgl {
+    width: 32px; height: 18px; border-radius: 999px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    position: relative;
+  }
+  .frame-extensions .toggle-row .tgl::after {
+    content: ''; position: absolute;
+    top: 2px; right: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: white;
+  }
+  .frame-extensions .load-btn {
+    background: rgba(34,211,238,0.12);
+    border: 1px solid rgba(34,211,238,0.4);
+    color: #22D3EE;
+    padding: 9px 18px; border-radius: 8px;
+    font-size: 12px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+    animation: pulseGlow 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(34,211,238,0); }
+  }
+
+  /* Frame 3: file picker selecciona carpeta */
+  .frame-picker {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .frame-picker .picker-window {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 12px 16px;
+    min-width: 280px;
+  }
+  .frame-picker .picker-window .head {
+    font-size: 10px; color: #64748B;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .frame-picker .picker-window .item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 5px;
+    font-size: 12px; color: #CBD5E1;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+  }
+  .frame-picker .picker-window .item.selected {
+    background: rgba(34,211,238,0.1);
+    border-color: rgba(34,211,238,0.3);
+    color: #22D3EE; font-weight: 600;
+  }
+  .frame-picker .picker-window .item .ico { font-size: 14px; }
+  .frame-picker .confirm {
+    color: #22C55E; font-size: 12px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  /* Frame 4: extension card aparece */
+  .frame-card {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .frame-card .ext-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(34,211,238,0.4);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 10px 30px rgba(59,130,246,0.2);
+    min-width: 320px;
+    animation: cardSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes cardSlide {
+    0% { transform: translateY(15px) scale(0.95); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .frame-card .ext-card .ico {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .frame-card .ext-card .meta { flex: 1; }
+  .frame-card .ext-card .name {
+    font-size: 13px; font-weight: 700; color: white;
+    margin-bottom: 2px;
+  }
+  .frame-card .ext-card .ver {
+    font-size: 11px; color: #64748B;
+  }
+  .frame-card .ext-card .toggle {
+    width: 32px; height: 18px; border-radius: 999px;
+    background: linear-gradient(135deg, #3B82F6, #22D3EE);
+    position: relative; flex-shrink: 0;
+  }
+  .frame-card .ext-card .toggle::after {
+    content: ''; position: absolute;
+    top: 2px; right: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: white;
+  }
+
+  /* Frame 5: ready */
+  .frame-ready {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .frame-ready .check {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #22C55E, #10B981);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 30px; font-weight: 900;
+    box-shadow: 0 14px 36px rgba(34,197,94,0.4);
+    animation: checkPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes checkPop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  .frame-ready .ready-text {
+    font-size: 18px; font-weight: 800; color: white; text-align: center;
+  }
+  .frame-ready .ready-sub {
+    font-size: 12px; color: #94A3B8; text-align: center; max-width: 340px;
+  }
+
+  /* Caption debajo */
+  .install-caption {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 13px; font-weight: 600;
+    color: #22D3EE;
+    min-height: 18px;
+    transition: opacity 0.3s;
+  }
+
+  @media (max-width: 600px) {
+    .install-stage { height: 240px; }
+    .frame-zip .zip-box, .frame-zip .folder-box { width: 64px; height: 64px; }
+    .frame-card .ext-card { min-width: 0; max-width: 280px; padding: 10px 14px; }
+    .frame-card .ext-card .ico { width: 36px; height: 36px; font-size: 18px; }
+    .frame-card .ext-card .name { font-size: 12px; }
+  }</style>
 </head>
 <body>
 
@@ -220,6 +483,83 @@
     Tiempo estimado: 2 minutos
   </div>
 </section>
+
+<!-- Animación CSS del flujo de instalación -->
+<div class="install-anim-wrap">
+  <div class="install-anim-label">As&iacute; se ve el proceso</div>
+  <div class="install-stage" id="install-stage">
+    <div class="install-bar" id="install-bar">
+      <span class="dot r"></span>
+      <span class="dot y"></span>
+      <span class="dot g"></span>
+      <span class="url" id="install-url">chrome://extensions</span>
+      <div class="toolbar-icons">
+        <div class="puzzle">&#129513;</div>
+        <div class="owl">&#129417;</div>
+      </div>
+    </div>
+    <div class="install-canvas">
+
+      <!-- Frame 1: zip → carpeta -->
+      <div class="install-frame frame-zip" data-frame="1">
+        <div class="zip-box">
+          <span class="ico">&#128230;</span>
+          <span class="lbl">.zip</span>
+        </div>
+        <span class="arrow">&rarr;</span>
+        <div class="folder-box">
+          <span class="ico">&#128193;</span>
+          <span class="lbl">extra&iacute;da</span>
+        </div>
+      </div>
+
+      <!-- Frame 2: chrome://extensions con modo dev -->
+      <div class="install-frame frame-extensions" data-frame="2">
+        <div class="toggle-row">
+          <span>Modo de desarrollador</span>
+          <span class="tgl"></span>
+          <span style="color:#22C55E;font-weight:700;">ACTIVADO</span>
+        </div>
+        <div class="load-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Cargar descomprimida
+        </div>
+      </div>
+
+      <!-- Frame 3: file picker -->
+      <div class="install-frame frame-picker" data-frame="3">
+        <div class="picker-window">
+          <div class="head">Selecciona la carpeta</div>
+          <div class="item"><span class="ico">&#128193;</span> Documentos</div>
+          <div class="item selected"><span class="ico">&#128193;</span> generador-aulas-v3 &#10003;</div>
+          <div class="item"><span class="ico">&#128462;</span> manifest.json</div>
+        </div>
+        <div class="confirm"><span>&#10003;</span> Seleccionar carpeta</div>
+      </div>
+
+      <!-- Frame 4: extension card aparece -->
+      <div class="install-frame frame-card" data-frame="4">
+        <div class="ext-card">
+          <div class="ico">&#129417;</div>
+          <div class="meta">
+            <div class="name">Generador de Aulas Virtuales 3.0</div>
+            <div class="ver">v3.7.3 &middot; Activada</div>
+          </div>
+          <div class="toggle"></div>
+        </div>
+      </div>
+
+      <!-- Frame 5: ready -->
+      <div class="install-frame frame-ready" data-frame="5">
+        <div class="check">&#10003;</div>
+        <div class="ready-text">&iexcl;Listo para usar!</div>
+        <div class="ready-sub">Fija el icono del b&uacute;ho en la barra y abre tu aula Moodle PUCESE.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="install-caption" id="install-caption">PASO 1 &middot; Descomprime el .zip</div>
+</div>
 
 <!-- Download -->
 <section class="download-section">
@@ -391,5 +731,61 @@
 </footer>
 
 <script defer src="/notifications.js"></script>
+
+<script>
+// ============================================
+// Animación del flujo de instalación
+// ============================================
+(function() {
+  var stage = document.getElementById('install-stage');
+  var bar = document.getElementById('install-bar');
+  var urlEl = document.getElementById('install-url');
+  var caption = document.getElementById('install-caption');
+  var frames = document.querySelectorAll('.install-frame');
+  if (!stage || frames.length === 0) return;
+
+  var captions = [
+    'PASO 1 · Descomprime el .zip',
+    'PASO 2 · Abre chrome://extensions y activa Modo desarrollador',
+    'PASO 3 · Selecciona la carpeta extraída',
+    'PASO 4 · Tu extensión queda activada',
+    'PASO 5 · ¡Lista! Empieza a usarla'
+  ];
+  var urls = [
+    'Descargas / generador-aulas-v3.zip',
+    'chrome://extensions',
+    'chrome://extensions',
+    'chrome://extensions',
+    'moodlecr.pucese.edu.ec/course/view.php?id=29'
+  ];
+  var durations = [2200, 2400, 2400, 2400, 2600];
+
+  var i = 0;
+
+  function show(idx) {
+    frames.forEach(function(f) { f.classList.remove('active'); });
+    frames[idx].classList.add('active');
+    caption.textContent = captions[idx];
+    urlEl.textContent = urls[idx];
+    if (idx >= 3) bar.classList.add('show-ext'); else bar.classList.remove('show-ext');
+  }
+
+  function loop() {
+    show(i);
+    setTimeout(function() {
+      i = (i + 1) % frames.length;
+      loop();
+    }, durations[i]);
+  }
+
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    show(4); // estado final
+  } else {
+    loop();
+  }
+})();
+</script>
+
 </body>
 </html>
