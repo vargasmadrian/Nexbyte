@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Política de Privacidad — Generador de Aulas Virtuales PUCE | NEXBYTE.pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0F172A; color: #CBD5E1; line-height: 1.8; }
+  .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+  h1 { color: white; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { color: #64748B; font-size: 14px; margin-bottom: 40px; }
+  h2 { color: #E2E8F0; font-size: 20px; font-weight: 700; margin-top: 36px; margin-bottom: 12px; }
+  p, li { font-size: 15px; margin-bottom: 12px; }
+  ul { padding-left: 24px; }
+  a { color: #22D3EE; }
+  code { background: #1E293B; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #FBBF24; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 30px; }
+  .back:hover { color: white; }
+
+  @media (max-width: 480px) {
+    .container { padding: 40px 16px; }
+    h1 { font-size: 24px; }
+    .subtitle { font-size: 13px; margin-bottom: 28px; }
+    h2 { font-size: 17px; margin-top: 28px; margin-bottom: 10px; }
+    p, li { font-size: 14px; margin-bottom: 10px; }
+    ul { padding-left: 18px; }
+    .back { font-size: 13px; margin-bottom: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="back">← Volver a NEXBYTE.pro</a>
+  <h1>Política de Privacidad</h1>
+  <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: mayo 2026</p>
+
+  <h2>1. Alcance</h2>
+  <p>Esta política aplica a la extensión de Chrome <strong>"Generador de Aulas — PUCE Quito y Ambato"</strong>, desarrollada para automatizar la configuración de aulas virtuales Moodle de los docentes de:</p>
+  <ul>
+    <li>Pontificia Universidad Católica del Ecuador, sede matriz Quito (<code>eva.puce.edu.ec</code>)</li>
+    <li>Pontificia Universidad Católica del Ecuador, sede Ambato (<code>eva.pucesa.edu.ec</code>)</li>
+  </ul>
+
+  <h2>2. Información que recopilamos</h2>
+  <p>Al iniciar sesión con Google OAuth, la extensión recopila únicamente:</p>
+  <ul>
+    <li><strong>Nombre completo y correo electrónico institucional</strong> (<code>@puce.edu.ec</code> o <code>@pucesa.edu.ec</code>) — entregados por Google.</li>
+    <li><strong>Foto de perfil</strong> — obtenida de la cuenta de Google del usuario.</li>
+  </ul>
+  <p>Si el docente adquiere un plan de pago, también almacenamos:</p>
+  <ul>
+    <li>Plan suscrito (mensual o trimestral), fecha de inicio y fin del período.</li>
+    <li>Número y monto de las transacciones procesadas a través de PayPhone (Ecuador), sin incluir datos sensibles de su tarjeta — esos viven en PayPhone, nunca en nuestra base de datos.</li>
+    <li>Conteo agregado de créditos consumidos por acción (importar plantilla, generar contenido, crear tarea, etc.).</li>
+  </ul>
+  <p>NO recopilamos: contenido de los cursos Moodle, calificaciones de estudiantes, historial de navegación fuera de Moodle, ni información personal adicional del docente o de sus estudiantes.</p>
+
+  <h2>3. Cómo utilizamos la información</h2>
+  <ul>
+    <li>Autenticar al usuario y mantener su sesión activa en la extensión.</li>
+    <li>Asociar su cuenta con su suscripción y plan activo.</li>
+    <li>Validar y descontar créditos por cada acción automatizada (importar plantilla, generar sílabo con IA, crear tarea, generar evaluación, replicar nota en criterios, etc.).</li>
+    <li>Mostrar el nombre del docente dentro del popup de la extensión.</li>
+    <li>Enviar comunicaciones transaccionales (confirmación de pago, recordatorio de renovación) al correo institucional del docente.</li>
+  </ul>
+
+  <h2>4. Almacenamiento de datos</h2>
+  <p>Los datos persistentes (cuenta, suscripción, créditos) se almacenan en <strong>Supabase</strong>, plataforma backend con cifrado en reposo y en tránsito (HTTPS). La sesión local se guarda mediante <code>chrome.storage</code> en el navegador del docente y se elimina al cerrar sesión.</p>
+  <p>Los pagos se procesan exclusivamente a través de <strong>PayPhone S.A.</strong> (Ecuador). No almacenamos números de tarjeta, CVV, ni datos PCI en nuestros servidores. La integración usa el flujo de redirección oficial de PayPhone.</p>
+
+  <h2>5. Compartición de datos con terceros</h2>
+  <p>No vendemos ni transferimos información personal del docente con fines comerciales. Los datos solo se comparten con los siguientes proveedores estrictamente necesarios para operar el servicio:</p>
+  <ul>
+    <li><strong>Google</strong> — autenticación OAuth (correo, nombre, foto de perfil).</li>
+    <li><strong>Supabase</strong> — almacenamiento de cuenta y suscripción.</li>
+    <li><strong>PayPhone</strong> — procesamiento de pagos.</li>
+    <li><strong>Resend</strong> — envío de correos transaccionales.</li>
+    <li><strong>Vercel</strong> — alojamiento del dashboard de administración.</li>
+  </ul>
+  <p>Cada uno de estos servicios opera bajo sus propias políticas de privacidad y cumple con estándares internacionales (SOC 2, GDPR, etc.).</p>
+
+  <h2>6. Permisos de la extensión y justificación</h2>
+  <ul>
+    <li><strong><code>activeTab</code></strong> — Inyectar scripts solo en la pestaña Moodle abierta por el docente.</li>
+    <li><strong><code>scripting</code></strong> — Automatizar interacciones con el DOM de Moodle (rellenar formularios de creación de tareas, subir archivos, etc.).</li>
+    <li><strong><code>storage</code></strong> + <strong><code>unlimitedStorage</code></strong> — Guardar localmente la sesión del docente, estado del flujo multi-página y caché de plantillas Moodle (archivos MBZ pueden superar 5MB del límite estándar).</li>
+    <li><strong><code>tabs</code></strong> — Coordinar mensajes entre el popup de la extensión y el content script en la pestaña Moodle.</li>
+    <li><strong><code>identity</code></strong> — Iniciar sesión OAuth con Google (necesario para validar el plan del docente).</li>
+    <li><strong><code>host_permissions: eva.puce.edu.ec, eva.pucesa.edu.ec</code></strong> — Ejecutar la automatización en los Moodle institucionales de PUCE Quito y PUCE Ambato.</li>
+    <li><strong><code>host_permissions: *.supabase.co</code></strong> — Comunicar con el backend para auth y validación de créditos.</li>
+    <li><strong><code>host_permissions: nexbyte.pro</code></strong> — Cargar recursos del dominio del producto (zip de actualización, política de privacidad).</li>
+  </ul>
+
+  <h2>7. Seguridad</h2>
+  <ul>
+    <li>Toda comunicación con el backend usa HTTPS (TLS 1.3).</li>
+    <li>OAuth 2.0 de Google para autenticación, sin manejar contraseñas directamente.</li>
+    <li>Row Level Security (RLS) en Supabase: cada docente solo accede a sus propios datos.</li>
+    <li>Tokens de sesión rotativos con expiración.</li>
+    <li>Pagos PCI-DSS a través de PayPhone (no almacenamos datos de tarjeta en ningún momento).</li>
+  </ul>
+
+  <h2>8. Derechos del docente</h2>
+  <p>El docente tiene derecho a:</p>
+  <ul>
+    <li><strong>Acceso</strong>: solicitar una copia de los datos que almacenamos sobre él.</li>
+    <li><strong>Rectificación</strong>: corregir datos inexactos.</li>
+    <li><strong>Eliminación</strong>: solicitar el borrado completo de su cuenta y datos asociados. La eliminación toma hasta 7 días hábiles.</li>
+    <li><strong>Portabilidad</strong>: recibir sus datos en formato JSON.</li>
+    <li><strong>Revocación de consentimiento</strong>: cerrar sesión desde la extensión elimina los datos locales; para eliminación total ver punto anterior.</li>
+  </ul>
+  <p>Para ejercer cualquiera de estos derechos, contactar a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
+
+  <h2>9. Datos de menores</h2>
+  <p>La extensión está dirigida exclusivamente a personal docente universitario de PUCE Quito y PUCE Ambato. No recopilamos información de menores de edad. El correo institucional <code>@puce.edu.ec</code> y <code>@pucesa.edu.ec</code> se asigna solo a personal autorizado por la universidad.</p>
+
+  <h2>10. Retención</h2>
+  <p>Los datos del docente se conservan mientras tenga una cuenta activa. Tras la baja, los datos se eliminan en un máximo de 90 días salvo obligación legal (ej. retención de comprobantes de pago por 7 años según ley ecuatoriana).</p>
+
+  <h2>11. Cambios a esta política</h2>
+  <p>Nos reservamos el derecho de actualizar esta política. Los cambios materiales se notificarán al docente por correo institucional con al menos 15 días de anticipación. La fecha de "última actualización" al inicio de este documento refleja la versión vigente.</p>
+
+  <h2>12. Contacto</h2>
+  <p>Cualquier consulta sobre esta política puede dirigirse a:</p>
+  <p><a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a></p>
+  <p>Responsable del tratamiento: NEXBYTE — Adrián Vargas Madrid · Ecuador.</p>
+</div>
+<script defer src="/notifications.js"></script>
+</body>
+</html>
