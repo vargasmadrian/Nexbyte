@@ -107,7 +107,7 @@
   .service-card p { font-size: 14px; color: #64748B; line-height: 1.7; }
 
   /* ===== PRODUCT ===== */
-  .product { padding: 120px 40px; background: linear-gradient(180deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+  .product { padding: 72px 40px; scroll-margin-top: 80px; background: linear-gradient(180deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
   .product-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
   .product-visual {
     background: linear-gradient(135deg, #1E293B, #0F172A);
@@ -144,8 +144,8 @@
   }
   .product-info h2 { font-size: 38px; font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.2; }
   .product-info .highlight { color: #22D3EE; }
-  .product-info > p { font-size: 16px; color: #94A3B8; line-height: 1.7; margin-bottom: 32px; }
-  .product-features { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+  .product-info > p { font-size: 16px; color: #94A3B8; line-height: 1.7; margin-bottom: 20px; }
+  .product-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 22px; }
   .product-features li {
     display: flex; align-items: center; gap: 12px;
     font-size: 15px; color: #CBD5E1; font-weight: 500;
@@ -244,7 +244,7 @@
   <div class="nav-links">
     <a href="#servicios">Servicios</a>
     <a href="#producto">Producto</a>
-    <a href="/planes/">Planes y precios</a>
+    <a href="#universidades">Planes y precios</a>
     <a href="#contacto">Contacto</a>
     <a href="mailto:vargasmadrian@gmail.com" class="nav-cta">Hablemos</a>
   </div>
@@ -347,10 +347,11 @@
 <!-- PRODUCT -->
 <section class="product" id="producto">
   <div class="product-container">
-    <div class="product-visual" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px;background:transparent;border:none;">
-      <img src="/logo-extension.png" alt="Generador de Aulas Virtuales" style="width:180px;height:auto;margin-bottom:24px;filter:drop-shadow(0 8px 30px rgba(59,130,246,0.25));">
+    <div class="product-visual" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:transparent;border:none;">
+      <img src="/logo-extension.png" alt="Asistente de Aulas Virtuales (AAVi)" style="width:170px;height:auto;margin-bottom:20px;filter:drop-shadow(0 8px 30px rgba(59,130,246,0.25));">
       <h3 style="font-size:24px;font-weight:800;color:white;margin-bottom:8px;text-align:center;">Asistente de Aulas Virtuales</h3>
       <p style="font-size:15px;color:#94A3B8;text-align:center;margin:0;">Moodle Virtual Classroom Automation</p>
+      <span style="display:inline-block;margin-top:14px;padding:5px 16px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);border-radius:50px;font-size:14px;font-weight:800;letter-spacing:1.5px;color:#22D3EE;">AAVi</span>
     </div>
 
     <div class="product-info">
@@ -387,8 +388,8 @@
           +100 preguntas Aiken generadas automaticamente
         </li>
       </ul>
-      <div style="margin-top:8px;padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
-        <p style="font-size:13px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;">Selecciona tu universidad</p>
+      <div id="universidades" style="margin-top:8px;padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;scroll-margin-top:90px;">
+        <p style="font-size:13px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;">Selecciona tu universidad <span style="color:#22D3EE;">para ver planes y precios</span></p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
           <a href="/aulas/" style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);border-radius:10px;text-decoration:none;transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(34,211,238,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
             <span style="font-size:11px;color:#22D3EE;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Disponible &middot; Ver detalles &rarr;</span>
@@ -445,7 +446,7 @@
     <div class="footer-col">
       <h4>Producto</h4>
       <a href="#producto">Generador de Aulas</a>
-      <a href="/planes/">Planes y precios</a>
+      <a href="#universidades">Planes y precios</a>
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
