@@ -20,6 +20,15 @@
   .back { display: inline-flex; align-items: center; gap: 8px; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 30px; }
   .back:hover { color: white; }
 
+  /* ===== Logo v4 NEXBYTE.pro — X palpitante (oficial) ===== */
+  .nx-logo { display: flex; width: fit-content; text-decoration: none; font-size: 20px; font-weight: 900; color: white; margin-bottom: 20px; }
+  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
+  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
+  .nx-brand { display: inline-flex; align-items: center; line-height: 1; letter-spacing: -0.5px; }
+  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
+  .nx-brand .nx-byte { color: #22D3EE; }
+  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
+
   @media (max-width: 480px) {
     .container { padding: 40px 16px; }
     h1 { font-size: 24px; }
@@ -33,7 +42,8 @@
 </head>
 <body>
 <div class="container">
-  <a href="/" class="back">← Volver a NEXBYTE.pro</a>
+  <a href="/" class="nx-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+  <a href="/" class="back">← Volver al inicio</a>
   <h1>Política de Privacidad</h1>
   <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: 31 de mayo de 2026</p>
 
