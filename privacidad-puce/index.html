@@ -35,7 +35,7 @@
 <div class="container">
   <a href="/" class="back">← Volver a NEXBYTE.pro</a>
   <h1>Política de Privacidad</h1>
-  <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: mayo 2026</p>
+  <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: 31 de mayo de 2026</p>
 
   <h2>1. Alcance</h2>
   <p>Esta política aplica a la extensión de Chrome <strong>"Generador de Aulas — PUCE Quito y Ambato"</strong>, desarrollada para automatizar la configuración de aulas virtuales Moodle de los docentes de:</p>
@@ -50,13 +50,15 @@
     <li><strong>Nombre completo y correo electrónico institucional</strong> (<code>@puce.edu.ec</code> o <code>@pucesa.edu.ec</code>) — entregados por Google.</li>
     <li><strong>Foto de perfil</strong> — obtenida de la cuenta de Google del usuario.</li>
   </ul>
+  <p><strong>Información de autenticación:</strong> tras iniciar sesión, la extensión guarda un <strong>token de sesión OAuth</strong> exclusivamente en el navegador del docente (<code>chrome.storage.local</code>) para mantener la sesión activa entre usos. Este token solo se utiliza para validar la sesión frente a Google y a nuestro backend (Supabase); <strong>no se comparte con ningún otro tercero</strong> y se elimina del navegador al cerrar sesión.</p>
   <p>Si el docente adquiere un plan de pago, también almacenamos:</p>
   <ul>
     <li>Plan suscrito (mensual o trimestral), fecha de inicio y fin del período.</li>
     <li>Número y monto de las transacciones procesadas a través de PayPhone (Ecuador), sin incluir datos sensibles de su tarjeta — esos viven en PayPhone, nunca en nuestra base de datos.</li>
     <li>Conteo agregado de créditos consumidos por acción (importar plantilla, generar contenido, crear tarea, etc.).</li>
   </ul>
-  <p>NO recopilamos: contenido de los cursos Moodle, calificaciones de estudiantes, historial de navegación fuera de Moodle, ni información personal adicional del docente o de sus estudiantes.</p>
+  <p><strong>Contenido del sitio web (Moodle):</strong> para ejecutar la automatización, la extensión <strong>lee de forma transitoria</strong> el contenido y la estructura de la página de Moodle que el docente tiene abierta (nombres de secciones, tipo de curso, formularios de configuración, etc.), directamente dentro del navegador del docente. Este contenido se procesa localmente y en tiempo real con el único fin de realizar la acción solicitada por el docente; <strong>no se transmite, no se almacena en nuestros servidores y no se comparte con terceros</strong>.</p>
+  <p>NO almacenamos ni transmitimos a nuestros servidores: contenido de los cursos Moodle, calificaciones de estudiantes, datos personales de estudiantes, historial de navegación fuera de Moodle, ni información personal adicional del docente o de sus estudiantes más allá de la indicada anteriormente.</p>
 
   <h2>3. Cómo utilizamos la información</h2>
   <ul>
