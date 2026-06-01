@@ -314,12 +314,28 @@
       <h2><span class="num">2</span> Tu cuenta y pago</h2>
 
       <form id="pp-form" class="pp-form">
-        <label for="pp-email">Email Google institucional</label>
-        <input type="email" id="pp-email" name="email" placeholder="docente@pucese.edu.ec o @gmail.com" required autocomplete="email">
-        <div class="hint">
-          Debe ser una cuenta <strong>Google</strong> (Gmail o Workspace).
-          Este es el mismo email con el que iniciar&aacute;s sesi&oacute;n en la extensi&oacute;n.
-          <br><strong style="color:#FCA5A5">Si te equivocas, soporte tendr&aacute; que vincular tu pago a mano.</strong>
+
+        <!-- Estado: SIN sesión Google -->
+        <div id="pp-login-hint" class="hint" style="margin-bottom:18px;">
+          Inicia sesi&oacute;n con tu cuenta <strong>Google</strong> (Gmail o Workspace).
+          Ser&aacute; el <strong>mismo correo</strong> con el que uses la extensi&oacute;n, as&iacute; tu pago
+          se vincula autom&aacute;ticamente &mdash; sin riesgo de errores de tipeo.
+        </div>
+
+        <!-- Estado: CON sesión Google -->
+        <div id="pp-account" style="display:none; align-items:center; gap:12px; margin-bottom:18px;
+             background:rgba(34,211,238,0.06); border:1px solid rgba(34,211,238,0.2);
+             border-radius:12px; padding:12px 14px;">
+          <span style="flex-shrink:0; width:38px; height:38px; border-radius:50%;
+               background:linear-gradient(135deg,#3B82F6,#22D3EE); color:white; font-weight:800; font-size:18px;
+               display:inline-flex; align-items:center; justify-content:center;">&#10003;</span>
+          <div style="min-width:0; flex:1;">
+            <div style="font-size:11px; color:#64748B; text-transform:uppercase; letter-spacing:0.5px;">Sesi&oacute;n iniciada como</div>
+            <div id="pp-account-email" style="font-size:14px; color:white; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></div>
+          </div>
+          <button type="button" id="pp-switch" style="flex-shrink:0; background:rgba(255,255,255,0.06);
+               border:1px solid rgba(255,255,255,0.12); color:#94A3B8; font-size:12px; font-weight:600;
+               padding:7px 12px; border-radius:9px; cursor:pointer; font-family:inherit;">Cambiar</button>
         </div>
 
         <label class="checkbox-row" for="pp-terms">
@@ -330,8 +346,8 @@
         <div id="pp-error" class="error"></div>
 
         <button type="submit" class="btn-pay-card" id="pp-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          Pagar $30 con tarjeta
+          <span id="pp-btn-icon" style="display:inline-flex; align-items:center;"></span>
+          <span id="pp-btn-text">Continuar con Google &middot; Pagar $30</span>
         </button>
 
         <div class="pay-meta">
@@ -383,107 +399,171 @@
   <a href="mailto:soporte@nexbyte.pro">Soporte</a>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   (function() {
+    // Proyecto Supabase PUCESE — URL + anon key son públicas por diseño.
+    var SUPABASE_URL = "https://wbgqdrhfvikiciwqrdec.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ3FkcmhmdmlraWNpd3FyZGVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjEzNjgsImV4cCI6MjA5MTY5NzM2OH0.gB7T0FZrTad_xUnNjPADkptTbDhOQI3DBRNnDsvYNkk";
     var PAYPHONE_API_URL = "https://dashboard-three-kohl-42.vercel.app/api/payphone";
-    var BLOCKED = ["hotmail.com","hotmail.es","outlook.com","outlook.es","live.com","live.es","msn.com","yahoo.com","yahoo.es","icloud.com","me.com","aol.com"];
+    // OAuth vuelve a esta misma página; ?continue=card dispara el pago automático.
+    var REDIRECT_URL = "https://nexbyte.pro/pagar/?continue=card";
 
-    // Typos comunes → dominio correcto sugerido
-    var TYPO_MAP = {
-      "gmai.com": "gmail.com", "gmial.com": "gmail.com", "gmal.com": "gmail.com",
-      "gnail.com": "gmail.com", "gmail.cm": "gmail.com", "gmail.co": "gmail.com",
-      "gmail.con": "gmail.com", "gmaill.com": "gmail.com", "gamil.com": "gmail.com",
-      "gmil.com": "gmail.com", "gmail.om": "gmail.com",
-      "hotmial.com": "hotmail.com", "hotmal.com": "hotmail.com",
-      "yaho.com": "yahoo.com", "yhoo.com": "yahoo.com",
-      "outlok.com": "outlook.com", "iclud.com": "icloud.com"
-    };
+    // Logo Google oficial (4 colores) para el estado sin sesión.
+    var GOOGLE_ICON = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true">'
+      + '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>'
+      + '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>'
+      + '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>'
+      + '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+    var CARD_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+    var SPINNER = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:.7"><circle cx="12" cy="12" r="10"/></svg>';
+
+    if (!window.supabase || !window.supabase.createClient) {
+      console.error("supabase-js no cargó");
+      return;
+    }
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true, flowType: "pkce" }
+    });
 
     var form = document.getElementById("pp-form");
-    var emailInput = document.getElementById("pp-email");
     var termsInput = document.getElementById("pp-terms");
     var errorDiv = document.getElementById("pp-error");
     var btn = document.getElementById("pp-btn");
+    var btnIcon = document.getElementById("pp-btn-icon");
+    var btnText = document.getElementById("pp-btn-text");
+    var loginHint = document.getElementById("pp-login-hint");
+    var accountBox = document.getElementById("pp-account");
+    var accountEmail = document.getElementById("pp-account-email");
+    var switchBtn = document.getElementById("pp-switch");
     if (!form) return;
 
-    var lastConfirmedEmail = null;
+    var loggedIn = false;
+    var paying = false;
+    var pendingAutoPay = false;
+
     function showError(msg) { errorDiv.innerHTML = msg; errorDiv.classList.add("show"); }
     function clearError() { errorDiv.classList.remove("show"); errorDiv.innerHTML = ""; }
-    emailInput.addEventListener("input", function() { clearError(); lastConfirmedEmail = null; });
     termsInput.addEventListener("change", clearError);
 
-    function suggestCorrectEmail(email) {
-      var parts = email.split("@");
-      if (parts.length !== 2) return null;
-      var domain = parts[1];
-      if (TYPO_MAP[domain]) return parts[0] + "@" + TYPO_MAP[domain];
-      return null;
+    function setBtn(iconHtml, text, disabled) {
+      btnIcon.innerHTML = iconHtml;
+      btnText.textContent = text;
+      btn.disabled = !!disabled;
+    }
+    function renderLoggedIn(email) {
+      loggedIn = true;
+      loginHint.style.display = "none";
+      accountBox.style.display = "flex";
+      accountEmail.textContent = email;
+      setBtn(CARD_ICON, "Pagar $30 con tarjeta", false);
+    }
+    function renderLoggedOut() {
+      loggedIn = false;
+      loginHint.style.display = "block";
+      accountBox.style.display = "none";
+      accountEmail.textContent = "";
+      setBtn(GOOGLE_ICON, "Continuar con Google · Pagar $30", false);
     }
 
-    form.addEventListener("click", function(e) {
-      var sug = e.target.closest("[data-fix-email]");
-      if (sug) {
-        e.preventDefault();
-        emailInput.value = sug.getAttribute("data-fix-email");
-        clearError();
-        lastConfirmedEmail = null;
+    async function currentSession() {
+      try { var r = await sb.auth.getSession(); return r.data.session || null; } catch (_) { return null; }
+    }
+
+    async function startPayment() {
+      paying = true;
+      clearError();
+      setBtn(SPINNER, "Procesando…", true);
+      var session = await currentSession();
+      if (!session || !session.access_token) {
+        paying = false;
+        showError("Tu sesión expiró. Pulsa de nuevo para iniciar sesión con Google.");
+        renderLoggedOut();
+        return;
       }
-    });
+      try {
+        // El backend deriva el email del token (verificado) — no lo mandamos desde el cliente.
+        var resp = await fetch(PAYPHONE_API_URL + "/create-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": "Bearer " + session.access_token },
+          body: JSON.stringify({})
+        });
+        var data = await resp.json();
+        if (!resp.ok || !data.paymentUrl) {
+          paying = false;
+          showError((data && data.error) || "No se pudo iniciar el pago. Intenta de nuevo o escríbenos a soporte@nexbyte.pro.");
+          renderLoggedIn(session.user.email);
+          return;
+        }
+        try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch (_) {}
+        window.location.href = data.paymentUrl;
+      } catch (err) {
+        paying = false;
+        console.error(err);
+        showError("Error de red. Verifica tu conexión e intenta de nuevo.");
+        renderLoggedIn(session.user.email);
+      }
+    }
 
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
       clearError();
+      if (!termsInput.checked) { showError("Debes aceptar los términos para continuar."); return; }
+      // Marca de consentimiento que sobrevive al redirect de OAuth.
+      try { localStorage.setItem("nexbyte_terms_ok", "1"); } catch (_) {}
 
-      if (!termsInput.checked) {
-        showError("Debes aceptar los términos para continuar.");
-        return;
-      }
+      if (loggedIn) { startPayment(); return; }
 
-      var email = emailInput.value.trim().toLowerCase();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Formato de email inválido"); return; }
-      var domain = email.split("@")[1];
-
-      var suggested = suggestCorrectEmail(email);
-      if (suggested && lastConfirmedEmail !== email) {
-        showError(
-          '⚠️ <strong>"' + domain + '" parece un error.</strong> ' +
-          '¿Quisiste decir <a href="#" data-fix-email="' + suggested + '">' + suggested + '</a>?<br>' +
-          '<span style="font-size:11px;opacity:0.75;">Si tu email es realmente con "' + domain + '", presiona "Pagar $30" otra vez para continuar.</span>'
-        );
-        lastConfirmedEmail = email;
-        return;
-      }
-
-      if (BLOCKED.indexOf(domain) >= 0) {
-        showError("Tu email no es de Google. Crea un Gmail personal gratis en <a href='https://accounts.google.com/signup' target='_blank'>accounts.google.com/signup</a> y vuelve aquí.");
-        return;
-      }
-
-      btn.disabled = true;
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg> Procesando...';
-
-      try {
-        var resp = await fetch(PAYPHONE_API_URL + "/create-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email })
-        });
-        var data = await resp.json();
-        if (!resp.ok || !data.paymentUrl) {
-          showError(data.error || "No se pudo iniciar el pago. Intenta de nuevo o escr&iacute;benos a soporte@nexbyte.pro.");
-          btn.disabled = false;
-          btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Pagar $30 con tarjeta';
-          return;
-        }
-        try { localStorage.setItem("nexbyte_payment_intent", data.intentId); } catch(_) {}
-        window.location.href = data.paymentUrl;
-      } catch (err) {
-        console.error(err);
-        showError("Error de red. Verifica tu conexión e intenta de nuevo.");
-        btn.disabled = false;
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Pagar $30 con tarjeta';
+      // Sin sesión → login con Google; al volver (?continue=card) se auto-continúa al pago.
+      setBtn(SPINNER, "Redirigiendo a Google…", true);
+      var res = await sb.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: REDIRECT_URL, queryParams: { prompt: "select_account" } }
+      });
+      if (res && res.error) {
+        showError("No se pudo iniciar sesión con Google. Intenta de nuevo.");
+        renderLoggedOut();
       }
     });
+
+    switchBtn.addEventListener("click", async function() {
+      clearError();
+      try { await sb.auth.signOut(); } catch (_) {}
+      try { localStorage.removeItem("nexbyte_terms_ok"); } catch (_) {}
+      renderLoggedOut();
+    });
+
+    // Refleja cambios de sesión (incluye el intercambio del code al volver del OAuth).
+    sb.auth.onAuthStateChange(function(_event, session) {
+      if (paying) return;
+      if (session && session.user && session.user.email) {
+        renderLoggedIn(session.user.email);
+        if (pendingAutoPay) { pendingAutoPay = false; termsInput.checked = true; startPayment(); }
+      } else {
+        renderLoggedOut();
+      }
+    });
+
+    (async function init() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("continue") === "card") {
+        // Limpia el query para que un refresh no re-dispare el pago.
+        params.delete("continue");
+        var clean = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
+        try { window.history.replaceState({}, "", clean); } catch (_) {}
+        var consented = false;
+        try { consented = localStorage.getItem("nexbyte_terms_ok") === "1"; } catch (_) {}
+        pendingAutoPay = consented;
+      }
+      var session = await currentSession();
+      if (session && session.user && session.user.email) {
+        renderLoggedIn(session.user.email);
+        if (pendingAutoPay) { pendingAutoPay = false; termsInput.checked = true; startPayment(); }
+      } else {
+        renderLoggedOut();
+        // Si el code aún no se intercambió, onAuthStateChange lo tomará y disparará el auto-pago.
+      }
+    })();
   })();
 </script>
 </body>
