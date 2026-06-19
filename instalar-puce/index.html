@@ -225,13 +225,25 @@
   </div>
 </section>
 
-<!-- Download -->
-<section class="download-section">
-  <a href="/generador-aulas-puce-v3.zip" class="btn-download" download>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    Descargar la extension (.zip)
-  </a>
-  <p class="download-note">Version 3.45.2 &middot; Para Google Chrome &middot; Pruebala gratis</p>
+<!-- Download (gateado: solo suscriptores de pago) -->
+<section class="download-section" id="dlSection">
+  <!-- No autenticado -->
+  <div id="dlSignedOut">
+    <a href="#" id="dlLoginBtn" class="btn-download">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#fff"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#fff" opacity=".85"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#fff" opacity=".7"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#fff" opacity=".9"/></svg>
+      Inicia sesion para descargar
+    </a>
+    <p class="download-note">La extension es exclusiva para suscriptores. &iquest;A&uacute;n no tienes plan? <a href="https://puce.nexbyte.pro/planes" style="color:#22D3EE;font-weight:600;">Ver planes</a></p>
+  </div>
+  <!-- Autenticado -->
+  <div id="dlSignedIn" style="display:none">
+    <button id="dlDownloadBtn" class="btn-download" style="border:none;cursor:pointer;font-family:inherit">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar la extension (.zip)
+    </button>
+    <p class="download-note" id="dlUserNote"></p>
+  </div>
+  <p class="download-note" id="dlMsg" style="display:none;margin-top:10px;"></p>
 </section>
 
 <!-- Steps -->
@@ -395,5 +407,54 @@
 </footer>
 
 <script defer src="/notifications.js"></script>
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  const SUPABASE_URL = 'https://bmdtewkgtnqslwlqurph.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtZHRld2tndG5xc2x3bHF1cnBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNTM5NDcsImV4cCI6MjA5MzgyOTk0N30.qsWYN93iJwoUL0GIbFJzgE4HUeNJter8mZg1Lziz768';
+  const FN_URL = SUPABASE_URL + '/functions/v1/download-extension';
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+  const $ = (id) => document.getElementById(id);
+  const showMsg = (html, color) => { const m=$('dlMsg'); if(!m) return; m.style.display='block'; m.innerHTML=html; m.style.color=color||'#94A3B8'; };
+
+  async function refreshUI() {
+    const { data: { session } } = await sb.auth.getSession();
+    const so=$('dlSignedOut'), si=$('dlSignedIn');
+    if (!so||!si) return;
+    if (session) {
+      so.style.display='none'; si.style.display='block';
+      const note=$('dlUserNote'); if(note) note.innerHTML = (session.user.email||'') + ' &middot; <a href="#" id="dlLogout" style="color:#64748B;">cerrar sesion</a>';
+      const lo=$('dlLogout'); if(lo) lo.addEventListener('click', async (e)=>{ e.preventDefault(); await sb.auth.signOut(); refreshUI(); });
+    } else { so.style.display='block'; si.style.display='none'; }
+  }
+
+  document.addEventListener('click', async (e) => {
+    if (e.target.closest && e.target.closest('#dlLoginBtn')) {
+      e.preventDefault();
+      await sb.auth.signInWithOAuth({ provider:'google', options:{ redirectTo: window.location.origin + window.location.pathname } });
+    }
+  });
+
+  document.addEventListener('click', async (e) => {
+    if (!(e.target.closest && e.target.closest('#dlDownloadBtn'))) return;
+    const btn=$('dlDownloadBtn'); btn.disabled=true;
+    showMsg('Verificando suscripcion...', '#22D3EE');
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) { showMsg('Inicia sesion primero.', '#F59E0B'); btn.disabled=false; return; }
+      const resp = await fetch(FN_URL, { headers: { Authorization: 'Bearer '+session.access_token, apikey: SUPABASE_ANON } });
+      if (resp.status === 403) { showMsg('Tu cuenta no tiene una suscripcion de pago activa. <a href="https://puce.nexbyte.pro/planes" style="color:#22D3EE;font-weight:600;">Ver planes</a>', '#F59E0B'); btn.disabled=false; return; }
+      if (!resp.ok) { const er=await resp.json().catch(()=>({})); showMsg('Error: '+(er.error||resp.status), '#EF4444'); btn.disabled=false; return; }
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='generador-aulas-puce-v3.zip'; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      showMsg('Descarga iniciada. Sigue los pasos de abajo para instalar.', '#22C55E');
+      btn.disabled=false;
+    } catch (err) { showMsg('Error: '+err.message, '#EF4444'); btn.disabled=false; }
+  });
+
+  sb.auth.onAuthStateChange(() => refreshUI());
+  refreshUI();
+</script>
 </body>
 </html>
