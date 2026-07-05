@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nx-logo.css">
 <style>
   :root{
     --bg:#0A0F1E; --bg-2:#0F172A; --card:#131C31; --line:rgba(255,255,255,.08);
@@ -40,10 +41,8 @@
   nav{position:sticky;top:0;z-index:50;background:rgba(10,15,30,.72);backdrop-filter:blur(18px) saturate(140%);
     border-bottom:1px solid var(--line-soft)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:#fff;font-size:18px;letter-spacing:-.02em}
-  .brand .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;
-    font-size:16px;box-shadow:0 6px 18px rgba(34,211,238,.28)}
-  .brand small{color:var(--brand-2);font-weight:700}
+  .brand{font-weight:800;color:#fff;font-size:22px}
+  /* El logo real lo pinta /nx-logo.css (clase .nx-brand). Editar ese archivo cambia el logo en TODAS las páginas. */
   .nav-links{display:flex;align-items:center;gap:30px}
   .nav-links a{font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
   .nav-links a:hover{color:#fff}
@@ -91,7 +90,7 @@
   .rda-h{font-size:12px;font-weight:800;color:var(--brand-2);letter-spacing:.05em;margin-bottom:9px}
   .res{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-2);padding:6px 0}
   .res .ic{width:26px;height:26px;border-radius:7px;background:rgba(59,130,246,.12);display:grid;place-items:center;font-size:13px;flex-shrink:0}
-  .float-badge{position:absolute;right:-14px;bottom:26px;background:#0d1526;border:1px solid var(--line);
+  .float-badge{position:absolute;right:16px;bottom:16px;background:#0d1526;border:1px solid var(--line);
     border-radius:13px;padding:11px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 44px -14px rgba(0,0,0,.8)}
   .float-badge .ic{width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;font-size:17px}
   .float-badge b{color:#fff;font-size:13px;display:block}.float-badge small{color:var(--ink-3);font-size:11px}
@@ -191,7 +190,7 @@
 <body>
 
 <nav><div class="wrap nav-in">
-  <a href="/" class="brand"><span class="mark">🦉</span> NEXBYTE<small>.pro</small></a>
+  <a href="/" class="brand nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
   <div class="nav-links">
     <a href="#como">Cómo funciona</a>
     <a href="#precios">Planes</a>
@@ -285,7 +284,7 @@
       <div class="track"><div class="fill slow"></div></div>
     </div>
     <div class="bar">
-      <div class="bar-top"><span class="lbl"><span class="tag ext">Con la extensión</span> Armar un aula completa</span><span class="val grad" style="-webkit-background-clip:text;-webkit-text-fill-color:transparent;background:var(--grad)">15 min</span></div>
+      <div class="bar-top"><span class="lbl"><span class="tag ext">Con la extensión</span> Armar un aula completa</span><span class="val" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">15 min</span></div>
       <div class="track"><div class="fill fast"></div></div>
     </div>
   </div>
@@ -360,7 +359,7 @@
 <footer><div class="wrap">
   <div class="foot-grid">
     <div>
-      <a href="/" class="brand"><span class="mark">🦉</span> NEXBYTE<small>.pro</small></a>
+      <a href="/" class="brand nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
       <p class="foot-about">Software a medida y automatización con IA para instituciones educativas en Ecuador. Hecho desde Esmeraldas.</p>
     </div>
     <div><h4>Producto</h4>
