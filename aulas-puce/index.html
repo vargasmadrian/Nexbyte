@@ -4,1100 +4,377 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Generador de Aulas Virtuales &mdash; PUCE Quito | NEXBYTE.pro</title>
-<meta name="description" content="Configura tu aula Moodle de PUCE Quito en 15 minutos en lugar de 3 horas. Importa tu silabo PDF, aprueba y listo. La extensi&oacute;n Chrome para docentes de PUCE.">
-
-<!-- Open Graph -->
+<title>Generador de Aulas Virtuales — PUCE Quito | NEXBYTE.pro</title>
+<meta name="description" content="Arma tu aula Moodle de PUCE Quito en 15 minutos: sube tu sílabo en PDF y la extensión genera banner, recursos por RDA, tareas y evaluaciones con IA. Tú apruebas y listo.">
 <meta property="og:title" content="Generador de Aulas Virtuales — PUCE Quito">
-<meta property="og:description" content="Configura tu aula Moodle de PUCE Quito en 15 minutos en lugar de 3 horas. Extensión Chrome con IA para docentes.">
+<meta property="og:description" content="Tu aula Moodle lista en 15 minutos, no en 3 horas. Extensión de Chrome con IA para docentes de PUCE Quito.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nexbyte.pro/aulas-puce/">
 <meta property="og:image" content="https://nexbyte.pro/logo-extension.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', sans-serif;
-    color: #E2E8F0;
-    background: #0F172A;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
+  :root{
+    --bg:#0A0F1E; --bg-2:#0F172A; --card:#131C31; --line:rgba(255,255,255,.08);
+    --line-soft:rgba(255,255,255,.055); --ink:#F1F5F9; --ink-2:#A9B6CC; --ink-3:#6B7A93;
+    --brand:#3B82F6; --brand-2:#22D3EE; --grad:linear-gradient(120deg,#3B82F6,#22D3EE);
+    --radius:18px; --maxw:1140px;
   }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink-2);background:var(--bg);line-height:1.6;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:rgba(59,130,246,.35);color:#fff}
+  a{text-decoration:none;color:inherit}
+  h1,h2,h3{color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--brand-2)}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2);box-shadow:0 0 12px var(--brand-2);
+    animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-  /* ===== NAV ===== */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    padding: 16px 32px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .nav-left { display: flex; align-items: center; gap: 14px; }
-  .back-arrow {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 10px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-    color: #94A3B8; text-decoration: none; font-size: 17px;
-    transition: all 0.3s;
-  }
-  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
-  .nav-logo { font-size: 20px; font-weight: 900; color: white; text-decoration: none; }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  .nav-links a {
-    color: #94A3B8; text-decoration: none; font-size: 13.5px;
-    font-weight: 500; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: white; }
-  .nav-cta {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white !important; padding: 9px 20px; border-radius: 9px;
-    font-weight: 700 !important; font-size: 13px !important;
-  }
-  .nav-cta:hover { box-shadow: 0 6px 20px rgba(59,130,246,0.35); }
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(10,15,30,.72);backdrop-filter:blur(18px) saturate(140%);
+    border-bottom:1px solid var(--line-soft)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:#fff;font-size:18px;letter-spacing:-.02em}
+  .brand .mark{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;
+    font-size:16px;box-shadow:0 6px 18px rgba(34,211,238,.28)}
+  .brand small{color:var(--brand-2);font-weight:700}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;border-radius:11px;transition:transform .18s,box-shadow .18s,background .2s;cursor:pointer;white-space:nowrap}
+  .btn-primary{background:var(--grad);color:#fff;padding:12px 22px;font-size:14.5px;box-shadow:0 8px 24px rgba(59,130,246,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(59,130,246,.42)}
+  .btn-ghost{background:rgba(255,255,255,.05);color:var(--ink);padding:12px 22px;font-size:14.5px;border:1px solid var(--line)}
+  .btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(59,130,246,.35)}
+  .btn-sm{padding:10px 18px;font-size:13.5px}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
 
-  /* ===== HERO ===== */
-  .hero {
-    padding: 80px 24px 60px;
-    max-width: 1200px; margin: 0 auto; width: 100%;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 60px; align-items: center;
-    position: relative;
-  }
-  .hero::before {
-    content: ''; position: absolute; top: -100px; left: 0; right: 0; height: 600px;
-    background: radial-gradient(ellipse at top, rgba(59,130,246,0.12) 0%, transparent 60%);
-    pointer-events: none; z-index: -1;
-  }
-  @media (max-width: 960px) {
-    .hero { grid-template-columns: 1fr; gap: 40px; padding: 50px 20px 40px; text-align: center; }
-  }
+  /* HERO */
+  .hero{position:relative;padding:84px 0 72px}
+  .hero::before{content:'';position:absolute;inset:-140px 0 auto 0;height:640px;z-index:-1;pointer-events:none;
+    background:radial-gradient(60% 60% at 50% 0,rgba(59,130,246,.16),transparent 70%),
+               radial-gradient(40% 40% at 85% 10%,rgba(34,211,238,.12),transparent 70%)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px;text-align:center}}
+  .hero h1{font-size:clamp(38px,5.4vw,60px);font-weight:900;color:#fff;letter-spacing:-.03em;margin:20px 0 18px}
+  .hero p.lead{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:520px;margin-bottom:30px}
+  @media(max-width:920px){.hero p.lead{margin-inline:auto}}
+  .cta-row{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:26px}
+  @media(max-width:920px){.cta-row{justify-content:center}}
+  .trust{display:flex;flex-wrap:wrap;gap:9px 20px;font-size:13.5px;color:var(--ink-3)}
+  @media(max-width:920px){.trust{justify-content:center}}
+  .trust span{display:inline-flex;align-items:center;gap:7px}
+  .trust svg{color:var(--brand-2);flex-shrink:0}
 
-  .hero-text .badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
-    padding: 7px 16px; border-radius: 50px;
-    font-size: 12px; font-weight: 600; color: #3B82F6;
-    margin-bottom: 20px; letter-spacing: 0.5px;
-  }
-  .hero-text .badge .dot {
-    width: 6px; height: 6px; background: #22D3EE; border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  /* PRODUCT MOCKUP */
+  .mock{background:linear-gradient(180deg,#101a30,#0d1526);border:1px solid var(--line);border-radius:20px;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(59,130,246,.06);overflow:hidden;position:relative}
+  .mock::after{content:'';position:absolute;inset:0;border-radius:20px;pointer-events:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line-soft);
+    background:rgba(255,255,255,.02)}
+  .mock-bar i{width:11px;height:11px;border-radius:50%;background:#33405c;display:block}
+  .mock-url{margin-left:10px;font-size:11.5px;color:var(--ink-3);background:rgba(0,0,0,.25);padding:5px 12px;
+    border-radius:7px;font-family:ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mock-body{padding:18px}
+  .mock-banner{background:var(--grad);border-radius:12px;padding:16px 18px;color:#fff;margin-bottom:16px;
+    display:flex;align-items:center;justify-content:space-between}
+  .mock-banner b{font-size:15px;display:block}.mock-banner small{opacity:.85;font-size:11.5px}
+  .mock-banner .pill{background:rgba(255,255,255,.2);border-radius:20px;padding:5px 11px;font-size:11px;font-weight:700}
+  .rda{background:rgba(255,255,255,.025);border:1px solid var(--line-soft);border-radius:11px;padding:12px 14px;margin-bottom:10px}
+  .rda-h{font-size:12px;font-weight:800;color:var(--brand-2);letter-spacing:.05em;margin-bottom:9px}
+  .res{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-2);padding:6px 0}
+  .res .ic{width:26px;height:26px;border-radius:7px;background:rgba(59,130,246,.12);display:grid;place-items:center;font-size:13px;flex-shrink:0}
+  .float-badge{position:absolute;right:-14px;bottom:26px;background:#0d1526;border:1px solid var(--line);
+    border-radius:13px;padding:11px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 44px -14px rgba(0,0,0,.8)}
+  .float-badge .ic{width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;font-size:17px}
+  .float-badge b{color:#fff;font-size:13px;display:block}.float-badge small{color:var(--ink-3);font-size:11px}
+  @media(max-width:520px){.float-badge{display:none}}
 
-  .hero-text h1 {
-    font-size: 54px; font-weight: 900; color: white;
-    line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 20px;
-  }
-  .hero-text h1 .gradient {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  @media (max-width: 600px) { .hero-text h1 { font-size: 36px; } }
+  /* SECTIONS */
+  section.blk{padding:88px 0}
+  .sec-head{max-width:620px;margin:0 auto 52px;text-align:center}
+  .sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;color:#fff;margin:14px 0 12px}
+  .sec-head p{font-size:16.5px;color:var(--ink-2)}
 
-  .hero-text p.subtitle {
-    font-size: 18px; color: #94A3B8; line-height: 1.6;
-    margin-bottom: 32px; max-width: 480px;
-  }
-  @media (max-width: 960px) { .hero-text p.subtitle { margin-left: auto; margin-right: auto; } }
+  /* STATS STRIP */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
+    border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden}
+  .stat{background:var(--bg-2);padding:30px 24px;text-align:center}
+  .stat b{display:block;font-size:34px;font-weight:900;color:#fff;letter-spacing:-.03em}
+  .stat b.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .stat span{font-size:13.5px;color:var(--ink-3)}
+  @media(max-width:640px){.stats{grid-template-columns:1fr}}
 
-  .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
-  @media (max-width: 960px) { .hero-cta-row { justify-content: center; } }
+  /* FEATURES */
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:760px){.features{grid-template-columns:1fr}}
+  .feat{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:26px 24px;
+    transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+  .feat:hover{transform:translateY(-3px);border-color:rgba(59,130,246,.3)}
+  .feat .fic{width:46px;height:46px;border-radius:12px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);
+    display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+  .feat h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+  .feat p{font-size:14.5px;color:var(--ink-2)}
+  .feat .step{position:absolute;top:20px;right:22px;font-size:12px;font-weight:800;color:var(--ink-3)}
 
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white; padding: 15px 30px; border-radius: 12px;
-    font-size: 15px; font-weight: 700; text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(59,130,246,0.4); }
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    color: white; padding: 15px 28px; border-radius: 12px;
-    font-size: 15px; font-weight: 600; text-decoration: none;
-    transition: all 0.3s;
-  }
-  .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(34,211,238,0.3); }
+  /* TIME COMPARE */
+  .compare{max-width:760px;margin:0 auto;display:grid;gap:16px}
+  .bar{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px 22px}
+  .bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .bar-top .lbl{font-weight:700;color:#fff;font-size:15px;display:flex;align-items:center;gap:9px}
+  .bar-top .val{font-weight:900;font-size:20px;color:#fff}
+  .track{height:12px;border-radius:20px;background:rgba(255,255,255,.06);overflow:hidden}
+  .fill{height:100%;border-radius:20px}
+  .fill.slow{width:100%;background:linear-gradient(90deg,#64748b,#94a3b8)}
+  .fill.fast{width:8.3%;background:var(--grad);box-shadow:0 0 18px rgba(34,211,238,.5)}
+  .tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.04em}
+  .tag.man{background:rgba(148,163,184,.14);color:#cbd5e1}
+  .tag.ext{background:rgba(34,211,238,.14);color:var(--brand-2)}
 
-  .hero-text .trust-row {
-    display: flex; gap: 18px; flex-wrap: wrap;
-    font-size: 13px; color: #64748B;
-  }
-  @media (max-width: 960px) { .hero-text .trust-row { justify-content: center; } }
-  .hero-text .trust-row .item { display: flex; align-items: center; gap: 6px; }
-  .hero-text .trust-row .item .check { color: #22C55E; font-weight: 700; }
+  /* PRICING PREVIEW */
+  .price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:820px;margin:0 auto}
+  @media(max-width:680px){.price-grid{grid-template-columns:1fr}}
+  .pcard{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px 26px;position:relative}
+  .pcard.reco{border-color:rgba(34,211,238,.4);box-shadow:0 0 0 1px rgba(34,211,238,.2),0 24px 60px -30px rgba(34,211,238,.5)}
+  .pcard .reco-tag{position:absolute;top:-11px;left:26px;background:var(--grad);color:#fff;font-size:11px;font-weight:800;
+    padding:5px 13px;border-radius:20px;letter-spacing:.04em}
+  .pcard .pn{font-size:15px;font-weight:700;color:#fff}
+  .pcard .pd{font-size:13px;color:var(--ink-3);margin-bottom:16px}
+  .pcard .amt{font-size:42px;font-weight:900;color:#fff;letter-spacing:-.03em}
+  .pcard .amt span{font-size:15px;font-weight:600;color:var(--ink-3);letter-spacing:0}
+  .pcard ul{list-style:none;margin:18px 0 22px;display:grid;gap:10px}
+  .pcard li{font-size:14px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start}
+  .pcard li svg{color:var(--brand-2);flex-shrink:0;margin-top:3px}
+  .pcard .btn{width:100%;justify-content:center}
+  .price-note{text-align:center;margin-top:22px;font-size:13.5px;color:var(--ink-3)}
+  .price-note a{color:var(--brand-2);font-weight:600}
 
-  /* =========================================================== */
-  /* ===== HERO ANIMATION (la estrella del show) =============== */
-  /* =========================================================== */
-  .hero-visual {
-    position: relative;
-    height: 460px;
-    perspective: 1200px;
-  }
-  @media (max-width: 600px) { .hero-visual { height: 380px; } }
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:860px){.quotes{grid-template-columns:1fr}}
+  .quote{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:26px 24px}
+  .quote .stars{color:var(--brand-2);font-size:14px;margin-bottom:12px;letter-spacing:2px}
+  .quote p{font-size:14.5px;color:var(--ink);margin-bottom:18px}
+  .quote .who{display:flex;align-items:center;gap:11px}
+  .quote .av{width:38px;height:38px;border-radius:50%;background:var(--grad);display:grid;place-items:center;
+    color:#fff;font-weight:800;font-size:15px}
+  .quote .who b{color:#fff;font-size:13.5px;display:block}.quote .who small{color:var(--ink-3);font-size:12px}
 
-  /* Browser frame */
-  .browser {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, #1E293B, #0F172A);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,211,238,0.05);
-    transform: rotateY(-2deg) rotateX(2deg);
-  }
-  .browser-bar {
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .browser-dot {
-    width: 11px; height: 11px; border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-  }
-  .browser-dot.red { background: #EF4444; }
-  .browser-dot.yellow { background: #F59E0B; }
-  .browser-dot.green { background: #22C55E; }
-  .browser-url {
-    flex: 1; margin: 0 8px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 11px; color: #64748B;
-    font-family: 'SF Mono', Menlo, monospace;
-  }
-  .browser-extension {
-    width: 24px; height: 24px; border-radius: 6px;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-  }
+  /* FINAL CTA */
+  .final{position:relative;text-align:center;padding:96px 0;overflow:hidden}
+  .final::before{content:'';position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(60% 100% at 50% 100%,rgba(59,130,246,.18),transparent 70%)}
+  .final h2{font-size:clamp(30px,4.4vw,46px);font-weight:900;color:#fff;margin-bottom:16px}
+  .final p{font-size:17px;color:var(--ink-2);max-width:520px;margin:0 auto 30px}
+  .final .cta-row{justify-content:center}
+  .final .fine{margin-top:20px;font-size:13px;color:var(--ink-3)}
 
-  .browser-content {
-    height: calc(100% - 38px);
-    padding: 14px;
-    display: grid; grid-template-columns: 1fr 220px;
-    gap: 14px;
-    position: relative;
-  }
-
-  /* Moodle background */
-  .moodle-mock {
-    background: rgba(255,255,255,0.02);
-    border-radius: 10px;
-    padding: 16px;
-    overflow: hidden;
-    position: relative;
-  }
-  .moodle-title {
-    font-size: 11px; font-weight: 700; color: #94A3B8;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    margin-bottom: 12px;
-  }
-  .moodle-section {
-    background: rgba(255,255,255,0.02);
-    border-radius: 6px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid transparent;
-    transition: border-color 0.4s, background 0.4s;
-    opacity: 0.35;
-  }
-  .moodle-section.rda-1 { border-left-color: rgba(59,130,246,0.5); }
-  .moodle-section.rda-2 { border-left-color: rgba(124,58,237,0.5); }
-  .moodle-section.rda-3 { border-left-color: rgba(236,72,153,0.5); }
-  .moodle-section.populated { opacity: 1; background: rgba(34,211,238,0.04); }
-  .moodle-section .label {
-    font-size: 10px; font-weight: 700; color: #CBD5E1;
-    text-transform: uppercase; letter-spacing: 1px;
-  }
-  .moodle-section .items {
-    margin-top: 8px;
-    display: flex; flex-direction: column; gap: 4px;
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.6s ease-out;
-  }
-  .moodle-section.populated .items { max-height: 100px; }
-  .moodle-section .item {
-    font-size: 9.5px; color: #64748B;
-    padding: 3px 6px; border-radius: 3px;
-    background: rgba(255,255,255,0.03);
-    display: flex; align-items: center; gap: 5px;
-  }
-  .moodle-section .item .ico { font-size: 10px; }
-
-  /* Popup de la extensión */
-  .popup {
-    background: linear-gradient(180deg, #0F172A, #1E293B);
-    border: 1px solid rgba(34,211,238,0.18);
-    border-radius: 10px;
-    padding: 12px;
-    display: flex; flex-direction: column;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    position: relative;
-    overflow: hidden;
-  }
-  .popup-header {
-    display: flex; align-items: center; gap: 6px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .popup-logo {
-    width: 18px; height: 18px; border-radius: 5px;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-  }
-  .popup-title { font-size: 10px; font-weight: 700; color: white; flex: 1; }
-  .popup-credits {
-    font-size: 9px; color: #22D3EE; font-weight: 700;
-    background: rgba(34,211,238,0.1);
-    padding: 2px 6px; border-radius: 999px;
-  }
-
-  /* Steps inside popup */
-  .popup-step {
-    margin-top: 10px;
-    padding: 8px;
-    background: rgba(255,255,255,0.02);
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.04);
-    transition: all 0.4s;
-  }
-  .popup-step.active {
-    background: rgba(34,211,238,0.08);
-    border-color: rgba(34,211,238,0.3);
-    box-shadow: 0 0 0 3px rgba(34,211,238,0.05);
-  }
-  .popup-step.done {
-    background: rgba(34,197,94,0.06);
-    border-color: rgba(34,197,94,0.25);
-  }
-  .popup-step-row {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 9.5px; color: #CBD5E1; font-weight: 600;
-  }
-  .popup-step-num {
-    width: 16px; height: 16px; border-radius: 50%;
-    background: rgba(255,255,255,0.08); color: #64748B;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800;
-    transition: all 0.4s;
-  }
-  .popup-step.active .popup-step-num {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white;
-  }
-  .popup-step.done .popup-step-num {
-    background: #22C55E; color: white;
-  }
-  .popup-step .label { flex: 1; }
-  .popup-step .progress-bar {
-    margin-top: 6px;
-    height: 4px; border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-    overflow: hidden;
-    display: none;
-  }
-  .popup-step.active .progress-bar { display: block; }
-  .popup-step .progress-fill {
-    height: 100%; border-radius: 999px;
-    background: linear-gradient(90deg, #3B82F6, #22D3EE);
-    width: 0%;
-    transition: width 1.4s ease-out;
-  }
-  .popup-step.active.filling .progress-fill { width: 100%; }
-
-  /* PDF floating in */
-  .pdf-card {
-    position: absolute;
-    top: 38%; right: 12px;
-    width: 90px; height: 110px;
-    background: linear-gradient(135deg, #DC2626, #991B1B);
-    border-radius: 8px;
-    box-shadow: 0 14px 32px rgba(220,38,38,0.4);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    color: white;
-    transform: translateY(0) rotate(-6deg);
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 10;
-  }
-  .pdf-card .pdf-ico { font-size: 24px; margin-bottom: 4px; }
-  .pdf-card .pdf-name { font-size: 9px; font-weight: 700; opacity: 0.9; }
-  .pdf-card.show { opacity: 1; transform: translateY(-12px) rotate(-3deg); }
-
-  /* Sparks */
-  .spark {
-    position: absolute;
-    width: 6px; height: 6px;
-    background: #22D3EE; border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    box-shadow: 0 0 8px #22D3EE, 0 0 16px #22D3EE;
-  }
-  .spark.s1 { top: 28%; right: 38%; }
-  .spark.s2 { top: 48%; right: 32%; }
-  .spark.s3 { top: 38%; right: 45%; }
-  .spark.s4 { top: 56%; right: 50%; }
-  .browser.processing .spark {
-    animation: sparkle 1.2s ease-out forwards;
-  }
-  .browser.processing .spark.s2 { animation-delay: 0.2s; }
-  .browser.processing .spark.s3 { animation-delay: 0.4s; }
-  .browser.processing .spark.s4 { animation-delay: 0.6s; }
-  @keyframes sparkle {
-    0% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1.4); }
-    100% { opacity: 0; transform: scale(0) translateY(-30px); }
-  }
-
-  /* Done check overlay */
-  .done-check {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(34,197,94,0.18), transparent 60%);
-    opacity: 0;
-    pointer-events: none;
-    display: flex; align-items: center; justify-content: center;
-    transition: opacity 0.6s;
-  }
-  .done-check .checkmark {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #22C55E, #10B981);
-    color: white;
-    font-size: 44px; font-weight: 900;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 20px 50px rgba(34,197,94,0.5);
-    transform: scale(0);
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .done-check.show { opacity: 1; }
-  .done-check.show .checkmark { transform: scale(1); }
-
-  .step-label {
-    position: absolute;
-    bottom: -34px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 13px; color: #22D3EE;
-    font-weight: 700;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .step-label.show { opacity: 1; }
-
-  /* ===== SOCIAL PROOF strip ===== */
-  .social-proof {
-    max-width: 1100px; margin: 30px auto 60px;
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .social-proof .lbl {
-    font-size: 11px; font-weight: 700; color: #64748B;
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
-  }
-  .social-proof .stats {
-    display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;
-  }
-  .social-proof .stat .num {
-    font-size: 32px; font-weight: 900; color: white;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .social-proof .stat .sub { font-size: 13px; color: #94A3B8; margin-top: 2px; }
-
-  /* ===== FEATURES section ===== */
-  .features {
-    max-width: 1100px; margin: 0 auto;
-    padding: 60px 24px;
-  }
-  .section-head { text-align: center; margin-bottom: 50px; }
-  .section-head .eyebrow {
-    display: inline-block;
-    font-size: 12px; font-weight: 700; color: #22D3EE;
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
-  }
-  .section-head h2 {
-    font-size: 38px; font-weight: 800; color: white;
-    letter-spacing: -1px; line-height: 1.15;
-    max-width: 720px; margin: 0 auto;
-  }
-  .section-head h2 .gradient {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .section-head p {
-    font-size: 16px; color: #94A3B8;
-    max-width: 600px; margin: 14px auto 0;
-    line-height: 1.6;
-  }
-  @media (max-width: 600px) { .section-head h2 { font-size: 28px; } }
-
-  .features-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr; } }
-
-  .feature-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 18px;
-    padding: 28px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .feature-card:hover {
-    border-color: rgba(34,211,238,0.3);
-    transform: translateY(-3px);
-  }
-  .feature-card::after {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, #3B82F6, #22D3EE, transparent);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .feature-card:hover::after { opacity: 1; }
-  .feature-icon {
-    width: 44px; height: 44px; border-radius: 11px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.15));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; margin-bottom: 16px;
-  }
-  .feature-card h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px; }
-  .feature-card p { font-size: 14px; color: #94A3B8; line-height: 1.65; }
-
-  /* ===== TIME COMPARISON ===== */
-  .time-comparison {
-    max-width: 920px; margin: 80px auto 0;
-    padding: 50px 28px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(34,211,238,0.04));
-    border: 1px solid rgba(59,130,246,0.18);
-    border-radius: 24px;
-    text-align: center;
-  }
-  .time-comparison h2 {
-    font-size: 30px; font-weight: 800; color: white;
-    margin-bottom: 32px; letter-spacing: -0.5px;
-  }
-  @media (max-width: 600px) { .time-comparison h2 { font-size: 22px; } }
-
-  .time-bars {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px; align-items: end;
-    max-width: 540px; margin: 0 auto;
-  }
-  .time-bar { text-align: center; }
-  .time-bar .label {
-    font-size: 13px; font-weight: 600; color: #94A3B8;
-    margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;
-  }
-  .time-bar .bar {
-    width: 100%; border-radius: 12px 12px 0 0;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 900;
-    transition: height 1s ease-out;
-  }
-  .time-bar.manual .bar {
-    height: 200px;
-    background: linear-gradient(180deg, #EF4444, #B91C1C);
-    font-size: 24px;
-  }
-  .time-bar.ai .bar {
-    height: 60px;
-    background: linear-gradient(180deg, #22D3EE, #3B82F6);
-    font-size: 18px;
-  }
-  .time-bar .sub { font-size: 11px; color: #64748B; margin-top: 8px; }
-
-  /* ===== TESTIMONIALS ===== */
-  .testimonials {
-    max-width: 1100px; margin: 0 auto;
-    padding: 60px 24px 40px;
-  }
-  .testimonials-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
-
-  .testimonial-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 18px;
-    padding: 26px;
-    position: relative;
-  }
-  .testimonial-card .quote-mark {
-    font-size: 48px; line-height: 1;
-    color: rgba(34,211,238,0.25); font-weight: 900;
-    margin-bottom: 4px;
-  }
-  .testimonial-card p {
-    font-size: 14.5px; color: #CBD5E1;
-    line-height: 1.65; margin-bottom: 18px;
-    font-style: italic;
-  }
-  .testimonial-card .author {
-    display: flex; align-items: center; gap: 10px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .testimonial-card .avatar-placeholder {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(34,211,238,0.2));
-    border: 1px solid rgba(34,211,238,0.2);
-    display: flex; align-items: center; justify-content: center;
-    color: #22D3EE; font-weight: 700; font-size: 13px;
-  }
-  .testimonial-card .author .name {
-    font-size: 13px; color: white; font-weight: 600;
-  }
-  .testimonial-card .author .role {
-    font-size: 11px; color: #64748B;
-  }
-
-  /* ===== CTA FINAL ===== */
-  .final-cta {
-    max-width: 800px; margin: 60px auto 80px;
-    padding: 48px 28px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(124,58,237,0.05));
-    border: 1px solid rgba(59,130,246,0.25);
-    border-radius: 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .final-cta::before {
-    content: ''; position: absolute;
-    top: -100px; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 400px;
-    background: radial-gradient(ellipse, rgba(34,211,238,0.08), transparent 60%);
-    pointer-events: none;
-  }
-  .final-cta h2 {
-    font-size: 32px; font-weight: 800; color: white;
-    line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px;
-    position: relative;
-  }
-  @media (max-width: 600px) { .final-cta h2 { font-size: 24px; } }
-  .final-cta p {
-    font-size: 16px; color: #94A3B8;
-    margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto;
-    line-height: 1.6;
-    position: relative;
-  }
-  .final-cta .ctas { position: relative; display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-  .final-cta .small-print {
-    margin-top: 16px; font-size: 12px; color: #64748B;
-    position: relative;
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background: #0a0f1c;
-    padding: 50px 24px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-  .footer-grid {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-  @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
-  .footer-brand h4 {
-    font-size: 16px; font-weight: 800; color: white;
-    margin-bottom: 10px;
-  }
-  .footer-brand p {
-    font-size: 13px; color: #64748B; line-height: 1.6;
-    max-width: 280px;
-  }
-  .footer-col h5 {
-    font-size: 11px; font-weight: 700; color: #94A3B8;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .footer-col a {
-    display: block;
-    color: #64748B; text-decoration: none; font-size: 13px;
-    margin-bottom: 9px; transition: color 0.2s;
-  }
-  .footer-col a:hover { color: #22D3EE; }
-  .footer-bottom {
-    max-width: 1100px; margin: 0 auto;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 10px;
-    font-size: 12px; color: #475569;
-  }
-
-  /* ===== Logo v4 NEXBYTE.pro — X palpitante (oficial) ===== */
-  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
-  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
-  .nx-brand { display: inline-block; line-height: 1; letter-spacing: -0.5px; }
-  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
-  .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
-
-  /* Mobile nav */
-  @media (max-width: 760px) {
-    nav { padding: 14px 18px; }
-    .nav-links { display: none; }
-    .nav-links .nav-cta { display: inline-flex; }
-    .nav-links { display: flex; gap: 12px; }
-    .nav-links a:not(.nav-cta) { display: none; }
-  }
+  /* FOOTER */
+  footer{border-top:1px solid var(--line-soft);padding:52px 0 34px;background:#0a0f1e}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px;margin-bottom:34px}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
+  .foot-grid h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.03em}
+  .foot-grid a{display:block;font-size:13.5px;color:var(--ink-3);margin-bottom:9px;transition:color .2s}
+  .foot-grid a:hover{color:var(--brand-2)}
+  .foot-about{font-size:13.5px;color:var(--ink-3);max-width:280px;margin-top:12px}
+  .foot-bot{border-top:1px solid var(--line-soft);padding-top:22px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--ink-3)}
 </style>
-  <link rel="stylesheet" href="/nx-logo.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-left">
-    <a href="/" class="back-arrow" title="Volver al inicio NEXBYTE">&larr;</a>
-    <a href="/" class="nav-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
-  </div>
+<nav><div class="wrap nav-in">
+  <a href="/" class="brand"><span class="mark">🦉</span> NEXBYTE<small>.pro</small></a>
   <div class="nav-links">
-    <a href="#como-funciona">C&oacute;mo funciona</a>
-    <a href="https://puce.nexbyte.pro/planes">Planes</a>
-    <a href="/instalar-puce/">Instalar</a>
-    <a href="https://puce.nexbyte.pro/planes" class="nav-cta">Suscribirme</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#precios">Planes</a>
+    <a href="/faq/">FAQ</a>
+    <a href="https://puce.nexbyte.pro/planes" class="btn btn-primary btn-sm">Ver planes</a>
   </div>
-</nav>
+</div></nav>
 
-<!-- ============================================ -->
-<!-- HERO con animación CSS+JS                    -->
-<!-- ============================================ -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="badge"><span class="dot"></span> AHORA DISPONIBLE EN PUCE QUITO</div>
-    <h1>Configura tu aula Moodle en <span class="gradient">15 minutos</span>, no en 3 horas.</h1>
-    <p class="subtitle">
-      Sube tu s&iacute;labo PDF. La extensi&oacute;n genera banner, recursos, tareas y evaluaciones con IA.
-      T&uacute; revisas y apruebas. Tu aula queda lista.
-    </p>
-    <div class="hero-cta-row">
-      <a href="/instalar-puce/" class="btn-primary">
-        Probar gratis
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="#como-funciona" class="btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Ver demo
-      </a>
+<!-- HERO -->
+<header class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow"><span class="dot"></span> Disponible en PUCE Quito</span>
+    <h1>Tu aula Moodle lista en <span class="grad">15 minutos</span>, no en 3 horas.</h1>
+    <p class="lead">Sube tu sílabo en PDF y la extensión arma el banner, los recursos por RDA, las tareas
+      y las evaluaciones con IA. Tú solo revisas y apruebas.</p>
+    <div class="cta-row">
+      <a href="https://puce.nexbyte.pro/planes" class="btn btn-primary">Ver planes y precios →</a>
+      <a href="/instalar-puce/" class="btn btn-ghost">Cómo instalar</a>
     </div>
-    <div class="trust-row">
-      <span class="item"><span class="check">&#10003;</span> Sin tarjeta para empezar</span>
-      <span class="item"><span class="check">&#10003;</span> Funciona con tu cuenta @puce.edu.ec</span>
-      <span class="item"><span class="check">&#10003;</span> Instalaci&oacute;n en 2 min</span>
+    <div class="trust">
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Con tu correo @puce.edu.ec</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Se instala en 2 minutos</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Sobre tu Moodle actual</span>
     </div>
   </div>
 
-  <!-- ANIMACIÓN -->
-  <div class="hero-visual" id="hero-anim">
-    <div class="browser" id="browser">
-      <div class="browser-bar">
-        <span class="browser-dot red"></span>
-        <span class="browser-dot yellow"></span>
-        <span class="browser-dot green"></span>
-        <span class="browser-url">eva.puce.edu.ec/QUI-202601R/course/view.php?id=29</span>
-        <span class="browser-extension">&#129417;</span>
+  <div class="mock">
+    <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">eva.puce.edu.ec/QUI-202601R/course/view.php?id=29</span></div>
+    <div class="mock-body">
+      <div class="mock-banner">
+        <div><b>Cálculo I — PUCE Quito</b><small>Generado con NEXBYTE</small></div>
+        <span class="pill">✦ IA</span>
       </div>
-
-      <div class="browser-content">
-        <!-- Moodle simulado -->
-        <div class="moodle-mock">
-          <div class="moodle-title">C&aacute;lculo I &mdash; PUCE Quito</div>
-
-          <div class="moodle-section rda-1" id="mdl-1">
-            <div class="label">RDA 1</div>
-            <div class="items">
-              <div class="item"><span class="ico">&#127909;</span> Video YouTube</div>
-              <div class="item"><span class="ico">&#128194;</span> PPT &mdash; Tema 1.1</div>
-              <div class="item"><span class="ico">&#128209;</span> Tarea con r&uacute;brica IA</div>
-            </div>
-          </div>
-
-          <div class="moodle-section rda-2" id="mdl-2">
-            <div class="label">RDA 2</div>
-            <div class="items">
-              <div class="item"><span class="ico">&#127909;</span> Video YouTube</div>
-              <div class="item"><span class="ico">&#128194;</span> PPT &mdash; Tema 2.1</div>
-              <div class="item"><span class="ico">&#128221;</span> Evaluaci&oacute;n IA</div>
-            </div>
-          </div>
-
-          <div class="moodle-section rda-3" id="mdl-3">
-            <div class="label">RDA 3</div>
-            <div class="items">
-              <div class="item"><span class="ico">&#128218;</span> Genially</div>
-              <div class="item"><span class="ico">&#128194;</span> PPT &mdash; Tema 3.1</div>
-              <div class="item"><span class="ico">&#128172;</span> Foro de discusi&oacute;n</div>
-            </div>
-          </div>
-
-          <!-- Sparks -->
-          <span class="spark s1"></span>
-          <span class="spark s2"></span>
-          <span class="spark s3"></span>
-          <span class="spark s4"></span>
-        </div>
-
-        <!-- PDF flotando -->
-        <div class="pdf-card" id="pdf">
-          <div class="pdf-ico">&#128196;</div>
-          <div class="pdf-name">silabo.pdf</div>
-        </div>
-
-        <!-- Popup -->
-        <div class="popup">
-          <div class="popup-header">
-            <span class="popup-logo">&#129417;</span>
-            <span class="popup-title">Generador Aulas</span>
-            <span class="popup-credits">&#9889; 147</span>
-          </div>
-
-          <div class="popup-step" id="step-1">
-            <div class="popup-step-row">
-              <span class="popup-step-num">1</span>
-              <span class="label">Importar plantilla</span>
-            </div>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-          </div>
-
-          <div class="popup-step" id="step-2">
-            <div class="popup-step-row">
-              <span class="popup-step-num">2</span>
-              <span class="label">S&iacute;labo &amp; banner</span>
-            </div>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-          </div>
-
-          <div class="popup-step" id="step-3">
-            <div class="popup-step-row">
-              <span class="popup-step-num">3</span>
-              <span class="label">RDA &mdash; recursos &amp; IA</span>
-            </div>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-          </div>
-        </div>
-
-        <!-- Done overlay -->
-        <div class="done-check" id="done">
-          <div class="checkmark">&#10003;</div>
-        </div>
+      <div class="rda">
+        <div class="rda-h">RDA 1</div>
+        <div class="res"><span class="ic">🎬</span> Video de YouTube</div>
+        <div class="res"><span class="ic">📊</span> PPT — Tema 1.1</div>
+        <div class="res"><span class="ic">📝</span> Tarea con rúbrica IA</div>
+      </div>
+      <div class="rda">
+        <div class="rda-h">RDA 2</div>
+        <div class="res"><span class="ic">📚</span> Genially interactivo</div>
+        <div class="res"><span class="ic">🧠</span> Evaluación con IA</div>
       </div>
     </div>
-
-    <div class="step-label" id="lbl">PASO 1 &middot; IMPORTANDO PLANTILLA</div>
+    <div class="float-badge"><span class="ic">🦉</span><div><b>Aula creada</b><small>en 14 min 32 s</small></div></div>
   </div>
-</section>
+</div></header>
 
-<!-- SOCIAL PROOF -->
-<section class="social-proof">
-  <div class="lbl">Lo que est&aacute;s ahorrando</div>
+<!-- STATS -->
+<section class="blk" style="padding-top:20px"><div class="wrap">
   <div class="stats">
-    <div class="stat">
-      <div class="num">15 min</div>
-      <div class="sub">tiempo medio por aula</div>
-    </div>
-    <div class="stat">
-      <div class="num">10</div>
-      <div class="sub">aulas por ciclo, $50</div>
-    </div>
-    <div class="stat">
-      <div class="num">90 d&iacute;as</div>
-      <div class="sub">de acceso completo</div>
-    </div>
+    <div class="stat"><b class="grad">15 min</b><span>tiempo medio por aula</span></div>
+    <div class="stat"><b>10</b><span>aulas por ciclo, un solo plan</span></div>
+    <div class="stat"><b>4</b><span>tipos de recurso por RDA</span></div>
   </div>
-</section>
+</div></section>
 
-<!-- ============================================ -->
-<!-- FEATURES                                     -->
-<!-- ============================================ -->
-<section class="features" id="como-funciona">
-  <div class="section-head">
-    <div class="eyebrow">&iquest;Qu&eacute; hace exactamente?</div>
-    <h2>Todo el trabajo aburrido. <span class="gradient">Automatizado.</span></h2>
-    <p>Cuatro cosas que la extensi&oacute;n hace por ti en cada aula Moodle.</p>
+<!-- CÓMO FUNCIONA -->
+<section class="blk" id="como"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>Todo el trabajo repetitivo, <span class="grad">automatizado</span>.</h2>
+    <p>Cuatro cosas que la extensión hace por ti en cada aula Moodle — tú apruebas.</p>
   </div>
-
-  <div class="features-grid">
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128194;</div>
+  <div class="features">
+    <div class="feat"><span class="step">01</span><div class="fic">📁</div>
       <h3>Importa la plantilla institucional</h3>
-      <p>Sube el archivo <code>.mbz</code> institucional una sola vez. La extensi&oacute;n configura las secciones General, RDA 1, RDA 2 y RDA 3 en menos de un minuto.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#129302;</div>
-      <h3>Lee tu s&iacute;labo con IA</h3>
-      <p>De tu s&iacute;labo PDF extrae: docente, asignatura, horario, RDAs, contenidos. Genera el banner profesional, el bot&oacute;n de NotebookLM y las descripciones de cada RDA.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#128229;</div>
+      <p>Sube el archivo <b>.mbz</b> de PUCE Quito una vez. La extensión crea las secciones General, RDA 1, RDA 2 y RDA 3 en menos de un minuto.</p></div>
+    <div class="feat"><span class="step">02</span><div class="fic">🤖</div>
+      <h3>Lee tu sílabo con IA</h3>
+      <p>De tu sílabo PDF extrae docente, asignatura, horario, RDAs y contenidos. Genera el banner profesional y las descripciones de cada RDA.</p></div>
+    <div class="feat"><span class="step">03</span><div class="fic">📥</div>
       <h3>Sube recursos por RDA</h3>
-      <p>Videos de YouTube, Genially interactivos, PowerPoints y PDFs. Hasta 3 por slot. La extensi&oacute;n los inserta en la secci&oacute;n &quot;Recursos&quot; del RDA correspondiente.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">&#10024;</div>
+      <p>Videos de YouTube, Genially, PowerPoints y PDFs — hasta 3 por slot. Se insertan en la sección "Recursos" del RDA correspondiente.</p></div>
+    <div class="feat"><span class="step">04</span><div class="fic">✨</div>
       <h3>Tareas y evaluaciones con IA</h3>
-      <p>R&uacute;bricas generadas por IA basadas en el PDF de instrucciones. Bancos de preguntas Aiken generados a partir de un PDF de contenido. T&uacute; editas, apruebas, listo.</p>
-    </div>
-
+      <p>Rúbricas generadas desde el PDF de la tarea y bancos de preguntas Aiken desde tu contenido. Tú editas, apruebas y queda listo.</p></div>
   </div>
+</div></section>
 
-  <!-- Tiempo comparison -->
-  <div class="time-comparison">
-    <h2>Lo que tardas <span style="color:#EF4444">manual</span> vs. <span style="color:#22D3EE">con la extensi&oacute;n</span></h2>
-    <div class="time-bars">
-      <div class="time-bar manual">
-        <div class="label">Manual</div>
-        <div class="bar">3 h</div>
-        <div class="sub">por aula completa</div>
-      </div>
-      <div class="time-bar ai">
-        <div class="label">Con extensi&oacute;n</div>
-        <div class="bar">15 min</div>
-        <div class="sub">por aula completa</div>
-      </div>
+<!-- TIME COMPARE -->
+<section class="blk" style="padding-top:0"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">El antes y el después</span>
+    <h2>Lo que tardabas en una tarde, <span class="grad">en un café</span>.</h2>
+  </div>
+  <div class="compare">
+    <div class="bar">
+      <div class="bar-top"><span class="lbl"><span class="tag man">Manual</span> Armar un aula completa</span><span class="val">3 h</span></div>
+      <div class="track"><div class="fill slow"></div></div>
+    </div>
+    <div class="bar">
+      <div class="bar-top"><span class="lbl"><span class="tag ext">Con la extensión</span> Armar un aula completa</span><span class="val grad" style="-webkit-background-clip:text;-webkit-text-fill-color:transparent;background:var(--grad)">15 min</span></div>
+      <div class="track"><div class="fill fast"></div></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ============================================ -->
-<!-- TESTIMONIALS                                 -->
-<!-- ============================================ -->
-<section class="testimonials">
-  <div class="section-head">
-    <div class="eyebrow">Lo que dicen los docentes</div>
-    <h2>Hecho para <span class="gradient">PUCE</span>, validado por docentes de Quito.</h2>
+<!-- PRICING -->
+<section class="blk" id="precios"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Planes y precios</span>
+    <h2>Elige tu plan. <span class="grad">Sin sorpresas.</span></h2>
+    <p>Precios para docentes de PUCE Quito. Cancela cuando quieras, mantienes acceso hasta el fin del período.</p>
   </div>
-
-  <div class="testimonials-grid">
-
-    <div class="testimonial-card">
-      <div class="quote-mark">&ldquo;</div>
-      <p>Antes preparaba cada aula en una tarde completa. Ahora termino las 5 que tengo en lo que dura un caf&eacute;. Lo mejor: los estudiantes notan que est&aacute; mejor armada.</p>
-      <div class="author">
-        <div class="avatar-placeholder">D</div>
-        <div>
-          <div class="name">Docente PUCE Quito</div>
-          <div class="role">Escuela de Sistemas</div>
-        </div>
-      </div>
+  <div class="price-grid">
+    <div class="pcard">
+      <div class="pn">Plan Mensual</div>
+      <div class="pd">Ideal para un ciclo corto</div>
+      <div class="amt">$35<span> / mes</span></div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Configura tus aulas Moodle completas</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Rúbricas y preguntas con IA</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Calificación con IA incluida</li>
+      </ul>
+      <a href="https://puce.nexbyte.pro/planes" class="btn btn-ghost">Elegir Mensual</a>
     </div>
-
-    <div class="testimonial-card">
-      <div class="quote-mark">&ldquo;</div>
-      <p>Lo que m&aacute;s me sorprendi&oacute; fue la r&uacute;brica con IA. Ped&iacute; que la generara desde el PDF de la tarea y la sac&oacute; clavada. Edit&eacute; dos cosas y la us&eacute;.</p>
-      <div class="author">
-        <div class="avatar-placeholder">D</div>
-        <div>
-          <div class="name">Docente PUCE Quito</div>
-          <div class="role">Escuela de Enfermer&iacute;a</div>
-        </div>
-      </div>
+    <div class="pcard reco">
+      <span class="reco-tag">MEJOR VALOR</span>
+      <div class="pn">Plan Trimestral</div>
+      <div class="pd">Cubre todo el semestre — hasta 10 aulas</div>
+      <div class="amt">$65<span> / 3 meses</span></div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Todo lo del Plan Mensual</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> <b style="color:#fff">90 días de acceso · hasta 10 aulas</b></li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Menos cobros que el plan mensual</li>
+      </ul>
+      <a href="https://puce.nexbyte.pro/planes" class="btn btn-primary">Elegir Trimestral</a>
     </div>
-
-    <div class="testimonial-card">
-      <div class="quote-mark">&ldquo;</div>
-      <p>Pagu&eacute; los $50 sin dudar despu&eacute;s de probar con el plan gratuito. Para todo el ciclo me sale a unos pocos d&oacute;lares por aula. No tengo m&aacute;s comentarios.</p>
-      <div class="author">
-        <div class="avatar-placeholder">D</div>
-        <div>
-          <div class="name">Docente PUCE Quito</div>
-          <div class="role">Escuela de Administraci&oacute;n</div>
-        </div>
-      </div>
-    </div>
-
   </div>
-</section>
+  <div class="price-note">¿Quieres ver la comparativa completa? <a href="https://puce.nexbyte.pro/planes">Ver todos los planes de PUCE Quito →</a></div>
+</div></section>
 
-<!-- ============================================ -->
-<!-- FINAL CTA                                    -->
-<!-- ============================================ -->
-<section class="final-cta">
-  <h2>Empieza a ahorrar horas <span style="background:linear-gradient(135deg,#3B82F6,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">hoy mismo.</span></h2>
-  <p>Pru&eacute;balo gratis sin tarjeta. Cuando est&eacute;s convencido, $50 te dan 90 d&iacute;as y hasta 10 aulas.</p>
-  <div class="ctas">
-    <a href="/instalar-puce/" class="btn-primary">
-      Probar gratis ahora
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a href="https://puce.nexbyte.pro/planes" class="btn-secondary">Ver planes y precios</a>
+<!-- TESTIMONIALS -->
+<section class="blk" style="padding-top:0"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Lo que dicen los docentes</span>
+    <h2>Hecho para <span class="grad">PUCE Quito</span>, usado por docentes de PUCE Quito.</h2>
   </div>
-  <div class="small-print">Sin contratos. Cancela cuando quieras. Soporte por email.</div>
-</section>
-
-<!-- ============================================ -->
-<!-- FOOTER                                       -->
-<!-- ============================================ -->
-<footer>
-  <div class="footer-grid">
-
-    <div class="footer-brand">
-      <h4>NE<span style="color:#22D3EE">XBYTE.pro</span></h4>
-      <p>Software a medida y automatizaci&oacute;n con IA para instituciones educativas en Ecuador.</p>
-    </div>
-
-    <div class="footer-col">
-      <h5>Producto</h5>
-      <a href="/aulas-puce/">Generador de Aulas</a>
-      <a href="https://puce.nexbyte.pro/planes">Planes y precios</a>
-      <a href="/instalar-puce/">Instalar</a>
-    </div>
-
-    <div class="footer-col">
-      <h5>Empresa</h5>
-      <a href="/">Sobre NEXBYTE</a>
-      <a href="mailto:soporte@nexbyte.pro">Soporte</a>
-      <a href="mailto:vargasmadrian@gmail.com">Contacto</a>
-    </div>
-
-    <div class="footer-col">
-      <h5>Legal</h5>
-      <a href="/privacidad-puce/">Privacidad</a>
-      <a href="/terminos/">T&eacute;rminos</a>
-    </div>
-
+  <div class="quotes">
+    <div class="quote"><div class="stars">★★★★★</div>
+      <p>"Antes preparaba cada aula en una tarde completa. Ahora termino las 5 que tengo en lo que dura un café — y quedan mejor armadas."</p>
+      <div class="who"><span class="av">S</span><div><b>Docente PUCE Quito</b><small>Escuela de Sistemas</small></div></div></div>
+    <div class="quote"><div class="stars">★★★★★</div>
+      <p>"Lo que más me sorprendió fue la rúbrica con IA. Pedí que la generara desde el PDF de la tarea y la sacó clavada. Edité dos cosas y la usé."</p>
+      <div class="who"><span class="av">E</span><div><b>Docente PUCE Quito</b><small>Escuela de Enfermería</small></div></div></div>
+    <div class="quote"><div class="stars">★★★★★</div>
+      <p>"Para todo el ciclo me sale a menos que una pizza y me ahorra tardes enteras. Contraté sin dudarlo. No tengo más que decir."</p>
+      <div class="who"><span class="av">A</span><div><b>Docente PUCE Quito</b><small>Escuela de Administración</small></div></div></div>
   </div>
+</div></section>
 
-  <div class="footer-bottom">
-    <div>&copy; 2026 NEXBYTE.pro &middot; Hecho en Ecuador</div>
-    <div>&#129417; Generador de Aulas Virtuales &mdash; PUCE Quito</div>
+<!-- FINAL CTA -->
+<section class="final"><div class="wrap">
+  <h2>Empieza a ahorrar horas <span class="grad">hoy mismo</span>.</h2>
+  <p>Instálalo en 2 minutos, elige tu plan y arma tu primera aula esta misma tarde.</p>
+  <div class="cta-row">
+    <a href="https://puce.nexbyte.pro/planes" class="btn btn-primary">Ver planes y precios →</a>
+    <a href="/instalar-puce/" class="btn btn-ghost">Cómo instalar</a>
   </div>
-</footer>
+  <p class="fine">Sin contratos · Cancela cuando quieras · Soporte por email</p>
+</div></section>
 
-<!-- ============================================ -->
-<!-- ANIMACIÓN del hero — JS                      -->
-<!-- ============================================ -->
-<script>
-(function() {
-  var browser = document.getElementById('browser');
-  var pdf = document.getElementById('pdf');
-  var step1 = document.getElementById('step-1');
-  var step2 = document.getElementById('step-2');
-  var step3 = document.getElementById('step-3');
-  var mdl1 = document.getElementById('mdl-1');
-  var mdl2 = document.getElementById('mdl-2');
-  var mdl3 = document.getElementById('mdl-3');
-  var done = document.getElementById('done');
-  var lbl = document.getElementById('lbl');
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div>
+      <a href="/" class="brand"><span class="mark">🦉</span> NEXBYTE<small>.pro</small></a>
+      <p class="foot-about">Software a medida y automatización con IA para instituciones educativas en Ecuador. Hecho desde Esmeraldas.</p>
+    </div>
+    <div><h4>Producto</h4>
+      <a href="/aulas-puce/">Generador de Aulas</a><a href="https://puce.nexbyte.pro/planes">Planes y precios</a><a href="/instalar-puce/">Instalar</a><a href="/faq/">FAQ</a></div>
+    <div><h4>Empresa</h4>
+      <a href="/">Sobre NEXBYTE</a><a href="mailto:soporte@nexbyte.pro">Contacto</a></div>
+    <div><h4>Legal</h4>
+      <a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a></div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 NEXBYTE.pro · Hecho en Esmeraldas, Ecuador</span>
+    <span>🦉 Generador de Aulas Virtuales</span>
+  </div>
+</div></footer>
 
-  var steps = [step1, step2, step3];
-
-  function reset() {
-    steps.forEach(function(s) { s.classList.remove('active', 'done', 'filling'); });
-    [mdl1, mdl2, mdl3].forEach(function(m) { m.classList.remove('populated'); });
-    pdf.classList.remove('show');
-    browser.classList.remove('processing');
-    done.classList.remove('show');
-    lbl.classList.remove('show');
-  }
-
-  function setLabel(text) {
-    lbl.textContent = text;
-    lbl.classList.add('show');
-  }
-
-  // Step 1: importar plantilla (1.6s)
-  function step1Act() {
-    setLabel('PASO 1 · IMPORTANDO PLANTILLA');
-    step1.classList.add('active');
-    setTimeout(function() { step1.classList.add('filling'); }, 60);
-    setTimeout(function() {
-      step1.classList.add('done');
-      step1.classList.remove('active', 'filling');
-      step2Act();
-    }, 1800);
-  }
-
-  // Step 2: subir PDF + procesar sílabo (2.4s)
-  function step2Act() {
-    setLabel('PASO 2 · LEYENDO SÍLABO PDF');
-    step2.classList.add('active');
-    pdf.classList.add('show');
-    browser.classList.add('processing');
-    setTimeout(function() { step2.classList.add('filling'); }, 60);
-    setTimeout(function() {
-      step2.classList.add('done');
-      step2.classList.remove('active', 'filling');
-      browser.classList.remove('processing');
-      // Empieza a "poblar" RDAs
-      mdl1.classList.add('populated');
-      step3Act();
-    }, 2400);
-  }
-
-  // Step 3: poblar RDAs uno por uno (2.4s)
-  function step3Act() {
-    setLabel('PASO 3 · GENERANDO RECURSOS + IA');
-    step3.classList.add('active');
-    setTimeout(function() { step3.classList.add('filling'); }, 60);
-    setTimeout(function() { mdl2.classList.add('populated'); }, 600);
-    setTimeout(function() { mdl3.classList.add('populated'); }, 1300);
-    setTimeout(function() {
-      step3.classList.add('done');
-      step3.classList.remove('active', 'filling');
-      finalAct();
-    }, 2400);
-  }
-
-  // Done: checkmark + label "AULA LISTA"
-  function finalAct() {
-    setLabel('✓ AULA LISTA EN MOODLE');
-    done.classList.add('show');
-    pdf.classList.remove('show');
-    setTimeout(function() {
-      done.classList.remove('show');
-      setTimeout(function() {
-        reset();
-        startLoop();
-      }, 600);
-    }, 2200);
-  }
-
-  function startLoop() {
-    setTimeout(step1Act, 400);
-  }
-
-  // Respetar prefers-reduced-motion
-  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    // Estado final estático
-    [step1, step2, step3].forEach(function(s) { s.classList.add('done'); });
-    [mdl1, mdl2, mdl3].forEach(function(m) { m.classList.add('populated'); });
-    setLabel('AULA LISTA EN MOODLE');
-  } else {
-    startLoop();
-  }
-})();
-</script>
-<script defer src="/notifications.js"></script>
 </body>
 </html>
