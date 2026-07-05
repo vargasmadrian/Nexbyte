@@ -280,11 +280,11 @@
       </div>
       <div class="summary-row">
         <span class="lbl">Plan</span>
-        <span class="val">Completo &mdash; PUCESE</span>
+        <span class="val" id="pp-plan-name">Plan</span>
       </div>
       <div class="summary-row">
         <span class="lbl">Duraci&oacute;n</span>
-        <span class="val">90 d&iacute;as</span>
+        <span class="val" id="pp-duration">&mdash;</span>
       </div>
       <div class="summary-row">
         <span class="lbl">Renovaci&oacute;n</span>
@@ -293,21 +293,20 @@
 
       <div class="summary-total">
         <span class="lbl">Total a pagar</span>
-        <span class="val" id="pp-total">$30<span class="currency">.00 USD</span></span>
+        <span class="val" id="pp-total">$0<span class="currency">.00 USD</span></span>
       </div>
 
-      <ul class="summary-features">
-        <li><span class="check">&#10003;</span> Configura hasta 10 aulas Moodle</li>
-        <li><span class="check">&#10003;</span> Rúbricas con IA (90 usos)</li>
-        <li><span class="check">&#10003;</span> Preguntas Aiken con IA (30 usos)</li>
+      <ul class="summary-features" id="pp-features">
+        <li><span class="check">&#10003;</span> Configura tus aulas Moodle (s&iacute;labo, tareas, recursos)</li>
+        <li><span class="check">&#10003;</span> R&uacute;bricas y preguntas Aiken con IA</li>
         <li><span class="check">&#10003;</span> Banners profesionales personalizados</li>
-        <li><span class="check">&#10003;</span> Soporte por email</li>
-        <li><span class="check">&#10003;</span> Cancela cuando quieras</li>
+        <li id="pp-feat-calif"><span class="check">&#10003;</span> Calificaci&oacute;n con IA</li>
+        <li><span class="check">&#10003;</span> Soporte por email &middot; Cancela cuando quieras</li>
       </ul>
 
-      <div class="summary-note">
-        <strong>Renovaci&oacute;n autom&aacute;tica:</strong> al expirar los 90 d&iacute;as se cobrar&aacute; $30 a la misma tarjeta.
-        Puedes <strong>cancelar en cualquier momento</strong> desde tu cuenta &mdash; mantienes acceso hasta el fin del per&iacute;odo pagado.
+      <div class="summary-note" id="pp-note">
+        <strong>Renovaci&oacute;n autom&aacute;tica:</strong> al expirar el per&iacute;odo se cobrar&aacute; el mismo valor a la
+        misma tarjeta. Puedes <strong>cancelar en cualquier momento</strong> &mdash; mantienes acceso hasta el fin del per&iacute;odo pagado.
       </div>
     </div>
 
@@ -422,6 +421,15 @@
     // default = Pro Trimestral si alguien llega sin ?plan (normalmente se llega desde /planes).
     var PLAN_KEY = "pucese_pro_trimestral";
     var BASE_PRICE = 50;
+    // Metadatos SOLO para mostrar el resumen (el cobro real lo re-deriva el backend desde la BD).
+    var PLAN_META = {
+      pucese_basico_mensual:    { name: "Básico — PUCESE", months: 1, price: 20, calif: 200 },
+      pucese_basico_trimestral: { name: "Básico — PUCESE", months: 3, price: 40, calif: 200 },
+      pucese_pro_mensual:       { name: "Pro — PUCESE",    months: 1, price: 30, calif: 2000 },
+      pucese_pro_trimestral:    { name: "Pro — PUCESE",    months: 3, price: 50, calif: 2000 },
+      completo:                 { name: "Completo — PUCE", months: 1, price: 20, calif: 2000 },
+      completo_trimestral:      { name: "Completo — PUCE", months: 3, price: 50, calif: 2000 }
+    };
     (function readPlan() {
       try {
         var qp = new URLSearchParams(window.location.search);
@@ -430,6 +438,16 @@
         PLAN_KEY = localStorage.getItem("nexbyte_plan_key") || PLAN_KEY;
         var sp = parseFloat(localStorage.getItem("nexbyte_plan_price"));
         if (!isNaN(sp)) BASE_PRICE = sp;
+        var m = PLAN_META[PLAN_KEY];
+        if (m && !isNaN(sp)) m = Object.assign({}, m, { price: sp }); // el precio del query manda si viene
+        m = m || { name: "Plan", months: 3, price: BASE_PRICE, calif: 0 };
+        BASE_PRICE = m.price;
+        // Rellenar el resumen del pedido
+        var set = function(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; };
+        set("pp-plan-name", m.name);
+        set("pp-duration", (m.months === 1 ? "1 mes" : m.months + " meses") + " (" + (m.months * 30) + " días)");
+        set("pp-total", "$" + m.price + "<span class=\"currency\">.00 USD</span>");
+        if (m.calif) set("pp-feat-calif", "<span class=\"check\">✓</span> <strong>" + m.calif.toLocaleString("es") + " calificaciones con IA</strong> (nota + retroalimentación)");
       } catch (_) {}
     })();
 
