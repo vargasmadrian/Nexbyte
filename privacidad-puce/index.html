@@ -19,6 +19,8 @@
   code { background: #1E293B; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #FBBF24; }
   .back { display: inline-flex; align-items: center; gap: 8px; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 30px; }
   .back:hover { color: white; }
+  .callout { background: #1E293B; border-left: 3px solid #22D3EE; border-radius: 6px; padding: 16px 20px; margin: 16px 0; }
+  .callout strong { color: #E2E8F0; }
 
   /* ===== Logo v4 NEXBYTE.pro — X palpitante (oficial) ===== */
   .nx-logo { display: flex; width: fit-content; text-decoration: none; font-size: 20px; font-weight: 900; color: white; margin-bottom: 20px; }
@@ -46,7 +48,7 @@
   <a href="/" class="nx-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
   <a href="/" class="back">← Volver al inicio</a>
   <h1>Política de Privacidad</h1>
-  <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: 31 de mayo de 2026</p>
+  <p class="subtitle">Generador de Aulas Virtuales — PUCE Quito y PUCE Ambato — Última actualización: 20 de julio de 2026</p>
 
   <h2>1. Alcance</h2>
   <p>Esta política aplica a la extensión de Chrome <strong>"Generador de Aulas — PUCE Quito y Ambato"</strong>, desarrollada para automatizar la configuración de aulas virtuales Moodle de los docentes de:</p>
@@ -54,92 +56,119 @@
     <li>Pontificia Universidad Católica del Ecuador, sede matriz Quito (<code>eva.puce.edu.ec</code>)</li>
     <li>Pontificia Universidad Católica del Ecuador, sede Ambato (<code>eva.pucesa.edu.ec</code>)</li>
   </ul>
+  <p>El objetivo de la extensión es ejecutar, <strong>por instrucción y en nombre del docente</strong>, tareas de configuración y calificación dentro del Moodle institucional del propio docente.</p>
 
-  <h2>2. Información que recopilamos</h2>
-  <p>Al iniciar sesión con Google OAuth, la extensión recopila únicamente:</p>
+  <h2>2. Información que recopilamos y procesamos</h2>
+
+  <p><strong>a) Datos de identidad (Google OAuth).</strong> Al iniciar sesión con Google, la extensión recibe:</p>
   <ul>
-    <li><strong>Nombre completo y correo electrónico institucional</strong> (<code>@puce.edu.ec</code> o <code>@pucesa.edu.ec</code>) — entregados por Google.</li>
-    <li><strong>Foto de perfil</strong> — obtenida de la cuenta de Google del usuario.</li>
+    <li><strong>Nombre completo y correo electrónico institucional</strong> (<code>@puce.edu.ec</code> o <code>@pucesa.edu.ec</code>).</li>
+    <li><strong>Foto de perfil</strong> de la cuenta de Google.</li>
   </ul>
-  <p><strong>Información de autenticación:</strong> tras iniciar sesión, la extensión guarda un <strong>token de sesión OAuth</strong> exclusivamente en el navegador del docente (<code>chrome.storage.local</code>) para mantener la sesión activa entre usos. Este token solo se utiliza para validar la sesión frente a Google y a nuestro backend (Supabase); <strong>no se comparte con ningún otro tercero</strong> y se elimina del navegador al cerrar sesión.</p>
-  <p>Si el docente adquiere un plan de pago, también almacenamos:</p>
+  <p>Tras iniciar sesión se guarda un <strong>token de sesión OAuth</strong> únicamente en el navegador del docente (<code>chrome.storage.local</code>) para mantener la sesión; se elimina al cerrar sesión.</p>
+
+  <div class="callout">
+    <p><strong>b) Divulgación destacada — cookie de sesión de Moodle.</strong> Para ejecutar las acciones que el docente solicita (crear secciones, recursos, tareas, evaluaciones, banners y calificaciones dentro de su curso), la extensión <strong>lee la cookie de sesión de Moodle</strong> (<code>MoodleSession</code>) de la pestaña institucional que el docente tiene abierta y la <strong>transmite, cifrada mediante HTTPS/TLS, a nuestro servidor de automatización</strong> (<code>api.nexbyte.pro</code>).</p>
+    <p>Esa cookie funciona como <strong>credencial temporal</strong> para que nuestro servidor realice, <strong>en nombre del docente y bajo su instrucción explícita</strong>, las acciones solicitadas dentro de su propio Moodle. La cookie se utiliza de forma <strong>transitoria</strong>, solo durante la ejecución de la acción, y <strong>no se conserva más allá de lo necesario para completarla</strong> ni se comparte con terceros distintos de los indicados en la sección 5.</p>
+  </div>
+
+  <p><strong>c) Contenido del curso Moodle.</strong> Para completar la acción solicitada, la extensión lee y <strong>transmite a <code>api.nexbyte.pro</code></strong> el contenido y la estructura del curso que sean necesarios (por ejemplo: nombres de secciones, tipo de curso, formularios de configuración y, cuando el docente usa funciones de inteligencia artificial, el texto del <strong>sílabo</strong>, de las <strong>tareas</strong> y de las <strong>entregas de estudiantes que el docente elige calificar</strong>). Este contenido se procesa con el <strong>único fin</strong> de producir el resultado que el docente pidió (crear la actividad, generar contenido o calcular una calificación con retroalimentación).</p>
+
+  <p><strong>d) Procesamiento con inteligencia artificial.</strong> Cuando la acción implica generación o calificación con IA, el contenido descrito en el punto (c) se procesa a través de un <strong>proveedor externo de IA (API de modelos de lenguaje de terceros)</strong>, exclusivamente para generar el resultado solicitado. Ese contenido <strong>no se utiliza para entrenar modelos</strong> ni para ningún fin distinto de la finalidad única de la extensión.</p>
+
+  <p><strong>e) Datos de suscripción y pago.</strong> Si el docente adquiere un plan de pago, almacenamos:</p>
   <ul>
     <li>Plan suscrito (mensual o trimestral), fecha de inicio y fin del período.</li>
-    <li>Número y monto de las transacciones procesadas a través de PayPhone (Ecuador), sin incluir datos sensibles de su tarjeta — esos viven en PayPhone, nunca en nuestra base de datos.</li>
-    <li>Conteo agregado de créditos consumidos por acción (importar plantilla, generar contenido, crear tarea, etc.).</li>
+    <li>Número y monto de las transacciones procesadas a través de PayPhone (Ecuador). <strong>No almacenamos números de tarjeta, CVV ni datos PCI</strong>: esos viven exclusivamente en PayPhone.</li>
+    <li>Conteo agregado de créditos consumidos por acción.</li>
   </ul>
-  <p><strong>Contenido del sitio web (Moodle):</strong> para ejecutar la automatización, la extensión <strong>lee de forma transitoria</strong> el contenido y la estructura de la página de Moodle que el docente tiene abierta (nombres de secciones, tipo de curso, formularios de configuración, etc.), directamente dentro del navegador del docente. Este contenido se procesa localmente y en tiempo real con el único fin de realizar la acción solicitada por el docente; <strong>no se transmite, no se almacena en nuestros servidores y no se comparte con terceros</strong>.</p>
-  <p>NO almacenamos ni transmitimos a nuestros servidores: contenido de los cursos Moodle, calificaciones de estudiantes, datos personales de estudiantes, historial de navegación fuera de Moodle, ni información personal adicional del docente o de sus estudiantes más allá de la indicada anteriormente.</p>
+
+  <p><strong>Qué NO recopilamos:</strong> no recopilamos historial de navegación fuera de Moodle, ni datos personales de estudiantes más allá del contenido de las entregas que el propio docente decide enviar a calificar, ni información del docente distinta de la aquí descrita.</p>
 
   <h2>3. Cómo utilizamos la información</h2>
   <ul>
-    <li>Autenticar al usuario y mantener su sesión activa en la extensión.</li>
-    <li>Asociar su cuenta con su suscripción y plan activo.</li>
-    <li>Validar y descontar créditos por cada acción automatizada (importar plantilla, generar sílabo con IA, crear tarea, generar evaluación, replicar nota en criterios, etc.).</li>
+    <li>Autenticar al docente y mantener su sesión activa en la extensión.</li>
+    <li>Ejecutar, en nombre del docente, las acciones que solicita dentro de su Moodle institucional (usando la cookie de sesión como credencial temporal).</li>
+    <li>Generar contenido y calificaciones con IA cuando el docente lo solicita, a partir del contenido que él aporta.</li>
+    <li>Asociar su cuenta con su suscripción y validar/descontar créditos por acción.</li>
     <li>Mostrar el nombre del docente dentro del popup de la extensión.</li>
-    <li>Enviar comunicaciones transaccionales (confirmación de pago, recordatorio de renovación) al correo institucional del docente.</li>
+    <li>Enviar comunicaciones transaccionales (confirmación de pago, recordatorio de renovación) a su correo institucional.</li>
   </ul>
 
-  <h2>4. Almacenamiento de datos</h2>
-  <p>Los datos persistentes (cuenta, suscripción, créditos) se almacenan en <strong>Supabase</strong>, plataforma backend con cifrado en reposo y en tránsito (HTTPS). La sesión local se guarda mediante <code>chrome.storage</code> en el navegador del docente y se elimina al cerrar sesión.</p>
-  <p>Los pagos se procesan exclusivamente a través de <strong>PayPhone S.A.</strong> (Ecuador). No almacenamos números de tarjeta, CVV, ni datos PCI en nuestros servidores. La integración usa el flujo de redirección oficial de PayPhone.</p>
+  <h2>4. Almacenamiento y conservación de datos</h2>
+  <p>Los datos <strong>persistentes</strong> (cuenta, suscripción, créditos) se almacenan en <strong>Supabase</strong>, con cifrado en reposo y en tránsito (HTTPS).</p>
+  <p>La <strong>cookie de sesión de Moodle</strong> y el <strong>contenido del curso</strong> que se transmiten para ejecutar una acción se procesan de forma <strong>transitoria</strong> y no se almacenan de forma persistente en nuestros servidores una vez completada la acción.</p>
+  <p>La sesión local del docente se guarda mediante <code>chrome.storage</code> en su navegador y se elimina al cerrar sesión. Los pagos se procesan exclusivamente a través de <strong>PayPhone S.A.</strong> (Ecuador) mediante su flujo de redirección oficial.</p>
 
   <h2>5. Compartición de datos con terceros</h2>
-  <p>No vendemos ni transferimos información personal del docente con fines comerciales. Los datos solo se comparten con los siguientes proveedores estrictamente necesarios para operar el servicio:</p>
+  <p>No vendemos ni transferimos información personal del docente con fines comerciales ni publicitarios. Los datos solo se comparten con los siguientes proveedores, estrictamente en la medida necesaria para operar el servicio:</p>
   <ul>
+    <li><strong>NEXBYTE — Servidor de automatización</strong> (<code>api.nexbyte.pro</code>) — recibe la cookie de sesión y el contenido del curso para ejecutar, en nombre del docente, las acciones solicitadas dentro de su Moodle.</li>
+    <li><strong>Proveedor externo de IA</strong> (API de modelos de lenguaje de terceros) — procesa el texto del sílabo, tareas y entregas <strong>solo</strong> cuando el docente usa funciones de generación o calificación con IA, con el único fin de producir el resultado solicitado.</li>
     <li><strong>Google</strong> — autenticación OAuth (correo, nombre, foto de perfil).</li>
-    <li><strong>Supabase</strong> — almacenamiento de cuenta y suscripción.</li>
+    <li><strong>Supabase</strong> — almacenamiento de cuenta, suscripción y créditos.</li>
     <li><strong>PayPhone</strong> — procesamiento de pagos.</li>
     <li><strong>Resend</strong> — envío de correos transaccionales.</li>
-    <li><strong>Vercel</strong> — alojamiento del dashboard de administración.</li>
+    <li><strong>Vercel</strong> — alojamiento del panel de administración.</li>
   </ul>
-  <p>Cada uno de estos servicios opera bajo sus propias políticas de privacidad y cumple con estándares internacionales (SOC 2, GDPR, etc.).</p>
+  <p>Cada uno de estos servicios opera bajo sus propias políticas de privacidad y estándares internacionales de seguridad.</p>
 
-  <h2>6. Permisos de la extensión y justificación</h2>
+  <h2>6. Uso limitado (Chrome Web Store Limited Use)</h2>
+  <p>El uso y la transferencia que NEXBYTE hace de la información recibida a través de la extensión se ajustan a la <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank" rel="noopener">Política de Uso Limitado de Chrome Web Store</a>. En particular:</p>
   <ul>
-    <li><strong><code>activeTab</code></strong> — Inyectar scripts solo en la pestaña Moodle abierta por el docente.</li>
-    <li><strong><code>scripting</code></strong> — Automatizar interacciones con el DOM de Moodle (rellenar formularios de creación de tareas, subir archivos, etc.).</li>
-    <li><strong><code>storage</code></strong> + <strong><code>unlimitedStorage</code></strong> — Guardar localmente la sesión del docente, estado del flujo multi-página y caché de plantillas Moodle (archivos MBZ pueden superar 5MB del límite estándar).</li>
-    <li><strong><code>tabs</code></strong> — Coordinar mensajes entre el popup de la extensión y el content script en la pestaña Moodle.</li>
-    <li><strong><code>identity</code></strong> — Iniciar sesión OAuth con Google (necesario para validar el plan del docente).</li>
-    <li><strong><code>host_permissions: eva.puce.edu.ec, eva.pucesa.edu.ec</code></strong> — Ejecutar la automatización en los Moodle institucionales de PUCE Quito y PUCE Ambato.</li>
-    <li><strong><code>host_permissions: *.supabase.co</code></strong> — Comunicar con el backend para auth y validación de créditos.</li>
-    <li><strong><code>host_permissions: nexbyte.pro</code></strong> — Cargar recursos del dominio del producto (zip de actualización, política de privacidad).</li>
+    <li>Los datos se usan <strong>únicamente</strong> para proporcionar y mejorar la finalidad única de la extensión.</li>
+    <li><strong>No</strong> vendemos datos de usuario.</li>
+    <li><strong>No</strong> usamos ni transferimos datos con fines de publicidad, ni para determinar solvencia crediticia, ni para préstamos.</li>
+    <li>Solo transferimos datos a terceros (a) para proveer o mejorar la funcionalidad que el usuario solicita, (b) por seguridad, o (c) para cumplir una obligación legal aplicable.</li>
+    <li>Los humanos no leen los datos del usuario salvo con su consentimiento para un problema de soporte específico, por seguridad, o para cumplir la ley.</li>
   </ul>
 
-  <h2>7. Seguridad</h2>
+  <h2>7. Permisos de la extensión y justificación</h2>
   <ul>
-    <li>Toda comunicación con el backend usa HTTPS (TLS 1.3).</li>
+    <li><strong><code>cookies</code></strong> — Leer la cookie de sesión de Moodle (<code>MoodleSession</code>) de la pestaña del docente para poder ejecutar acciones en su nombre (ver sección 2b).</li>
+    <li><strong><code>activeTab</code></strong> — Actuar solo sobre la pestaña Moodle abierta por el docente.</li>
+    <li><strong><code>scripting</code></strong> — Automatizar interacciones con el DOM de Moodle (rellenar formularios, subir archivos, etc.).</li>
+    <li><strong><code>storage</code></strong> — Guardar localmente la sesión del docente, preferencias y estado del flujo multi-página.</li>
+    <li><strong><code>tabs</code></strong> — Coordinar mensajes entre el popup y el content script de la pestaña Moodle.</li>
+    <li><strong><code>identity</code></strong> — Iniciar sesión OAuth con Google (validar el plan del docente).</li>
+    <li><strong><code>host_permissions: eva.puce.edu.ec, eva.pucesa.edu.ec</code></strong> — Ejecutar la automatización en los Moodle institucionales de PUCE Quito y Ambato.</li>
+    <li><strong><code>host_permissions: api.nexbyte.pro, *.nexbyte.pro</code></strong> — Comunicar con el servidor de automatización que ejecuta las acciones y con recursos del producto.</li>
+    <li><strong><code>host_permissions: *.supabase.co</code></strong> — Comunicar con el backend para autenticación y validación de créditos.</li>
+  </ul>
+
+  <h2>8. Seguridad</h2>
+  <ul>
+    <li>Toda comunicación con nuestros servidores usa HTTPS (TLS).</li>
     <li>OAuth 2.0 de Google para autenticación, sin manejar contraseñas directamente.</li>
-    <li>Row Level Security (RLS) en Supabase: cada docente solo accede a sus propios datos.</li>
-    <li>Tokens de sesión rotativos con expiración.</li>
-    <li>Pagos PCI-DSS a través de PayPhone (no almacenamos datos de tarjeta en ningún momento).</li>
+    <li>Row Level Security (RLS) en Supabase: cada docente accede solo a sus propios datos.</li>
+    <li>La cookie de sesión se transmite cifrada y se usa de forma transitoria.</li>
+    <li>Pagos a través de PayPhone; no almacenamos datos de tarjeta en ningún momento.</li>
   </ul>
 
-  <h2>8. Derechos del docente</h2>
+  <h2>9. Derechos del docente</h2>
   <p>El docente tiene derecho a:</p>
   <ul>
     <li><strong>Acceso</strong>: solicitar una copia de los datos que almacenamos sobre él.</li>
     <li><strong>Rectificación</strong>: corregir datos inexactos.</li>
-    <li><strong>Eliminación</strong>: solicitar el borrado completo de su cuenta y datos asociados. La eliminación toma hasta 7 días hábiles.</li>
+    <li><strong>Eliminación</strong>: solicitar el borrado completo de su cuenta y datos asociados.</li>
     <li><strong>Portabilidad</strong>: recibir sus datos en formato JSON.</li>
-    <li><strong>Revocación de consentimiento</strong>: cerrar sesión desde la extensión elimina los datos locales; para eliminación total ver punto anterior.</li>
+    <li><strong>Revocación de consentimiento</strong>: cerrar sesión desde la extensión elimina los datos locales; para eliminación total, ver el punto anterior.</li>
   </ul>
   <p>Para ejercer cualquiera de estos derechos, contactar a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
 
-  <h2>9. Datos de menores</h2>
-  <p>La extensión está dirigida exclusivamente a personal docente universitario de PUCE Quito y PUCE Ambato. No recopilamos información de menores de edad. El correo institucional <code>@puce.edu.ec</code> y <code>@pucesa.edu.ec</code> se asigna solo a personal autorizado por la universidad.</p>
+  <h2>10. Datos de menores</h2>
+  <p>La extensión está dirigida exclusivamente a personal docente universitario de PUCE Quito y PUCE Ambato. No está dirigida a menores de edad. El contenido de estudiantes solo se procesa cuando el docente, en el marco de su relación institucional, decide enviar una entrega a calificar, y únicamente para producir la calificación y retroalimentación solicitadas.</p>
 
-  <h2>10. Retención</h2>
-  <p>Los datos del docente se conservan mientras tenga una cuenta activa. Tras la baja, los datos se eliminan en un máximo de 90 días salvo obligación legal (ej. retención de comprobantes de pago por 7 años según ley ecuatoriana).</p>
+  <h2>11. Retención</h2>
+  <p>Los datos de cuenta del docente se conservan mientras tenga una cuenta activa; tras la baja se eliminan en un máximo de 90 días, salvo obligación legal (ej. comprobantes de pago según ley ecuatoriana). La cookie de sesión y el contenido del curso transmitidos para una acción no se retienen de forma persistente una vez completada.</p>
 
-  <h2>11. Cambios a esta política</h2>
-  <p>Nos reservamos el derecho de actualizar esta política. Los cambios materiales se notificarán al docente por correo institucional con al menos 15 días de anticipación. La fecha de "última actualización" al inicio de este documento refleja la versión vigente.</p>
+  <h2>12. Cambios a esta política</h2>
+  <p>Nos reservamos el derecho de actualizar esta política. Los cambios materiales se notificarán al docente por correo institucional con al menos 15 días de anticipación. La fecha de "última actualización" al inicio refleja la versión vigente.</p>
 
-  <h2>12. Contacto</h2>
+  <h2>13. Contacto</h2>
   <p>Cualquier consulta sobre esta política puede dirigirse a:</p>
   <p><a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a></p>
-  <p>Responsable del tratamiento: NEXBYTE — Adrián Vargas Madrid · Ecuador.</p>
+  <p>Responsable del tratamiento: NEXBYTE — Adrián Vargas · Ecuador.</p>
 </div>
 <script defer src="/notifications.js"></script>
 </body>
