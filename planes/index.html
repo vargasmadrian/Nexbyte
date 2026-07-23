@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Planes y precios — PUCE Esmeraldas | NEXBYTE.pro</title>
-<meta name="description" content="Planes del Generador de Aulas Virtuales para docentes PUCESE. Básico $20 y Pro $30 al mes. Elige mensual o trimestral. Cancela cuando quieras.">
+<meta name="description" content="Planes del Generador de Aulas Virtuales para docentes PUCESE. Básico $10 y Pro $30 al mes. Elige mensual o trimestral. Cancela cuando quieras.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/nx-logo.css">
@@ -96,7 +96,7 @@
   </div>
   <div class="seg dur" id="segDur">
     <button data-dur="mensual" class="on">Mensual</button>
-    <button data-dur="trimestral">Trimestral <span class="save-badge" id="saveBadge">ahorra 33%</span></button>
+    <button data-dur="trimestral">Trimestral <span class="save-badge" id="saveBadge"></span></button>
   </div>
 </div>
 
@@ -108,7 +108,7 @@
       <div><div class="pn" id="pName">Plan Básico</div><div class="pd" id="pDesc">Generador de aulas + calificación de prueba</div></div>
     </div>
     <div class="price">
-      <div class="amt" id="pAmt">$20</div>
+      <div class="amt" id="pAmt">$10</div>
       <div class="per" id="pPer">al mes</div>
       <div class="sub">Pago por período · IVA incluido</div>
     </div>
@@ -136,7 +136,7 @@
       </tbody>
     </table>
   </div>
-  <div class="cta"><a id="ctaBtn" href="/pagar/?plan=pucese_basico_mensual&price=20">Suscribirme — <span id="ctaPrice">$20</span> →</a></div>
+  <div class="cta"><a id="ctaBtn" href="/pagar/?plan=pucese_basico_mensual&price=10">Suscribirme — <span id="ctaPrice">$10</span> →</a></div>
 </div>
 
 <div class="foot-note">Procesado por <b>PayPhone Ecuador</b> · Visa · Mastercard · Activación automática en menos de 1 minuto.<br>¿Dudas? Escríbenos a <b>soporte@nexbyte.pro</b>.</div>
@@ -157,7 +157,7 @@
 <script>
   var PLANS = {
     basico:{ name:"Plan Básico", desc:"Generador de aulas + calificación de prueba", calif:200,
-      mensual:{key:"pucese_basico_mensual",price:20}, trimestral:{key:"pucese_basico_trimestral",price:40} },
+      mensual:{key:"pucese_basico_mensual",price:10}, trimestral:{key:"pucese_basico_trimestral",price:30} },
     pro:{ name:"Plan Pro", desc:"Para calificar todo el semestre con IA", calif:2000,
       mensual:{key:"pucese_pro_mensual",price:30}, trimestral:{key:"pucese_pro_trimestral",price:50} }
   };
@@ -175,7 +175,7 @@
     document.getElementById("ctaPrice").textContent="$"+d.price;
     document.getElementById("recoTag").style.display = tier==="pro" ? "block" : "none";
     document.getElementById("card").classList.toggle("reco", tier==="pro");
-    document.getElementById("saveBadge").textContent = tier==="pro" ? "ahorra 44%" : "ahorra 33%";
+    document.getElementById("saveBadge").textContent = tier==="pro" ? "ahorra 44%" : "";
   }
   document.getElementById("segTier").addEventListener("click",function(e){
     var b=e.target.closest("button"); if(!b)return; tier=b.dataset.tier;
