@@ -155,15 +155,14 @@
 </section>
 
 <script>
-  // Universidad detectada por la extensión (?u=<slug>). El plan_key se arma <slug>_<tier>_<dur>,
-  // así la MISMA página sirve a cualquier docente sin clonarla. Agregar U = crear sus planes en la BD
-  // (pucese_basico_mensual, uta_basico_mensual, …). Sin ?u= usa pucese por defecto.
-  var U = ((new URLSearchParams(location.search).get('u') || 'pucese').toLowerCase().replace(/[^a-z0-9_]/g, '')) || 'pucese';
+  // Catálogo INDIVIDUAL UNIFORME (mismo precio para TODO docente, sin importar su universidad).
+  // plan_key fijos (pucese_* = catálogo general consolidado). El ?u=<slug> que manda la extensión
+  // queda disponible para marca (logo/nombre de la U) más adelante, pero NO cambia el precio.
   var PLANS = {
     basico:{ name:"Plan Básico", desc:"Generador de aulas + calificación de prueba", calif:200,
-      mensual:{key:U+"_basico_mensual",price:10}, trimestral:{key:U+"_basico_trimestral",price:30} },
+      mensual:{key:"pucese_basico_mensual",price:10}, trimestral:{key:"pucese_basico_trimestral",price:30} },
     pro:{ name:"Plan Pro", desc:"Para calificar todo el semestre con IA", calif:2000,
-      mensual:{key:U+"_pro_mensual",price:30}, trimestral:{key:U+"_pro_trimestral",price:50} }
+      mensual:{key:"pucese_pro_mensual",price:30}, trimestral:{key:"pucese_pro_trimestral",price:50} }
   };
   var tier="basico", dur="mensual";
   function fmt(n){ return n.toLocaleString("es"); }
