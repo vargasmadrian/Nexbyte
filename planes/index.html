@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Planes y precios — PUCE Esmeraldas | NEXBYTE.pro</title>
-<meta name="description" content="Planes del Generador de Aulas Virtuales para docentes PUCESE. Básico $10 y Pro $30 al mes. Elige mensual o trimestral. Cancela cuando quieras.">
+<title>Planes y precios | NEXBYTE.pro</title>
+<meta name="description" content="Planes del Generador de Aulas Virtuales para docentes. Elige mensual o trimestral. Cancela cuando quieras.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/nx-logo.css">
@@ -84,9 +84,9 @@
 </div></div>
 
 <div class="phead"><div class="wrap">
-  <span class="eyebrow">Generador de Aulas Virtuales · PUCE Esmeraldas</span>
+  <span class="eyebrow">Generador de Aulas Virtuales</span>
   <h1>Elige tu plan. <span class="grad">Sin sorpresas.</span></h1>
-  <p>Un plan para cada docente PUCESE. Cambia de idea cuando quieras — mantienes acceso hasta el fin del período pagado.</p>
+  <p>Un plan para cada docente. Cambia de idea cuando quieras — mantienes acceso hasta el fin del período pagado.</p>
 </div></div>
 
 <div class="toggles">
@@ -139,7 +139,7 @@
   <div class="cta"><a id="ctaBtn" href="/pagar/?plan=pucese_basico_mensual&price=10">Suscribirme — <span id="ctaPrice">$10</span> →</a></div>
 </div>
 
-<div class="foot-note">Procesado por <b>PayPhone Ecuador</b> · Visa · Mastercard · Activación automática en menos de 1 minuto.<br>¿Dudas? Escríbenos a <b>soporte@nexbyte.pro</b>.</div>
+<div class="foot-note">Procesado por <b>PayPhone</b> · Visa · Mastercard · Activación automática en menos de 1 minuto.<br>¿Dudas? Escríbenos a <b>soporte@nexbyte.pro</b>.</div>
 
 <section id="qr-deuna" style="max-width:520px;margin:40px auto 8px;padding:28px 24px;background:#fff;border:1px solid #e6ebf3;border-radius:18px;text-align:center;scroll-margin-top:24px;box-shadow:0 8px 30px rgba(16,24,40,.06)">
   <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb;margin-bottom:8px">Pago manual</div>
@@ -155,11 +155,15 @@
 </section>
 
 <script>
+  // Universidad detectada por la extensión (?u=<slug>). El plan_key se arma <slug>_<tier>_<dur>,
+  // así la MISMA página sirve a cualquier docente sin clonarla. Agregar U = crear sus planes en la BD
+  // (pucese_basico_mensual, uta_basico_mensual, …). Sin ?u= usa pucese por defecto.
+  var U = ((new URLSearchParams(location.search).get('u') || 'pucese').toLowerCase().replace(/[^a-z0-9_]/g, '')) || 'pucese';
   var PLANS = {
     basico:{ name:"Plan Básico", desc:"Generador de aulas + calificación de prueba", calif:200,
-      mensual:{key:"pucese_basico_mensual",price:10}, trimestral:{key:"pucese_basico_trimestral",price:30} },
+      mensual:{key:U+"_basico_mensual",price:10}, trimestral:{key:U+"_basico_trimestral",price:30} },
     pro:{ name:"Plan Pro", desc:"Para calificar todo el semestre con IA", calif:2000,
-      mensual:{key:"pucese_pro_mensual",price:30}, trimestral:{key:"pucese_pro_trimestral",price:50} }
+      mensual:{key:U+"_pro_mensual",price:30}, trimestral:{key:U+"_pro_trimestral",price:50} }
   };
   var tier="basico", dur="mensual";
   function fmt(n){ return n.toLocaleString("es"); }
