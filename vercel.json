@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    { "source": "/aulas-puce", "destination": "/aulas/", "permanent": false },
+    { "source": "/aulas-puce/", "destination": "/aulas/", "permanent": false },
+    { "source": "/planes-puce", "destination": "/planes/", "permanent": false },
+    { "source": "/planes-puce/", "destination": "/planes/", "permanent": false },
+    { "source": "/instalar", "destination": "https://chromewebstore.google.com/detail/generador-de-aulas-virtua/hailcbdhfnaipkjfblbkkehjnapfokah", "permanent": false },
+    { "source": "/instalar/", "destination": "https://chromewebstore.google.com/detail/generador-de-aulas-virtua/hailcbdhfnaipkjfblbkkehjnapfokah", "permanent": false },
+    { "source": "/instalar-puce", "destination": "https://chromewebstore.google.com/detail/generador-de-aulas-virtua/hailcbdhfnaipkjfblbkkehjnapfokah", "permanent": false },
+    { "source": "/instalar-puce/", "destination": "https://chromewebstore.google.com/detail/generador-de-aulas-virtua/hailcbdhfnaipkjfblbkkehjnapfokah", "permanent": false }
+  ]
+}

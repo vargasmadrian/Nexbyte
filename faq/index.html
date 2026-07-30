@@ -297,7 +297,7 @@
     <details>
       <summary>&iquest;Qu&eacute; hace exactamente la extensi&oacute;n?</summary>
       <div class="answer">
-        <p>El Generador de Aulas Virtuales automatiza la configuraci&oacute;n de tu aula Moodle PUCESE.
+        <p>El Generador de Aulas Virtuales automatiza la configuraci&oacute;n de tu aula Moodle.
         Con un solo s&iacute;labo PDF y unos pocos clics, configura <strong>hasta 10 aulas completas por ciclo</strong>:</p>
         <ul>
           <li>Importa la plantilla institucional (<code>.mbz</code>).</li>
@@ -314,12 +314,8 @@
     <details>
       <summary>&iquest;Con qu&eacute; Moodles funciona?</summary>
       <div class="answer">
-        <p>Con los Moodles oficiales de PUCE Esmeraldas:</p>
-        <ul>
-          <li><code>moodle.pucese.edu.ec</code></li>
-          <li><code>moodlecr.pucese.edu.ec</code></li>
-        </ul>
-        <p>Si est&aacute;s en PUCE Quito (<code>eva.puce.edu.ec</code>), necesitas la <a href="/planes-puce/">versi&oacute;n para PUCE Quito</a>.</p>
+        <p>Con el <strong>Moodle institucional de tu universidad</strong>. Funciona sobre tu Moodle actual, sin instalar nada en el servidor de la instituci&oacute;n.</p>
+        <p>Al abrir tu curso, la extensi&oacute;n reconoce tu Moodle autom&aacute;ticamente. Si tu universidad todav&iacute;a no est&aacute; habilitada, escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</p>
       </div>
     </details>
 
@@ -335,7 +331,7 @@
       <summary>&iquest;La IA usa mis datos para entrenarse?</summary>
       <div class="answer">
         <p><strong>No.</strong> Las acciones de IA env&iacute;an tus PDFs a <strong>Google Gemini</strong> (API). Google los procesa seg&uacute;n su pol&iacute;tica oficial y <strong>NEXBYTE no guarda copias</strong> de tus archivos.</p>
-        <p>Los archivos que subes a Moodle (PPTs, PDFs, sílabos) viajan <strong>directamente</strong> a tu Moodle PUCESE desde tu navegador. No pasan por servidores de NEXBYTE.</p>
+        <p>Los archivos que subes a Moodle (PPTs, PDFs, sílabos) viajan <strong>directamente</strong> a tu Moodle institucional desde tu navegador. No pasan por servidores de NEXBYTE.</p>
       </div>
     </details>
 
@@ -348,9 +344,9 @@
     </details>
 
     <details>
-      <summary>&iquest;Qu&eacute; pasa si Moodle PUCESE cambia de versi&oacute;n?</summary>
+      <summary>&iquest;Qu&eacute; pasa si mi Moodle cambia de versi&oacute;n?</summary>
       <div class="answer">
-        <p>Cuando PUCESE actualiza Moodle, probamos y publicamos una actualizaci&oacute;n de la extensi&oacute;n en menos de 48 horas. Recibir&aacute;s un aviso autom&aacute;tico dentro del popup.</p>
+        <p>Cuando tu universidad actualiza Moodle, probamos y publicamos una actualizaci&oacute;n de la extensi&oacute;n en menos de 48 horas. Recibir&aacute;s un aviso autom&aacute;tico dentro del popup.</p>
       </div>
     </details>
   </section>
@@ -446,25 +442,18 @@
     <h2><span class="num">3</span> Instalaci&oacute;n</h2>
 
     <details>
-      <summary>&iquest;C&oacute;mo cargo la extensi&oacute;n en Chrome?</summary>
+      <summary>&iquest;C&oacute;mo instalo la extensi&oacute;n?</summary>
       <div class="answer">
-        <p>Resumen r&aacute;pido:</p>
-        <ol>
-          <li>Descarga <code>generador-aulas-v3.zip</code> en <a href="/instalar/">la p&aacute;gina de instalaci&oacute;n</a>.</li>
-          <li>Descomprime el archivo.</li>
-          <li>Abre <code>chrome://extensions</code> y activa el <strong>Modo desarrollador</strong>.</li>
-          <li>Haz clic en <strong>&quot;Cargar descomprimida&quot;</strong> y selecciona la carpeta.</li>
-          <li>Fija el icono del b&uacute;ho con el rompecabezas (&#129513;).</li>
-        </ol>
-        <p>Ver <a href="/instalar/">gu&iacute;a completa paso a paso</a> con capturas.</p>
+        <p>En <strong>un solo clic</strong>. Tras contratar tu plan, te llega (por correo y en la p&aacute;gina de confirmaci&oacute;n) un bot&oacute;n <strong>&quot;Instalar la extensi&oacute;n&quot;</strong> que la a&ntilde;ade a tu navegador desde Chrome Web Store al instante &mdash; sin descargas ni pasos t&eacute;cnicos.</p>
+        <p>Luego abre la extensi&oacute;n (icono del b&uacute;ho), inicia sesi&oacute;n con Google usando <strong>el mismo correo con el que pagaste</strong>, y listo. Para fijar el icono, usa el rompecabezas (&#129513;) de Chrome.</p>
       </div>
     </details>
 
     <details>
-      <summary>&iquest;Por qu&eacute; Chrome muestra advertencia &quot;Esta extensi&oacute;n puede leer y modificar todos los datos&quot;?</summary>
+      <summary>&iquest;Por qu&eacute; Chrome me pide permiso sobre mi Moodle?</summary>
       <div class="answer">
-        <p>Es el aviso est&aacute;ndar de Chrome para extensiones en <strong>modo desarrollador</strong>. La extensi&oacute;n solo se ejecuta en <code>*.pucese.edu.ec</code> y <code>nexbyte.pro</code> (definido en su <code>manifest.json</code>).</p>
-        <p>Puedes ignorar el aviso o pulsar &quot;Mantener&quot;.</p>
+        <p>La extensi&oacute;n necesita permiso para actuar en la p&aacute;gina de tu Moodle institucional (crear secciones, subir recursos, etc.). La primera vez que la usas en tu Moodle, Chrome te lo pide <strong>una sola vez</strong> &mdash; pulsa &quot;Permitir&quot;.</p>
+        <p>Solo se ejecuta en el Moodle de tu universidad y en <code>nexbyte.pro</code> (definido en su <code>manifest.json</code>). No accede a otras p&aacute;ginas.</p>
       </div>
     </details>
 
@@ -472,14 +461,6 @@
       <summary>&iquest;Funciona en Edge, Brave, Opera o Arc?</summary>
       <div class="answer">
         <p>S&iacute;. Todos son navegadores basados en Chromium &mdash; mismo motor que Chrome. El proceso de instalaci&oacute;n es id&eacute;ntico (cada uno tiene su propia URL: <code>edge://extensions</code>, <code>brave://extensions</code>, etc.).</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>&iquest;La extensi&oacute;n deja de funcionar si reinicio Chrome?</summary>
-      <div class="answer">
-        <p>No, siempre que <strong>NO muevas ni borres</strong> la carpeta <code>generador-aulas-v3</code> donde la descomprimiste. Chrome la lee de esa ubicaci&oacute;n cada vez que arranca.</p>
-        <p>Si la moviste, ve a <code>chrome://extensions</code>, elim&iacute;nala y vuelve a hacer &quot;Cargar descomprimida&quot; apuntando a la nueva ruta.</p>
       </div>
     </details>
 

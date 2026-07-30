@@ -53,18 +53,13 @@
 
   <div id="state-success" class="hidden">
     <div class="icon success">&#10003;</div>
-    <h1>&iexcl;Pago confirmado!</h1>
-    <p>Tu plan trimestral est&aacute; activo. Te enviamos un email a <strong id="success-email"></strong> con las instrucciones.</p>
-    <p class="small" style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:12px 16px;color:#FBBF24;">&#9888;&#65039; Si no lo encuentras en tu bandeja de entrada, revisa la carpeta de <strong>spam o correo no deseado</strong>. Si llega ah&iacute;, m&aacute;rcalo como &laquo;No es spam&raquo; para futuros mensajes.</p>
-    <div class="steps">
-      <h3>Pr&oacute;ximos pasos</h3>
-      <ol>
-        <li>Descarga e instala la extensi&oacute;n siguiendo la <a href="/instalar/" target="_blank">gu&iacute;a paso a paso en /instalar</a>.</li>
-        <li>&Aacute;brela y haz clic en <strong>"Iniciar sesi&oacute;n con Google"</strong>.</li>
-        <li>Inicia sesi&oacute;n con el email <strong id="success-email-2"></strong>.</li>
-      </ol>
-    </div>
-    <a href="/instalar/" target="_blank" class="btn">Instalar extensi&oacute;n</a>
+    <h1>&iexcl;Listo! Tu plan est&aacute; activo</h1>
+    <p>Inst&aacute;lalo en tu navegador con un solo clic:</p>
+    <a href="https://chromewebstore.google.com/detail/generador-de-aulas-virtua/hailcbdhfnaipkjfblbkkehjnapfokah" target="_blank" rel="noopener" class="btn" style="display:inline-flex;align-items:center;gap:10px;">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v10m0 0 4-4m-4 4-4-4"/><path d="M5 19h14"/></svg>
+      Instalar la extensi&oacute;n
+    </a>
+    <p class="small" style="margin-top:18px">&Aacute;brela e inicia sesi&oacute;n con <strong id="success-email"></strong> &mdash; el mismo correo con el que pagaste, para vincular tu acceso autom&aacute;ticamente.</p>
   </div>
 
   <div id="state-cancelled" class="hidden">
@@ -115,7 +110,6 @@
       var data = await resp.json();
       if (data.status === "confirmed" || data.status === "linked" || data.alreadyProcessed) {
         document.getElementById("success-email").textContent = data.email || "tu correo";
-        document.getElementById("success-email-2").textContent = data.email || "tu correo";
         show("state-success");
         try { localStorage.removeItem("nexbyte_payment_intent"); } catch(_){}
         return;
