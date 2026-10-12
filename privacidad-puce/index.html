@@ -5,45 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Política de Privacidad — Generador de Aulas Virtuales PUCE | NEXBYTE.pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: #0F172A; color: #CBD5E1; line-height: 1.8; }
-  .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
-  h1 { color: white; font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-  .subtitle { color: #64748B; font-size: 14px; margin-bottom: 40px; }
-  h2 { color: #E2E8F0; font-size: 20px; font-weight: 700; margin-top: 36px; margin-bottom: 12px; }
-  p, li { font-size: 15px; margin-bottom: 12px; }
-  ul { padding-left: 24px; }
-  a { color: #22D3EE; }
-  code { background: #1E293B; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #FBBF24; }
-  .back { display: inline-flex; align-items: center; gap: 8px; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 30px; }
-  .back:hover { color: white; }
-  .callout { background: #1E293B; border-left: 3px solid #22D3EE; border-radius: 6px; padding: 16px 20px; margin: 16px 0; }
-  .callout strong { color: #E2E8F0; }
-
-  /* ===== Logo v4 NEXBYTE.pro — X palpitante (oficial) ===== */
-  .nx-logo { display: flex; width: fit-content; text-decoration: none; font-size: 20px; font-weight: 900; color: white; margin-bottom: 20px; }
-  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
-  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
-  .nx-brand { display: inline-block; line-height: 1; letter-spacing: -0.5px; }
-  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
-  .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
-
-  @media (max-width: 480px) {
-    .container { padding: 40px 16px; }
-    h1 { font-size: 24px; }
-    .subtitle { font-size: 13px; margin-bottom: 28px; }
-    h2 { font-size: 17px; margin-top: 28px; margin-bottom: 10px; }
-    p, li { font-size: 14px; margin-bottom: 10px; }
-    ul { padding-left: 18px; }
-    .back { font-size: 13px; margin-bottom: 20px; }
-  }
-</style>
-  <link rel="stylesheet" href="/nx-logo.css">
+<meta name="theme-color" content="#0a1020">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nx-logo.css">
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+
+<nav class="barra" aria-label="Principal">
+  <div class="caja barra-in">
+    <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+  </div>
+</nav>
+
+<main class="legal" data-seccion="documento">
 <div class="container">
   <a href="/" class="nx-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
   <a href="/" class="back">← Volver al inicio</a>
@@ -174,6 +152,9 @@
   <p><a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a></p>
   <p>Responsable del tratamiento: NEXBYTE — Adrián Vargas · Ecuador.</p>
 </div>
+</main>
+
+<script defer src="/nx/sitio.js"></script>
 <script defer src="/notifications.js"></script>
 </body>
 </html>

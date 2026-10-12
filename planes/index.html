@@ -6,153 +6,96 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Planes y precios | NEXBYTE.pro</title>
 <meta name="description" content="Planes del Generador de Aulas Virtuales para docentes. Elige mensual o trimestral. Cancela cuando quieras.">
+<meta name="theme-color" content="#0a1020">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/nx-logo.css">
-<style>
-  :root{ --ink:#0F172A; --ink-2:#475569; --ink-3:#94A3B8; --line:#E2E8F0; --bg:#F5F7FB;
-    --brand:#1E3A8A; --brand-2:#2563EB; --accent:#22D3EE; --grad:linear-gradient(120deg,#2563EB,#22D3EE); --radius:18px; }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink-2);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{text-decoration:none;color:inherit}
-  h1,h2,h3{color:var(--ink);letter-spacing:-.02em;line-height:1.15}
-  .wrap{max-width:920px;margin:0 auto;padding:0 20px;width:100%}
-
-  /* Top bar */
-  .topbar{background:linear-gradient(120deg,#111a3f,#1e3a8a);color:#fff}
-  .topbar-in{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1080px;margin:0 auto;padding:0 20px}
-  .topbar .brand{font-size:20px;font-weight:800;color:#fff}
-  .topbar .back{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:#c7d2fe;padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.08)}
-  .topbar .back:hover{background:rgba(255,255,255,.16)}
-
-  /* Hero */
-  .phead{text-align:center;padding:56px 0 8px}
-  .phead .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-2);margin-bottom:12px}
-  .phead h1{font-size:clamp(30px,4.4vw,44px);font-weight:900;color:var(--ink)}
-  .phead h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .phead p{font-size:16.5px;color:var(--ink-2);max-width:520px;margin:14px auto 0}
-
-  /* Toggles */
-  .toggles{display:flex;flex-direction:column;align-items:center;gap:14px;margin:34px 0 8px}
-  .seg{display:inline-flex;background:#EEF2F7;border:1px solid var(--line);border-radius:999px;padding:5px;gap:4px}
-  .seg button{border:0;background:transparent;font-family:inherit;font-size:14px;font-weight:700;color:var(--ink-2);
-    padding:9px 22px;border-radius:999px;cursor:pointer;transition:all .18s;position:relative}
-  .seg button.on{background:#fff;color:var(--brand);box-shadow:0 2px 8px rgba(15,23,42,.1)}
-  .seg.dur button.on{background:var(--grad);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.35)}
-  .save-badge{font-size:11px;font-weight:800;color:#0e7490;background:#cffafe;border-radius:999px;padding:2px 8px;margin-left:8px}
-
-  /* Card */
-  .card{max-width:720px;margin:22px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;
-    box-shadow:0 30px 60px -30px rgba(15,23,42,.18);overflow:hidden;position:relative}
-  .card.reco{border:2px solid var(--brand-2);box-shadow:0 30px 70px -28px rgba(37,99,235,.45)}
-  .reco-tag{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;
-    font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:5px 16px;border-radius:0 0 12px 12px}
-  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:34px 30px 22px;flex-wrap:wrap}
-  .card-top .ic{width:52px;height:52px;border-radius:14px;background:var(--grad);display:grid;place-items:center;font-size:24px;flex-shrink:0}
-  .card-top .pn{font-size:22px;font-weight:800;color:var(--ink)}
-  .card-top .pd{font-size:14px;color:var(--ink-3)}
-  .card-top .price{margin-left:auto;text-align:right}
-  .card-top .amt{font-size:44px;font-weight:900;color:var(--ink);letter-spacing:-.03em;line-height:1}
-  .card-top .per{font-size:13.5px;color:var(--ink-3)}
-  .card-top .sub{font-size:12px;color:var(--ink-3)}
-  .feats{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:6px 30px 22px}
-  @media(max-width:560px){.feats{grid-template-columns:1fr}}
-  .feats li{list-style:none;display:flex;gap:9px;align-items:flex-start;font-size:14px;color:#334155}
-  .feats svg{color:#16a34a;flex-shrink:0;margin-top:3px}
-  .tbl-wrap{margin:0 30px 22px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  table{width:100%;border-collapse:collapse;font-size:13.5px}
-  thead tr{background:#F8FAFC}
-  th{text-align:left;padding:11px 16px;font-weight:700;color:#334155}
-  th.c{text-align:center;width:90px}th.ai{text-align:center;width:64px}
-  td{padding:10px 16px;color:#475569;border-top:1px solid #F1F5F9}
-  td.c{text-align:center;font-weight:700;color:var(--ink)}td.ai{text-align:center}
-  .ai-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#7c3aed;background:#f3e8ff;border-radius:999px;padding:2px 8px}
-  .cta{padding:0 30px 30px}
-  .cta a{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:var(--grad);color:#fff;
-    font-weight:800;font-size:16px;padding:16px;border-radius:13px;box-shadow:0 12px 28px rgba(37,99,235,.32);transition:transform .18s,box-shadow .18s}
-  .cta a:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(37,99,235,.42)}
-  .foot-note{text-align:center;color:var(--ink-3);font-size:13.5px;padding:8px 0 60px}
-  .foot-note b{color:var(--ink-2)}
-</style>
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<div class="topbar"><div class="topbar-in">
-  <a href="/" class="brand nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
-  <a href="/aulas/" class="back">← Volver</a>
-</div></div>
-
-<div class="phead"><div class="wrap">
-  <span class="eyebrow">Generador de Aulas Virtuales</span>
-  <h1>Elige tu plan. <span class="grad">Sin sorpresas.</span></h1>
-  <p>Un plan para cada docente. Cambia de idea cuando quieras — mantienes acceso hasta el fin del período pagado.</p>
-</div></div>
-
-<div class="toggles">
-  <div class="seg tier" id="segTier">
-    <button data-tier="basico" class="on">Básico</button>
-    <button data-tier="pro">Pro</button>
+<nav class="barra" aria-label="Principal">
+  <div class="caja barra-in">
+    <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+    <a href="/aulas/" class="volver texto"><svg viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg> Volver</a>
   </div>
-  <div class="seg dur" id="segDur">
-    <button data-dur="mensual" class="on">Mensual</button>
-    <button data-dur="trimestral">Trimestral <span class="save-badge" id="saveBadge"></span></button>
-  </div>
-</div>
+</nav>
 
-<div class="card" id="card">
-  <span class="reco-tag" id="recoTag" style="display:none">RECOMENDADO</span>
-  <div class="card-top">
-    <div style="display:flex;gap:16px;align-items:flex-start">
-      <div class="ic">✦</div>
-      <div><div class="pn" id="pName">Plan Básico</div><div class="pd" id="pDesc">Generador de aulas + calificación de prueba</div></div>
+<header class="cab-pagina" data-seccion="cabecera">
+  <div class="caja">
+    <p class="rotulo mono" data-ver><span class="byte" data-n="1"></span> <b>Generador de Aulas Virtuales</b></p>
+    <h1 data-ver="titulo"><span class="l"><span>Elige tu plan.</span></span><span class="l" style="--i:1"><span><em>Sin sorpresas.</em></span></span></h1>
+    <p class="bajada" data-ver style="--i:2">Un plan para cada docente. Cambia de idea cuando quieras — mantienes acceso hasta el fin del período pagado.</p>
+  </div>
+</header>
+
+<main class="caja" style="padding-bottom:clamp(60px,8vw,110px)">
+  <div class="selectores" data-ver data-seccion="plan-selectores">
+    <div class="seg tier" id="segTier">
+      <button data-tier="basico" class="on">Básico</button>
+      <button data-tier="pro">Pro</button>
     </div>
-    <div class="price">
-      <div class="amt" id="pAmt">$10</div>
+    <div class="seg dur" id="segDur">
+      <button data-dur="mensual" class="on">Mensual</button>
+      <button data-dur="trimestral">Trimestral <span class="save-badge" id="saveBadge"></span></button>
+    </div>
+  </div>
+
+  <div class="plan" id="card" data-ver data-seccion="plan">
+    <div class="plan-izq">
+      <span class="reco-tag" id="recoTag" style="display:none">RECOMENDADO</span>
+      <div class="pn" id="pName" data-cambia>Plan Básico</div>
+      <div class="pd" id="pDesc">Generador de aulas + calificación de prueba</div>
+      <div class="amt" id="pAmt" data-cambia>$10</div>
       <div class="per" id="pPer">al mes</div>
       <div class="sub">Pago por período · IVA incluido</div>
+      <a class="boton todo" id="ctaBtn" href="/pagar/?plan=pucese_basico_mensual&price=10">Suscribirme — <span id="ctaPrice">$10</span>
+        <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+    </div>
+    <div class="plan-der">
+      <ul class="feats">
+        <li><i class="chico" data-g="ok"></i> Configura tus aulas Moodle completas</li>
+        <li><i class="chico" data-g="ok"></i> Importa la plantilla institucional</li>
+        <li><i class="chico" data-g="ok"></i> Lee tu sílabo en PDF con IA</li>
+        <li><i class="chico" data-g="ok"></i> Recursos por RDA (videos, PPT, PDF…)</li>
+        <li><i class="chico" data-g="ok"></i> Rúbricas y preguntas Aiken con IA</li>
+        <li id="featCalif"><i class="chico" data-g="ok"></i> <span id="califFeat">200 calificaciones con IA</span></li>
+      </ul>
+      <table class="tabla">
+        <thead><tr><th>Funcionalidad</th><th class="c">Usos</th><th class="ai">IA</th></tr></thead>
+        <tbody>
+          <tr><td>Importar plantilla Moodle</td><td class="c">12</td><td class="ai">—</td></tr>
+          <tr><td>Generar sílabo y banner</td><td class="c">12</td><td class="ai">—</td></tr>
+          <tr><td>Subir recursos (video, PPT, PDF…)</td><td class="c">140</td><td class="ai">—</td></tr>
+          <tr><td>Crear tareas</td><td class="c">90</td><td class="ai">—</td></tr>
+          <tr><td>Generar rúbricas con IA</td><td class="c">90</td><td class="ai"><span class="ai-pill">IA</span></td></tr>
+          <tr><td>Crear evaluaciones</td><td class="c">30</td><td class="ai">—</td></tr>
+          <tr><td>Generar preguntas Aiken con IA</td><td class="c">30</td><td class="ai"><span class="ai-pill">IA</span></td></tr>
+          <tr><td>Calificar tareas con IA</td><td class="c" id="tblCalif">200</td><td class="ai"><span class="ai-pill">IA</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <ul class="feats">
-    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Configura tus aulas Moodle completas</li>
-    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Importa la plantilla institucional</li>
-    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Lee tu sílabo en PDF con IA</li>
-    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Recursos por RDA (videos, PPT, PDF…)</li>
-    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Rúbricas y preguntas Aiken con IA</li>
-    <li id="featCalif"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> <span id="califFeat">200 calificaciones con IA</span></li>
-  </ul>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Funcionalidad</th><th class="c">Usos</th><th class="ai">IA</th></tr></thead>
-      <tbody>
-        <tr><td>Importar plantilla Moodle</td><td class="c">12</td><td class="ai">—</td></tr>
-        <tr><td>Generar sílabo y banner</td><td class="c">12</td><td class="ai">—</td></tr>
-        <tr><td>Subir recursos (video, PPT, PDF…)</td><td class="c">140</td><td class="ai">—</td></tr>
-        <tr><td>Crear tareas</td><td class="c">90</td><td class="ai">—</td></tr>
-        <tr><td>Generar rúbricas con IA</td><td class="c">90</td><td class="ai"><span class="ai-pill">✦ IA</span></td></tr>
-        <tr><td>Crear evaluaciones</td><td class="c">30</td><td class="ai">—</td></tr>
-        <tr><td>Generar preguntas Aiken con IA</td><td class="c">30</td><td class="ai"><span class="ai-pill">✦ IA</span></td></tr>
-        <tr><td>Calificar tareas con IA</td><td class="c" id="tblCalif">200</td><td class="ai"><span class="ai-pill">✦ IA</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="cta"><a id="ctaBtn" href="/pagar/?plan=pucese_basico_mensual&price=10">Suscribirme — <span id="ctaPrice">$10</span> →</a></div>
-</div>
 
-<div class="foot-note">Procesado por <b>PayPhone</b> · Visa · Mastercard · Activación automática en menos de 1 minuto.<br>¿Dudas? Escríbenos a <b>soporte@nexbyte.pro</b>.</div>
+  <p class="foot-note">Procesado por <b>PayPhone</b> · Visa · Mastercard · Activación automática en menos de 1 minuto.<br>¿Dudas? Escríbenos a <b>soporte@nexbyte.pro</b>.</p>
 
-<section id="qr-deuna" style="max-width:520px;margin:40px auto 8px;padding:28px 24px;background:#fff;border:1px solid #e6ebf3;border-radius:18px;text-align:center;scroll-margin-top:24px;box-shadow:0 8px 30px rgba(16,24,40,.06)">
-  <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2563eb;margin-bottom:8px">Pago manual</div>
-  <h2 style="margin:0 0 6px;font-size:22px;color:#0f172a">Paga con QR De Una</h2>
-  <p style="margin:0 0 18px;color:#64748b;font-size:15px">Desde tu app de <b>Banco Pichincha</b> · sin tarjeta</p>
-  <img src="/qr-deuna.png" alt="QR De Una — Banco Pichincha NEXBYTE" width="240" height="240" loading="lazy" style="width:240px;height:240px;border-radius:14px;border:1px solid #eef2f7;background:#fff" />
-  <ol style="text-align:left;max-width:390px;margin:20px auto 0;padding-left:20px;color:#334155;font-size:14.5px;line-height:1.75">
-    <li>Abre <b>Banco Pichincha</b> → <b>De Una</b> → <b>Escanear QR</b>.</li>
-    <li>Escanea este código y paga el <b>monto de tu plan</b>.</li>
-    <li>Envía el <b>comprobante</b>, tu <b>correo Google</b> y el <b>plan</b> a <a href="mailto:soporte@nexbyte.pro" style="color:#2563eb;font-weight:600">soporte@nexbyte.pro</a>.</li>
-    <li>Activamos tu plan en <b>máximo 24 horas hábiles</b>.</li>
-  </ol>
-</section>
+  <section class="qr" id="qr-deuna" data-ver data-seccion="qr">
+    <div class="qr-img"><img src="/qr-deuna.png" alt="QR De Una — Banco Pichincha NEXBYTE" width="240" height="240" loading="lazy"></div>
+    <div>
+      <p class="rotulo mono"><span class="byte" data-n="2"></span> <b>Pago manual</b></p>
+      <h2>Paga con QR De Una</h2>
+      <p>Desde tu app de <b>Banco Pichincha</b> · sin tarjeta</p>
+      <ol>
+        <li><span>Abre <b>Banco Pichincha</b> → <b>De Una</b> → <b>Escanear QR</b>.</span></li>
+        <li><span>Escanea este código y paga el <b>monto de tu plan</b>.</span></li>
+        <li><span>Envía el <b>comprobante</b>, tu <b>correo Google</b> y el <b>plan</b> a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>.</span></li>
+        <li><span>Activamos tu plan en <b>máximo 24 horas hábiles</b>.</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
 
 <script>
   // Catálogo INDIVIDUAL UNIFORME (mismo precio para TODO docente, sin importar su universidad).
@@ -190,5 +133,6 @@
   });
   render();
 </script>
+<script defer src="/nx/sitio.js"></script>
 </body>
 </html>

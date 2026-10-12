@@ -5,449 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>NEXBYTE.pro — Automatiza. Escala. Evoluciona.</title>
-<meta name="description" content="Desarrollo de software y automatizacion de procesos empresariales. Soluciones tech a medida en Ecuador.">
+<meta name="description" content="Desarrollo de software y automatización de procesos empresariales. Soluciones tech a medida en Ecuador.">
+<meta name="theme-color" content="#0a1020">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; color: #E2E8F0; background: #0F172A; overflow-x: hidden; }
-
-  /* ===== NAV ===== */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 20px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .nav-logo { font-size: 22px; font-weight: 900; letter-spacing: 0; color: white; text-decoration: none; }
-  .nav-logo span { color: #22D3EE; }
-  .nav-links { display: flex; gap: 32px; align-items: center; }
-  .nav-links a { color: #94A3B8; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
-  .nav-links a:hover { color: white; }
-  .nav-cta {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white !important; padding: 10px 24px; border-radius: 10px;
-    font-weight: 600 !important; font-size: 13px !important;
-    transition: transform 0.3s, box-shadow 0.3s !important;
-  }
-  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.3); }
-
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 120px 40px 80px;
-    position: relative;
-  }
-  .hero::before {
-    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
-    padding: 8px 20px; border-radius: 50px;
-    font-size: 13px; font-weight: 500; color: #3B82F6;
-    margin-bottom: 30px;
-  }
-  .hero-badge .dot { width: 6px; height: 6px; background: #22D3EE; border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .hero h1 { font-size: 72px; font-weight: 900; line-height: 1.05; color: white; max-width: 800px; margin: 0 auto 24px; letter-spacing: -2px; }
-  .hero h1 .gradient { background: linear-gradient(135deg, #3B82F6, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { font-size: 20px; color: #94A3B8; max-width: 560px; margin: 0 auto 40px; line-height: 1.6; font-weight: 400; }
-  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white; padding: 16px 36px; border-radius: 12px; border: none;
-    font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none;
-    transition: box-shadow 0.2s; display: inline-flex; align-items: center; gap: 10px;
-  }
-  .btn-primary:hover { box-shadow: 0 12px 35px rgba(59,130,246,0.35); }
-  .btn-secondary {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    color: white; padding: 16px 36px; border-radius: 12px;
-    font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none;
-    transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;
-  }
-  .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
-
-  /* ===== SERVICES ===== */
-  .services { padding: 120px 40px; position: relative; }
-  .section-label {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; font-weight: 700; color: #3B82F6;
-    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px;
-  }
-  .section-label .line { width: 30px; height: 2px; background: #3B82F6; }
-  .section-title { font-size: 44px; font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -1px; }
-  .section-desc { font-size: 18px; color: #64748B; max-width: 500px; margin-bottom: 60px; line-height: 1.6; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
-  .service-card {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px; padding: 36px; transition: all 0.4s; position: relative; overflow: hidden;
-  }
-  .service-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(59,130,246,0.3); transform: translateY(-5px); }
-  .service-card::after {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, #3B82F6, #22D3EE, transparent);
-    opacity: 0; transition: opacity 0.4s;
-  }
-  .service-card:hover::after { opacity: 1; }
-  .service-icon {
-    width: 52px; height: 52px; border-radius: 14px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(34,211,238,0.15));
-    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
-  }
-  .service-icon svg { width: 24px; height: 24px; stroke: #3B82F6; fill: none; stroke-width: 2; }
-  .service-card h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 10px; }
-  .service-card p { font-size: 14px; color: #64748B; line-height: 1.7; }
-
-  /* ===== PRODUCT ===== */
-  .product { padding: 44px 40px; scroll-margin-top: 76px; background: linear-gradient(180deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
-  .product-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .product-visual {
-    background: linear-gradient(135deg, #1E293B, #0F172A);
-    border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
-    padding: 40px; position: relative; overflow: visible;
-  }
-  .product-visual::before {
-    content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle at 70% 30%, rgba(59,130,246,0.08), transparent 50%);
-    pointer-events: none;
-  }
-  .product-mockup {
-    background: #0F172A; border-radius: 16px; padding: 24px;
-    border: 1px solid rgba(255,255,255,0.06); position: relative;
-  }
-  .mockup-bar { display: flex; gap: 6px; margin-bottom: 16px; }
-  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .mockup-dot:nth-child(1) { background: #EF4444; }
-  .mockup-dot:nth-child(2) { background: #F59E0B; }
-  .mockup-dot:nth-child(3) { background: #22C55E; }
-  .mockup-content { display: flex; flex-direction: column; gap: 10px; }
-  .mockup-line { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.06); }
-  .mockup-line:nth-child(1) { width: 60%; background: linear-gradient(90deg, rgba(59,130,246,0.3), rgba(34,211,238,0.3)); }
-  .mockup-line:nth-child(2) { width: 80%; }
-  .mockup-line:nth-child(3) { width: 45%; }
-  .mockup-line:nth-child(4) { width: 70%; background: rgba(34,211,238,0.15); }
-  .mockup-line:nth-child(5) { width: 55%; }
-  .mockup-badge {
-    position: absolute; bottom: -12px; right: -12px;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    border-radius: 12px; padding: 12px 18px;
-    font-size: 11px; font-weight: 700; color: white;
-    box-shadow: 0 8px 25px rgba(59,130,246,0.3);
-  }
-  .product-info h2 { font-size: 30px; font-weight: 800; color: white; margin-bottom: 8px; line-height: 1.15; }
-  .product-info .highlight { color: #22D3EE; }
-  .product-info > p { font-size: 15px; color: #94A3B8; line-height: 1.55; margin-bottom: 14px; }
-  .product-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 22px; margin-bottom: 16px; }
-  .product-features li {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 15px; color: #CBD5E1; font-weight: 500;
-  }
-  .feature-check {
-    width: 24px; height: 24px; border-radius: 8px;
-    background: rgba(34,211,238,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .feature-check svg { width: 14px; height: 14px; stroke: #22D3EE; fill: none; stroke-width: 2.5; }
-
-  /* ===== STATS ===== */
-  .stats { padding: 80px 40px; }
-  .stats-grid { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
-  .stat-number { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, #3B82F6, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .stat-label { font-size: 14px; color: #64748B; margin-top: 4px; }
-
-  /* ===== CTA ===== */
-  .cta { padding: 120px 40px; text-align: center; }
-  .cta-box {
-    max-width: 700px; margin: 0 auto;
-    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(34,211,238,0.05));
-    border: 1px solid rgba(59,130,246,0.15);
-    border-radius: 28px; padding: 60px 50px;
-  }
-  .cta-box h2 { font-size: 36px; font-weight: 800; color: white; margin-bottom: 16px; }
-  .cta-box p { font-size: 16px; color: #94A3B8; margin-bottom: 36px; line-height: 1.6; }
-
-  /* ===== FOOTER ===== */
-  footer {
-    padding: 60px 40px 30px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-  .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 40px; }
-  .footer-brand .logo { font-size: 20px; font-weight: 900; letter-spacing: 0; color: white; margin-bottom: 8px; }
-  .footer-brand .logo span { color: #22D3EE; }
-  .footer-brand p { font-size: 13px; color: #64748B; max-width: 280px; line-height: 1.6; }
-  .footer-col h4 { font-size: 12px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
-  .footer-col a { display: block; font-size: 14px; color: #64748B; text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
-  .footer-col a:hover { color: #22D3EE; }
-  .footer-bottom {
-    max-width: 1100px; margin: 40px auto 0;
-    padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
-    display: flex; justify-content: space-between;
-    font-size: 12px; color: #475569;
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 40px; }
-    .hero { padding: 100px 24px 60px; }
-    .hero p { font-size: 16px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .product-container { grid-template-columns: 1fr; gap: 40px; }
-    .stats-grid { grid-template-columns: 1fr; gap: 30px; }
-    .nav-links { display: none; }
-    nav { padding: 16px 24px; }
-    .services { padding: 80px 24px; }
-    .product { padding: 80px 24px; }
-    .cta-box { padding: 40px 24px; }
-    .footer-content { flex-direction: column; gap: 20px; text-align: center; }
-  }
-  @media (max-width: 480px) {
-    nav { padding: 12px 16px; }
-    .hero { padding: 80px 16px 50px; }
-    .hero h1 { font-size: 30px; line-height: 1.2; }
-    .hero p { font-size: 14px; }
-    .hero-buttons { flex-direction: column; width: 100%; }
-    .btn-primary, .btn-secondary { width: 100%; justify-content: center; text-align: center; }
-    .service-card { padding: 24px; }
-    .services { padding: 60px 16px; }
-    .product { padding: 60px 16px; }
-    .product-container { gap: 30px; }
-    .stat-number { font-size: 32px; }
-    .stat-label { font-size: 12px; }
-    .cta-box { padding: 32px 16px; }
-    .cta-box h2 { font-size: 24px; }
-    .cta-box p { font-size: 14px; }
-    footer { padding: 24px 16px; }
-    .footer-content { font-size: 11px; }
-  }
-
-  /* ===== Logo v4 NEXBYTE.pro — X palpitante ===== */
-  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
-  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} } 20% {fill:#E0F7FA;} 40% {fill:#FFFFFF;} 60% {fill:#F3E8FF;} 80% {fill:#FFF5E1;} } 50% {filter:drop-shadow(0 0 4px rgba(255,255,255,0.8)) drop-shadow(0 0 8px rgba(224,247,250,0.4));} }
-  .nx-brand { display: inline-flex; align-items: center; line-height: 1; letter-spacing: -0.5px; }
-  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
-  .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }</style>
-  <link rel="stylesheet" href="/nx-logo.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nx-logo.css">
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo nx-brand"> NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span>
-  </a>
-  <div class="nav-links">
-    <a href="#servicios">Servicios</a>
-    <a href="#producto">Producto</a>
-    <a href="#universidades">Planes y precios</a>
-    <a href="#contacto">Contacto</a>
-    <a href="mailto:vargasmadrian@gmail.com" class="nav-cta">Hablemos</a>
+<!-- BARRA -->
+<nav class="barra con-menu" aria-label="Principal">
+  <div class="caja barra-in">
+    <a href="#" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+    <div class="menu" id="menu">
+      <a href="#servicios">Servicios</a>
+      <a href="#producto">Producto</a>
+      <a href="#universidades">Planes y precios</a>
+      <a href="#contacto">Contacto</a>
+      <a href="mailto:vargasmadrian@gmail.com" class="boton chico">Hablemos
+        <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+    </div>
+    <button class="abre-menu" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <div class="hero-badge">
-      <span class="dot"></span>
-      Desarrollo de software en América
-    </div>
-    <h1>Software que <span class="gradient">automatiza</span> tu negocio</h1>
-    <p>Desarrollamos soluciones tecnologicas a medida que eliminan procesos manuales, reducen costos y escalan tu operacion.</p>
-    <div class="hero-buttons">
-      <a href="mailto:vargasmadrian@gmail.com" class="btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        Solicitar cotizacion
-      </a>
-      <a href="#servicios" class="btn-secondary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m12 8 4 4-4 4M8 12h8"/></svg>
-        Ver servicios
-      </a>
-    </div>
-  </div>
-</section>
+<!-- PORTADA -->
+<header class="portada oscuro" data-seccion="portada">
+  <canvas class="matriz" aria-hidden="true"></canvas>
+  <div class="caja portada-in">
+    <p class="rotulo mono" data-ver><span class="byte" data-n="1"></span> <b>Desarrollo de software en América</b></p>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-grid">
-    <div>
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Software a medida</div>
-    </div>
-    <div>
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Sistemas automatizados</div>
-    </div>
-    <div>
-      <div class="stat-number">IA</div>
-      <div class="stat-label">Inteligencia artificial integrada</div>
-    </div>
-  </div>
-</section>
+    <h1 data-ver="titulo">
+      <span class="l"><span>Software que</span></span>
+      <span class="l" style="--i:1"><span><em>automatiza</em><svg class="trazo" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M1 4C24 1 62 1 99 3"/></svg></span></span>
+      <span class="l" style="--i:2"><span>tu negocio</span></span>
+    </h1>
 
-<!-- SERVICES -->
-<section class="services" id="servicios">
-  <div style="max-width: 1100px; margin: 0 auto;">
-    <div class="section-label"><span class="line"></span> SERVICIOS</div>
-    <div class="section-title">Soluciones que transforman</div>
-    <div class="section-desc">Tecnologia de vanguardia adaptada a las necesidades reales de tu empresa.</div>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    <div>
+      <div class="portada-pie">
+        <p class="bajada" data-ver style="--i:4">Desarrollamos soluciones tecnológicas a medida que eliminan procesos manuales, reducen costos y escalan tu operación.</p>
+        <div class="fila-botones" data-ver style="--i:5">
+          <a href="mailto:vargasmadrian@gmail.com" class="boton azul">Solicitar cotización
+            <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+          <a href="#servicios" class="boton linea">Ver servicios</a>
         </div>
+      </div>
+
+      <!-- CIFRAS -->
+      <div class="cifras" data-ver style="--i:6;margin-top:clamp(24px,4vh,44px)">
+        <div class="cifra"><b>100%</b><span>Software a medida</span></div>
+        <div class="cifra"><b>24/7</b><span>Sistemas automatizados</span></div>
+        <div class="cifra"><b>IA</b><span>Inteligencia artificial integrada</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- LEMA -->
+<div class="cinta-lema" aria-hidden="true"><div>
+  <span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span>
+  <span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span><span>Automatiza</span><span>Escala</span><span>Evoluciona</span>
+</div></div>
+
+<!-- SERVICIOS -->
+<section class="bloque" id="servicios" data-seccion="servicios">
+  <div class="caja dos">
+    <div class="fija">
+      <p class="rotulo mono" data-ver><span class="byte" data-n="2"></span> <b>Servicios</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Soluciones</span></span><span class="l" style="--i:1"><span>que <em>transforman</em></span></span></h2>
+      <p class="bajada" data-ver style="--i:2">Tecnología de vanguardia adaptada a las necesidades reales de tu empresa.</p>
+    </div>
+
+    <ul class="lista-serv">
+      <li class="serv" data-ver>
+        <span class="n mono">01</span><i data-g="codigo"></i>
         <h3>Software a Medida</h3>
-        <p>Aplicaciones web y moviles disenadas desde cero para resolver los desafios especificos de tu negocio.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-        </div>
-        <h3>Automatizacion</h3>
+        <p>Aplicaciones web y móviles diseñadas desde cero para resolver los desafíos específicos de tu negocio.</p>
+      </li>
+      <li class="serv" data-ver>
+        <span class="n mono">02</span><i data-g="ciclo"></i>
+        <h3>Automatización</h3>
         <p>Eliminamos tareas manuales y repetitivas con flujos inteligentes, bots y procesos automatizados.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-        </div>
+      </li>
+      <li class="serv" data-ver>
+        <span class="n mono">03</span><i data-g="chispa"></i>
         <h3>Inteligencia Artificial</h3>
-        <p>Soluciones con IA para analisis de datos, generacion de contenido y toma de decisiones automatizada.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <h3>Integracion de Sistemas</h3>
+        <p>Soluciones con IA para análisis de datos, generación de contenido y toma de decisiones automatizada.</p>
+      </li>
+      <li class="serv" data-ver>
+        <span class="n mono">04</span><i data-g="nodos"></i>
+        <h3>Integración de Sistemas</h3>
         <p>Conectamos tus plataformas existentes (ERP, CRM, LMS, APIs) en un ecosistema unificado y eficiente.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        </div>
-        <h3>Consultoria Tech</h3>
-        <p>Asesoramos en estrategia tecnologica, arquitectura de software y transformacion digital de tu empresa.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3>Extensiones & Plugins</h3>
+      </li>
+      <li class="serv" data-ver>
+        <span class="n mono">05</span><i data-g="brujula"></i>
+        <h3>Consultoría Tech</h3>
+        <p>Asesoramos en estrategia tecnológica, arquitectura de software y transformación digital de tu empresa.</p>
+      </li>
+      <li class="serv" data-ver>
+        <span class="n mono">06</span><i data-g="pieza"></i>
+        <h3>Extensiones &amp; Plugins</h3>
         <p>Desarrollamos extensiones de navegador y plugins que potencian herramientas existentes con funcionalidades a medida.</p>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- PRODUCT -->
-<section class="product" id="producto">
-  <div class="product-container">
-    <div class="product-visual" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:transparent;border:none;">
-      <img src="/logo-extension.png" alt="Asistente de Aulas Virtuales (AAVi)" style="width:170px;height:auto;margin-bottom:20px;filter:drop-shadow(0 8px 30px rgba(59,130,246,0.25));">
-      <h3 style="font-size:24px;font-weight:800;color:white;margin-bottom:8px;text-align:center;">Asistente de Aulas Virtuales</h3>
-      <p style="font-size:15px;color:#94A3B8;text-align:center;margin:0;">Moodle Virtual Classroom Automation</p>
-      <span style="display:inline-block;margin-top:14px;padding:5px 16px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);border-radius:50px;font-size:14px;font-weight:800;letter-spacing:1.5px;color:#22D3EE;">AAVi</span>
-    </div>
+<!-- PRODUCTO -->
+<section class="bloque oscuro" id="producto" data-seccion="producto">
+  <div class="caja producto-rej">
+    <div>
+      <p class="rotulo mono" data-ver><span class="byte" data-n="3"></span> <b>Producto</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Generador de Aulas</span></span><span class="l" style="--i:1"><span><em>Virtuales</em></span></span></h2>
+      <p class="bajada" data-ver style="--i:2">Extensión de navegador que automatiza la configuración completa de aulas Moodle con inteligencia artificial. Diseñada para docentes universitarios.</p>
+      <p class="sello mono" data-ver style="--i:3">Empieza gratis &mdash; 2 intentos por acción</p>
 
-    <div class="product-info">
-      <div class="section-label"><span class="line"></span> PRODUCTO</div>
-      <h2>Generador de Aulas <span class="highlight">Virtuales</span></h2>
-      <p>Extension de navegador que automatiza la configuracion completa de aulas Moodle con inteligencia artificial. Disenada para docentes universitarios.</p>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);color:#22C55E;padding:6px 14px;border-radius:50px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">
-        <span style="width:6px;height:6px;background:#22C55E;border-radius:50%;"></span>
-        Empieza gratis &mdash; 2 intentos por acci&oacute;n
-      </div>
-      <ul class="product-features">
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          Plan Gratuito al registrarte &mdash; sin tarjeta
-        </li>
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          Configuracion de aulas con IA en minutos
-        </li>
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          Generacion automatica de banners profesionales
-        </li>
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          Importacion inteligente de silabos desde PDF
-        </li>
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          Creacion de tareas, cuestionarios y rubricas
-        </li>
-        <li>
-          <div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          +100 preguntas Aiken generadas automaticamente
-        </li>
+      <ul class="checks" data-ver style="--i:4">
+        <li><i class="chico" data-g="ok"></i> Plan Gratuito al registrarte &mdash; sin tarjeta</li>
+        <li><i class="chico" data-g="ok"></i> Configuración de aulas con IA en minutos</li>
+        <li><i class="chico" data-g="ok"></i> Generación automática de banners profesionales</li>
+        <li><i class="chico" data-g="ok"></i> Importación inteligente de sílabos desde PDF</li>
+        <li><i class="chico" data-g="ok"></i> Creación de tareas, cuestionarios y rúbricas</li>
+        <li><i class="chico" data-g="ok"></i> +100 preguntas Aiken generadas automáticamente</li>
       </ul>
-      <div id="universidades" style="margin-top:8px;padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;scroll-margin-top:90px;">
-        <p style="font-size:13px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;">Para <span style="color:#22D3EE;">cualquier universidad con Moodle</span></p>
-        <a href="/aulas/" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 18px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);border-radius:10px;text-decoration:none;transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(34,211,238,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-          <span style="font-size:15px;color:white;font-weight:700;">Generador de Aulas Virtuales</span>
-          <span style="font-size:13px;color:#22D3EE;font-weight:700;white-space:nowrap;">Ver cómo funciona &rarr;</span>
+    </div>
+
+    <aside class="ficha" data-ver style="--i:2">
+      <div class="ficha-arriba">
+        <img src="/nx/buho.png" alt="Asistente de Aulas Virtuales (AAVi)" width="296" height="296" loading="lazy">
+        <h3>Asistente de Aulas Virtuales</h3>
+        <p>Moodle Virtual Classroom Automation</p>
+        <span class="mono">AAVi</span>
+      </div>
+      <div class="ficha-abajo" id="universidades">
+        <p class="mono">Para <b>cualquier universidad con Moodle</b></p>
+        <a href="/aulas/" class="ficha-ir">
+          <b>Generador de Aulas Virtuales</b>
+          <span>Ver cómo funciona <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></span>
         </a>
-        <p style="font-size:11px;color:#64748B;margin:12px 0 0;line-height:1.4;">
-          Funciona sobre tu Moodle institucional, sin instalar nada en el servidor de tu universidad.
-        </p>
+        <small>Funciona sobre tu Moodle institucional, sin instalar nada en el servidor de tu universidad.</small>
       </div>
+    </aside>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="bloque contacto" id="contacto" data-seccion="contacto">
+  <div class="caja">
+    <p class="rotulo mono" data-ver style="margin-bottom:26px"><span class="byte" data-n="4"></span> <b>Contacto</b></p>
+    <h2 data-ver="titulo"><span class="l"><span>¿Tienes un proceso</span></span><span class="l" style="--i:1"><span>que <em>automatizar?</em></span></span></h2>
+    <div class="contacto-pie">
+      <p class="bajada" data-ver>Cuéntanos tu idea y te ayudamos a convertirla en software. Primera consulta sin costo.</p>
+      <a href="mailto:soporte@nexbyte.pro" class="correo-grande" data-ver style="--i:1">soporte@nexbyte.pro
+        <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta" id="contacto">
-  <div class="cta-box">
-    <h2>Tienes un proceso que automatizar?</h2>
-    <p>Cuentanos tu idea y te ayudamos a convertirla en software. Primera consulta sin costo.</p>
-    <a href="mailto:soporte@nexbyte.pro" class="btn-primary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-      soporte@nexbyte.pro
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-brand">
-      <div class="logo nx-brand"> NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span>
+<!-- PIE -->
+<footer class="pie oscuro" data-seccion="pie">
+  <div class="caja">
+    <div class="pie-rej">
+      <div>
+        <div class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></div>
+        <p class="pie-sobre">Software development &amp; business process automation.<br>Desarrollo de software y automatización de procesos empresariales.</p>
       </div>
-      <p>Software development &amp; business process automation.<br>Desarrollo de software y automatización de procesos empresariales.</p>
+      <div class="pie-col">
+        <h4>Servicios</h4>
+        <a href="#servicios">Software a medida</a>
+        <a href="#servicios">Automatización</a>
+        <a href="#servicios">Inteligencia artificial</a>
+        <a href="#servicios">Consultoría tech</a>
+      </div>
+      <div class="pie-col">
+        <h4>Producto</h4>
+        <a href="#producto">Generador de Aulas</a>
+        <a href="#universidades">Planes y precios</a>
+      </div>
+      <div class="pie-col">
+        <h4>Contacto</h4>
+        <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>
+        <a href="/terminos">Términos de uso</a>
+        <a href="/privacidad">Política de privacidad</a>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Servicios</h4>
-      <a href="#servicios">Software a medida</a>
-      <a href="#servicios">Automatizacion</a>
-      <a href="#servicios">Inteligencia artificial</a>
-      <a href="#servicios">Consultoria tech</a>
+    <div class="pie-fin">
+      <span>&copy; 2026 NEXBYTE.pro. Todos los derechos reservados.</span>
+      <span>América</span>
     </div>
-    <div class="footer-col">
-      <h4>Producto</h4>
-      <a href="#producto">Generador de Aulas</a>
-      <a href="#universidades">Planes y precios</a>
-    </div>
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a>
-      <a href="/terminos">Términos de uso</a>
-      <a href="/privacidad">Política de privacidad</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 NEXBYTE.pro. Todos los derechos reservados.</span>
-    <span>América</span>
   </div>
 </footer>
 
+<script defer src="/nx/sitio.js"></script>
 <script defer src="/notifications.js"></script>
 </body>
 </html>

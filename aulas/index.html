@@ -11,369 +11,249 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nexbyte.pro/aulas/">
 <meta property="og:image" content="https://nexbyte.pro/logo-extension.png">
+<meta name="theme-color" content="#0a1020">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/nx-logo.css">
-<style>
-  :root{
-    --bg:#0A0F1E; --bg-2:#0F172A; --card:#131C31; --line:rgba(255,255,255,.08);
-    --line-soft:rgba(255,255,255,.055); --ink:#F1F5F9; --ink-2:#A9B6CC; --ink-3:#6B7A93;
-    --brand:#3B82F6; --brand-2:#22D3EE; --grad:linear-gradient(120deg,#3B82F6,#22D3EE);
-    --radius:18px; --maxw:1140px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink-2);background:var(--bg);line-height:1.6;
-    overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  ::selection{background:rgba(59,130,246,.35);color:#fff}
-  a{text-decoration:none;color:inherit}
-  h1,h2,h3{color:var(--ink);letter-spacing:-.02em;line-height:1.1}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
-  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.08em;
-    text-transform:uppercase;color:var(--brand-2)}
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2);box-shadow:0 0 12px var(--brand-2);
-    animation:pulse 2.4s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
-  /* NAV */
-  nav{position:sticky;top:0;z-index:50;background:rgba(10,15,30,.72);backdrop-filter:blur(18px) saturate(140%);
-    border-bottom:1px solid var(--line-soft)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-weight:800;color:#fff;font-size:22px}
-  /* El logo real lo pinta /nx-logo.css (clase .nx-brand). Editar ese archivo cambia el logo en TODAS las páginas. */
-  .nav-links{display:flex;align-items:center;gap:30px}
-  .nav-links a{font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
-  .nav-links a:hover{color:#fff}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;border-radius:11px;transition:transform .18s,box-shadow .18s,background .2s;cursor:pointer;white-space:nowrap}
-  .btn-primary{background:var(--grad);color:#fff;padding:12px 22px;font-size:14.5px;box-shadow:0 8px 24px rgba(59,130,246,.28)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(59,130,246,.42)}
-  .btn-ghost{background:rgba(255,255,255,.05);color:var(--ink);padding:12px 22px;font-size:14.5px;border:1px solid var(--line)}
-  .btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(59,130,246,.35)}
-  .btn-sm{padding:10px 18px;font-size:13.5px}
-  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
-
-  /* HERO */
-  .hero{position:relative;padding:84px 0 72px}
-  .hero::before{content:'';position:absolute;inset:-140px 0 auto 0;height:640px;z-index:-1;pointer-events:none;
-    background:radial-gradient(60% 60% at 50% 0,rgba(59,130,246,.16),transparent 70%),
-               radial-gradient(40% 40% at 85% 10%,rgba(34,211,238,.12),transparent 70%)}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-  @media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px;text-align:center}}
-  .hero h1{font-size:clamp(38px,5.4vw,60px);font-weight:900;color:#fff;letter-spacing:-.03em;margin:20px 0 18px}
-  .hero p.lead{font-size:clamp(16px,2vw,19px);color:var(--ink-2);max-width:520px;margin-bottom:30px}
-  @media(max-width:920px){.hero p.lead{margin-inline:auto}}
-  .cta-row{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:26px}
-  @media(max-width:920px){.cta-row{justify-content:center}}
-  .trust{display:flex;flex-wrap:wrap;gap:9px 20px;font-size:13.5px;color:var(--ink-3)}
-  @media(max-width:920px){.trust{justify-content:center}}
-  .trust span{display:inline-flex;align-items:center;gap:7px}
-  .trust svg{color:var(--brand-2);flex-shrink:0}
-
-  /* PRODUCT MOCKUP */
-  .mock{background:linear-gradient(180deg,#101a30,#0d1526);border:1px solid var(--line);border-radius:20px;
-    box-shadow:0 40px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(59,130,246,.06);overflow:hidden;position:relative}
-  .mock::after{content:'';position:absolute;inset:0;border-radius:20px;pointer-events:none;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
-  .mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line-soft);
-    background:rgba(255,255,255,.02)}
-  .mock-bar i{width:11px;height:11px;border-radius:50%;background:#33405c;display:block}
-  .mock-url{margin-left:10px;font-size:11.5px;color:var(--ink-3);background:rgba(0,0,0,.25);padding:5px 12px;
-    border-radius:7px;font-family:ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .mock-body{padding:18px}
-  .mock-banner{background:var(--grad);border-radius:12px;padding:16px 18px;color:#fff;margin-bottom:16px;
-    display:flex;align-items:center;justify-content:space-between}
-  .mock-banner b{font-size:15px;display:block}.mock-banner small{opacity:.85;font-size:11.5px}
-  .mock-banner .pill{background:rgba(255,255,255,.2);border-radius:20px;padding:5px 11px;font-size:11px;font-weight:700}
-  .rda{background:rgba(255,255,255,.025);border:1px solid var(--line-soft);border-radius:11px;padding:12px 14px;margin-bottom:10px}
-  .rda-h{font-size:12px;font-weight:800;color:var(--brand-2);letter-spacing:.05em;margin-bottom:9px}
-  .res{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-2);padding:6px 0}
-  .res .ic{width:26px;height:26px;border-radius:7px;background:rgba(59,130,246,.12);display:grid;place-items:center;font-size:13px;flex-shrink:0}
-  .float-badge{position:absolute;right:16px;bottom:16px;background:#0d1526;border:1px solid var(--line);
-    border-radius:13px;padding:11px 15px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 44px -14px rgba(0,0,0,.8)}
-  .float-badge .ic{width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;font-size:17px}
-  .float-badge b{color:#fff;font-size:13px;display:block}.float-badge small{color:var(--ink-3);font-size:11px}
-  @media(max-width:520px){.float-badge{display:none}}
-
-  /* SECTIONS */
-  section.blk{padding:88px 0}
-  .sec-head{max-width:620px;margin:0 auto 52px;text-align:center}
-  .sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;color:#fff;margin:14px 0 12px}
-  .sec-head p{font-size:16.5px;color:var(--ink-2)}
-
-  /* STATS STRIP */
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
-    border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden}
-  .stat{background:var(--bg-2);padding:30px 24px;text-align:center}
-  .stat b{display:block;font-size:34px;font-weight:900;color:#fff;letter-spacing:-.03em}
-  .stat b.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .stat span{font-size:13.5px;color:var(--ink-3)}
-  @media(max-width:640px){.stats{grid-template-columns:1fr}}
-
-  /* FEATURES */
-  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-  @media(max-width:760px){.features{grid-template-columns:1fr}}
-  .feat{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:26px 24px;
-    transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
-  .feat:hover{transform:translateY(-3px);border-color:rgba(59,130,246,.3)}
-  .feat .fic{width:46px;height:46px;border-radius:12px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);
-    display:grid;place-items:center;font-size:22px;margin-bottom:16px}
-  .feat h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
-  .feat p{font-size:14.5px;color:var(--ink-2)}
-  .feat .step{position:absolute;top:20px;right:22px;font-size:12px;font-weight:800;color:var(--ink-3)}
-
-  /* TIME COMPARE */
-  .compare{max-width:760px;margin:0 auto;display:grid;gap:16px}
-  .bar{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px 22px}
-  .bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .bar-top .lbl{font-weight:700;color:#fff;font-size:15px;display:flex;align-items:center;gap:9px}
-  .bar-top .val{font-weight:900;font-size:20px;color:#fff}
-  .track{height:12px;border-radius:20px;background:rgba(255,255,255,.06);overflow:hidden}
-  .fill{height:100%;border-radius:20px}
-  .fill.slow{width:100%;background:linear-gradient(90deg,#64748b,#94a3b8)}
-  .fill.fast{width:8.3%;background:var(--grad);box-shadow:0 0 18px rgba(34,211,238,.5)}
-  .tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.04em}
-  .tag.man{background:rgba(148,163,184,.14);color:#cbd5e1}
-  .tag.ext{background:rgba(34,211,238,.14);color:var(--brand-2)}
-
-  /* PRICING PREVIEW */
-  .price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:820px;margin:0 auto}
-  @media(max-width:680px){.price-grid{grid-template-columns:1fr}}
-  .pcard{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px 26px;position:relative}
-  .pcard.reco{border-color:rgba(34,211,238,.4);box-shadow:0 0 0 1px rgba(34,211,238,.2),0 24px 60px -30px rgba(34,211,238,.5)}
-  .pcard .reco-tag{position:absolute;top:-11px;left:26px;background:var(--grad);color:#fff;font-size:11px;font-weight:800;
-    padding:5px 13px;border-radius:20px;letter-spacing:.04em}
-  .pcard .pn{font-size:15px;font-weight:700;color:#fff}
-  .pcard .pd{font-size:13px;color:var(--ink-3);margin-bottom:16px}
-  .pcard .amt{font-size:42px;font-weight:900;color:#fff;letter-spacing:-.03em}
-  .pcard .amt span{font-size:15px;font-weight:600;color:var(--ink-3);letter-spacing:0}
-  .pcard ul{list-style:none;margin:18px 0 22px;display:grid;gap:10px}
-  .pcard li{font-size:14px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start}
-  .pcard li svg{color:var(--brand-2);flex-shrink:0;margin-top:3px}
-  .pcard .btn{width:100%;justify-content:center}
-  .price-note{text-align:center;margin-top:22px;font-size:13.5px;color:var(--ink-3)}
-  .price-note a{color:var(--brand-2);font-weight:600}
-
-  /* TESTIMONIALS */
-  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:860px){.quotes{grid-template-columns:1fr}}
-  .quote{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);padding:26px 24px}
-  .quote .stars{color:var(--brand-2);font-size:14px;margin-bottom:12px;letter-spacing:2px}
-  .quote p{font-size:14.5px;color:var(--ink);margin-bottom:18px}
-  .quote .who{display:flex;align-items:center;gap:11px}
-  .quote .av{width:38px;height:38px;border-radius:50%;background:var(--grad);display:grid;place-items:center;
-    color:#fff;font-weight:800;font-size:15px}
-  .quote .who b{color:#fff;font-size:13.5px;display:block}.quote .who small{color:var(--ink-3);font-size:12px}
-
-  /* FINAL CTA */
-  .final{position:relative;text-align:center;padding:96px 0;overflow:hidden}
-  .final::before{content:'';position:absolute;inset:0;z-index:-1;
-    background:radial-gradient(60% 100% at 50% 100%,rgba(59,130,246,.18),transparent 70%)}
-  .final h2{font-size:clamp(30px,4.4vw,46px);font-weight:900;color:#fff;margin-bottom:16px}
-  .final p{font-size:17px;color:var(--ink-2);max-width:520px;margin:0 auto 30px}
-  .final .cta-row{justify-content:center}
-  .final .fine{margin-top:20px;font-size:13px;color:var(--ink-3)}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--line-soft);padding:52px 0 34px;background:#0a0f1e}
-  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px;margin-bottom:34px}
-  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
-  .foot-grid h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.03em}
-  .foot-grid a{display:block;font-size:13.5px;color:var(--ink-3);margin-bottom:9px;transition:color .2s}
-  .foot-grid a:hover{color:var(--brand-2)}
-  .foot-about{font-size:13.5px;color:var(--ink-3);max-width:280px;margin-top:12px}
-  .foot-bot{border-top:1px solid var(--line-soft);padding-top:22px;display:flex;justify-content:space-between;
-    flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--ink-3)}
-</style>
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<nav><div class="wrap nav-in">
-  <a href="/" class="brand nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
-  <div class="nav-links">
-    <a href="#como">Cómo funciona</a>
-    <a href="#precios">Planes</a>
-    <a href="/faq/">FAQ</a>
-    <a href="/planes/" class="btn btn-primary btn-sm">Ver planes</a>
-  </div>
-</div></nav>
-
-<!-- HERO -->
-<header class="hero"><div class="wrap hero-grid">
-  <div>
-    <span class="eyebrow"><span class="dot"></span> Para cualquier universidad con Moodle</span>
-    <h1>Tu aula Moodle lista en <span class="grad">15 minutos</span>, no en 3 horas.</h1>
-    <p class="lead">Sube tu sílabo en PDF y la extensión arma el banner, los recursos por RDA, las tareas
-      y las evaluaciones con IA. Tú solo revisas y apruebas.</p>
-    <div class="cta-row">
-      <a href="/planes/" class="btn btn-primary">Ver planes y precios →</a>
-      <a href="#como" class="btn btn-ghost">Cómo funciona</a>
+<nav class="barra con-menu" aria-label="Principal">
+  <div class="caja barra-in">
+    <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+    <div class="menu" id="menu">
+      <a href="#como">Cómo funciona</a>
+      <a href="#precios">Planes</a>
+      <a href="/faq/">FAQ</a>
+      <a href="/planes/" class="boton chico">Ver planes
+        <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
     </div>
-    <div class="trust">
-      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Con tu correo institucional</span>
-      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Se instala en 1 clic</span>
-      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Sobre tu Moodle actual</span>
+    <button class="abre-menu" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</nav>
+
+<!-- PORTADA -->
+<header class="portada-aulas oscuro" data-seccion="portada">
+  <div class="caja aulas-rej">
+    <div>
+      <p class="rotulo mono" data-ver><span class="byte" data-n="1"></span> <b>Para cualquier universidad con Moodle</b></p>
+      <h1 data-ver="titulo">
+        <span class="l"><span>Tu aula Moodle</span></span>
+        <span class="l" style="--i:1"><span>lista en <em>15 minutos</em>,</span></span>
+        <span class="l" style="--i:2"><span>no en 3 horas.</span></span>
+      </h1>
+      <p class="bajada" data-ver style="--i:3">Sube tu sílabo en PDF y la extensión arma el banner, los recursos por RDA, las tareas
+        y las evaluaciones con IA. Tú solo revisas y apruebas.</p>
+      <div class="fila-botones" data-ver style="--i:4">
+        <a href="/planes/" class="boton azul">Ver planes y precios
+          <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+        <a href="#como" class="boton linea">Cómo funciona</a>
+      </div>
+      <ul class="garantias" data-ver style="--i:5">
+        <li><i class="chico" data-g="ok"></i> Con tu correo institucional</li>
+        <li><i class="chico" data-g="ok"></i> Se instala en 1 clic</li>
+        <li><i class="chico" data-g="ok"></i> Sobre tu Moodle actual</li>
+      </ul>
+    </div>
+
+    <div class="navegador" data-ver style="--i:2">
+      <div class="nav-franja"><i></i><i></i><i></i><span>tu-universidad.edu.ec/course/view.php?id=…</span></div>
+      <div class="nav-cuerpo arma">
+        <div class="aula-banner" style="--p:0">
+          <div><b>Cálculo I</b><small>Generado con NEXBYTE</small></div>
+          <span class="mono"><i class="chico" data-g="chispa"></i> IA</span>
+        </div>
+        <div class="rda" style="--p:1">
+          <h4>RDA 1</h4>
+          <ul class="arma">
+            <li style="--p:2"><i class="chico" data-g="video"></i> Video de YouTube</li>
+            <li style="--p:3"><i class="chico" data-g="barras"></i> PPT — Tema 1.1</li>
+            <li style="--p:4"><i class="chico" data-g="hoja"></i> Tarea con rúbrica IA</li>
+          </ul>
+        </div>
+        <div class="rda" style="--p:5">
+          <h4>RDA 2</h4>
+          <ul class="arma">
+            <li style="--p:6"><i class="chico" data-g="capas"></i> Genially interactivo</li>
+            <li style="--p:7"><i class="chico" data-g="lista"></i> Evaluación con IA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="aula-lista"><img src="/nx/buho.png" alt="" width="38" height="38" style="border-radius:24%"><div><b>Aula creada</b><small data-crono="872">en 14 min 32 s</small></div></div>
     </div>
   </div>
+</header>
 
-  <div class="mock">
-    <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">tu-universidad.edu.ec/course/view.php?id=…</span></div>
-    <div class="mock-body">
-      <div class="mock-banner">
-        <div><b>Cálculo I</b><small>Generado con NEXBYTE</small></div>
-        <span class="pill">✦ IA</span>
-      </div>
-      <div class="rda">
-        <div class="rda-h">RDA 1</div>
-        <div class="res"><span class="ic">🎬</span> Video de YouTube</div>
-        <div class="res"><span class="ic">📊</span> PPT — Tema 1.1</div>
-        <div class="res"><span class="ic">📝</span> Tarea con rúbrica IA</div>
-      </div>
-      <div class="rda">
-        <div class="rda-h">RDA 2</div>
-        <div class="res"><span class="ic">📚</span> Genially interactivo</div>
-        <div class="res"><span class="ic">🧠</span> Evaluación con IA</div>
-      </div>
+<!-- CIFRAS -->
+<section class="bloque corto" data-seccion="cifras" style="padding-bottom:0">
+  <div class="caja">
+    <div class="cifras claras" data-ver>
+      <div class="cifra"><b>15 min</b><span>tiempo medio por aula</span></div>
+      <div class="cifra"><b>10</b><span>aulas por ciclo, un solo plan</span></div>
+      <div class="cifra"><b>4</b><span>tipos de recurso por RDA</span></div>
     </div>
-    <div class="float-badge"><span class="ic">🦉</span><div><b>Aula creada</b><small>en 14 min 32 s</small></div></div>
   </div>
-</div></header>
-
-<!-- STATS -->
-<section class="blk" style="padding-top:20px"><div class="wrap">
-  <div class="stats">
-    <div class="stat"><b class="grad">15 min</b><span>tiempo medio por aula</span></div>
-    <div class="stat"><b>10</b><span>aulas por ciclo, un solo plan</span></div>
-    <div class="stat"><b>4</b><span>tipos de recurso por RDA</span></div>
-  </div>
-</div></section>
+</section>
 
 <!-- CÓMO FUNCIONA -->
-<section class="blk" id="como"><div class="wrap">
-  <div class="sec-head">
-    <span class="eyebrow">Cómo funciona</span>
-    <h2>Todo el trabajo repetitivo, <span class="grad">automatizado</span>.</h2>
-    <p>Cuatro cosas que la extensión hace por ti en cada aula Moodle — tú apruebas.</p>
+<section class="bloque" id="como" data-seccion="como">
+  <div class="caja">
+    <div class="cabeza">
+      <p class="rotulo mono" data-ver><span class="byte" data-n="2"></span> <b>Cómo funciona</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Todo el trabajo repetitivo,</span></span><span class="l" style="--i:1"><span><em>automatizado</em>.</span></span></h2>
+      <p class="bajada" data-ver style="--i:2">Cuatro cosas que la extensión hace por ti en cada aula Moodle — tú apruebas.</p>
+    </div>
+    <ol class="pasos">
+      <li class="paso" data-ver>
+        <div class="paso-arriba"><span class="n">01</span><i data-g="carpeta"></i></div>
+        <h3>Importa la plantilla de tu institución</h3>
+        <p>Sube el archivo <b>.mbz</b> de tu universidad una vez. La extensión crea las secciones General, RDA 1, RDA 2 y RDA 3 en menos de un minuto.</p>
+      </li>
+      <li class="paso" data-ver style="--i:1">
+        <div class="paso-arriba"><span class="n">02</span><i data-g="hoja"></i></div>
+        <h3>Lee tu sílabo con IA</h3>
+        <p>De tu sílabo PDF extrae docente, asignatura, horario, RDAs y contenidos. Genera el banner profesional y las descripciones de cada RDA.</p>
+      </li>
+      <li class="paso" data-ver style="--i:2">
+        <div class="paso-arriba"><span class="n">03</span><i data-g="subir"></i></div>
+        <h3>Sube recursos por RDA</h3>
+        <p>Videos de YouTube, Genially, PowerPoints y PDFs — hasta 3 por slot. Se insertan en la sección "Recursos" del RDA correspondiente.</p>
+      </li>
+      <li class="paso" data-ver style="--i:3">
+        <div class="paso-arriba"><span class="n">04</span><i data-g="chispa"></i></div>
+        <h3>Tareas y evaluaciones con IA</h3>
+        <p>Rúbricas generadas desde el PDF de la tarea y bancos de preguntas Aiken desde tu contenido. Tú editas, apruebas y queda listo.</p>
+      </li>
+    </ol>
   </div>
-  <div class="features">
-    <div class="feat"><span class="step">01</span><div class="fic">📁</div>
-      <h3>Importa la plantilla de tu institución</h3>
-      <p>Sube el archivo <b>.mbz</b> de tu universidad una vez. La extensión crea las secciones General, RDA 1, RDA 2 y RDA 3 en menos de un minuto.</p></div>
-    <div class="feat"><span class="step">02</span><div class="fic">🤖</div>
-      <h3>Lee tu sílabo con IA</h3>
-      <p>De tu sílabo PDF extrae docente, asignatura, horario, RDAs y contenidos. Genera el banner profesional y las descripciones de cada RDA.</p></div>
-    <div class="feat"><span class="step">03</span><div class="fic">📥</div>
-      <h3>Sube recursos por RDA</h3>
-      <p>Videos de YouTube, Genially, PowerPoints y PDFs — hasta 3 por slot. Se insertan en la sección "Recursos" del RDA correspondiente.</p></div>
-    <div class="feat"><span class="step">04</span><div class="fic">✨</div>
-      <h3>Tareas y evaluaciones con IA</h3>
-      <p>Rúbricas generadas desde el PDF de la tarea y bancos de preguntas Aiken desde tu contenido. Tú editas, apruebas y queda listo.</p></div>
-  </div>
-</div></section>
+</section>
 
-<!-- TIME COMPARE -->
-<section class="blk" style="padding-top:0"><div class="wrap">
-  <div class="sec-head">
-    <span class="eyebrow">El antes y el después</span>
-    <h2>Lo que tardabas en una tarde, <span class="grad">en un café</span>.</h2>
-  </div>
-  <div class="compare">
-    <div class="bar">
-      <div class="bar-top"><span class="lbl"><span class="tag man">Manual</span> Armar un aula completa</span><span class="val">3 h</span></div>
-      <div class="track"><div class="fill slow"></div></div>
+<!-- ANTES Y DESPUÉS -->
+<section class="bloque" style="padding-top:0" data-seccion="compara">
+  <div class="caja">
+    <div class="cabeza">
+      <p class="rotulo mono" data-ver><span class="byte" data-n="3"></span> <b>El antes y el después</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Lo que tardabas en una tarde,</span></span><span class="l" style="--i:1"><span><em>en un café</em>.</span></span></h2>
     </div>
-    <div class="bar">
-      <div class="bar-top"><span class="lbl"><span class="tag ext">Con la extensión</span> Armar un aula completa</span><span class="val" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">15 min</span></div>
-      <div class="track"><div class="fill fast"></div></div>
-    </div>
-  </div>
-</div></section>
-
-<!-- PRICING -->
-<section class="blk" id="precios"><div class="wrap">
-  <div class="sec-head">
-    <span class="eyebrow">Planes y precios</span>
-    <h2>Elige tu plan. <span class="grad">Sin sorpresas.</span></h2>
-    <p>Un plan para cada docente. Cancela cuando quieras, mantienes acceso hasta el fin del período.</p>
-  </div>
-  <div class="price-grid">
-    <div class="pcard">
-      <div class="pn">Plan Básico</div>
-      <div class="pd">Generador de aulas + calificación de prueba</div>
-      <div class="amt">$10<span> / mes</span></div>
-      <ul>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Configura tus aulas Moodle completas</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Rúbricas y preguntas con IA</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> 200 calificaciones con IA</li>
-      </ul>
-      <a href="/pagar/?plan=pucese_basico_mensual&amp;price=10" class="btn btn-ghost">Elegir Básico</a>
-    </div>
-    <div class="pcard reco">
-      <span class="reco-tag">RECOMENDADO</span>
-      <div class="pn">Plan Pro</div>
-      <div class="pd">Para calificar todo el semestre con IA</div>
-      <div class="amt">$30<span> / mes</span></div>
-      <ul>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Todo lo del Plan Básico</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> <b style="color:#fff">2.000 calificaciones con IA</b></li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Importación automática de sílabos</li>
-      </ul>
-      <a href="/pagar/?plan=pucese_pro_mensual&amp;price=30" class="btn btn-primary">Elegir Pro</a>
+    <div class="compara" data-ver>
+      <div class="medida">
+        <div class="medida-arriba"><div><span class="mono">Manual</span><p>Armar un aula completa</p></div><b>3 h</b></div>
+        <div class="regla"><i></i></div>
+      </div>
+      <div class="medida rapida">
+        <div class="medida-arriba"><div><span class="mono">Con la extensión</span><p>Armar un aula completa</p></div><b>15 min</b></div>
+        <div class="regla"><i></i></div>
+      </div>
     </div>
   </div>
-  <div class="price-note">¿Prefieres pagar por trimestre? <a href="/planes/">Ver todos los planes y el detalle →</a></div>
-</div></section>
+</section>
 
-<!-- TESTIMONIALS -->
-<section class="blk" style="padding-top:0"><div class="wrap">
-  <div class="sec-head">
-    <span class="eyebrow">Lo que dicen los docentes</span>
-    <h2>Hecho para <span class="grad">docentes</span>, usado por docentes.</h2>
-  </div>
-  <div class="quotes">
-    <div class="quote"><div class="stars">★★★★★</div>
-      <p>"Antes preparaba cada aula en una tarde completa. Ahora termino las 5 que tengo en lo que dura un café — y quedan mejor armadas."</p>
-      <div class="who"><span class="av">S</span><div><b>Docente universitario</b><small>Carrera de Sistemas</small></div></div></div>
-    <div class="quote"><div class="stars">★★★★★</div>
-      <p>"Lo que más me sorprendió fue la rúbrica con IA. Pedí que la generara desde el PDF de la tarea y la sacó clavada. Edité dos cosas y la usé."</p>
-      <div class="who"><span class="av">E</span><div><b>Docente universitaria</b><small>Carrera de Enfermería</small></div></div></div>
-    <div class="quote"><div class="stars">★★★★★</div>
-      <p>"Para todo el ciclo me sale a menos que una pizza y me ahorra tardes enteras. Contraté sin dudarlo. No tengo más que decir."</p>
-      <div class="who"><span class="av">A</span><div><b>Docente universitario</b><small>Carrera de Administración</small></div></div></div>
-  </div>
-</div></section>
-
-<!-- FINAL CTA -->
-<section class="final"><div class="wrap">
-  <h2>Empieza a ahorrar horas <span class="grad">hoy mismo</span>.</h2>
-  <p>Elige tu plan, instala la extensión en un clic y arma tu primera aula esta misma tarde.</p>
-  <div class="cta-row">
-    <a href="/planes/" class="btn btn-primary">Ver planes y precios →</a>
-    <a href="#como" class="btn btn-ghost">Cómo funciona</a>
-  </div>
-  <p class="fine">Sin contratos · Cancela cuando quieras · Instalación en 1 clic · Soporte por email</p>
-</div></section>
-
-<!-- FOOTER -->
-<footer><div class="wrap">
-  <div class="foot-grid">
-    <div>
-      <a href="/" class="brand nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
-      <p class="foot-about">Software a medida y automatización con IA para instituciones educativas en Ecuador.</p>
+<!-- PRECIOS -->
+<section class="bloque" id="precios" style="padding-top:0" data-seccion="precios">
+  <div class="caja">
+    <div class="cabeza centro">
+      <p class="rotulo mono" data-ver><span class="byte" data-n="4"></span> <b>Planes y precios</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Elige tu plan.</span></span><span class="l" style="--i:1"><span><em>Sin sorpresas.</em></span></span></h2>
+      <p class="bajada" data-ver style="--i:2">Un plan para cada docente. Cancela cuando quieras, mantienes acceso hasta el fin del período.</p>
     </div>
-    <div><h4>Producto</h4>
-      <a href="/aulas/">Generador de Aulas</a><a href="/planes/">Planes y precios</a><a href="/faq/">FAQ</a></div>
-    <div><h4>Empresa</h4>
-      <a href="/">Sobre NEXBYTE</a><a href="mailto:soporte@nexbyte.pro">Contacto</a></div>
-    <div><h4>Legal</h4>
-      <a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a></div>
+    <div class="precios" data-ver>
+      <div class="precio">
+        <div class="precio-arriba"><h3>Plan Básico</h3></div>
+        <p>Generador de aulas + calificación de prueba</p>
+        <div class="monto">$10<span> / mes</span></div>
+        <ul>
+          <li><i class="chico" data-g="ok"></i> Configura tus aulas Moodle completas</li>
+          <li><i class="chico" data-g="ok"></i> Rúbricas y preguntas con IA</li>
+          <li><i class="chico" data-g="ok"></i> 200 calificaciones con IA</li>
+        </ul>
+        <a href="/pagar/?plan=pucese_basico_mensual&amp;price=10" class="boton linea todo">Elegir Básico</a>
+      </div>
+      <div class="precio pro">
+        <div class="precio-arriba"><h3>Plan Pro</h3><span class="mono">RECOMENDADO</span></div>
+        <p>Para calificar todo el semestre con IA</p>
+        <div class="monto">$30<span> / mes</span></div>
+        <ul>
+          <li><i class="chico" data-g="ok"></i> Todo lo del Plan Básico</li>
+          <li><i class="chico" data-g="ok"></i> <b>2.000 calificaciones con IA</b></li>
+          <li><i class="chico" data-g="ok"></i> Importación automática de sílabos</li>
+        </ul>
+        <a href="/pagar/?plan=pucese_pro_mensual&amp;price=30" class="boton todo">Elegir Pro
+          <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+    <p class="nota-precio">¿Prefieres pagar por trimestre? <a href="/planes/" class="enlace">Ver todos los planes y el detalle
+      <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a></p>
   </div>
-  <div class="foot-bot">
-    <span>© 2026 NEXBYTE.pro · Hecho en Ecuador</span>
-    <span>🦉 Generador de Aulas Virtuales</span>
-  </div>
-</div></footer>
+</section>
 
+<!-- TESTIMONIOS -->
+<section class="bloque" style="padding-top:0" data-seccion="testimonios">
+  <div class="caja">
+    <div class="cabeza">
+      <p class="rotulo mono" data-ver><span class="byte" data-n="5"></span> <b>Lo que dicen los docentes</b></p>
+      <h2 class="t-2" data-ver="titulo"><span class="l"><span>Hecho para <em>docentes</em>,</span></span><span class="l" style="--i:1"><span>usado por docentes.</span></span></h2>
+    </div>
+    <div class="citas">
+      <figure class="cita" data-ver>
+        <div class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg></div>
+        <blockquote>"Antes preparaba cada aula en una tarde completa. Ahora termino las 5 que tengo en lo que dura un café — y quedan mejor armadas."</blockquote>
+        <figcaption><span class="inicial">S</span><div><b>Docente universitario</b><small>Carrera de Sistemas</small></div></figcaption>
+      </figure>
+      <figure class="cita" data-ver style="--i:1">
+        <div class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg></div>
+        <blockquote>"Lo que más me sorprendió fue la rúbrica con IA. Pedí que la generara desde el PDF de la tarea y la sacó clavada. Edité dos cosas y la usé."</blockquote>
+        <figcaption><span class="inicial">E</span><div><b>Docente universitaria</b><small>Carrera de Enfermería</small></div></figcaption>
+      </figure>
+      <figure class="cita" data-ver style="--i:2">
+        <div class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg><svg viewBox="0 0 10 10"><path d="M5 0l1.3 3.7L10 5 6.3 6.3 5 10 3.7 6.3 0 5l3.7-1.3z"/></svg></div>
+        <blockquote>"Para todo el ciclo me sale a menos que una pizza y me ahorra tardes enteras. Contraté sin dudarlo. No tengo más que decir."</blockquote>
+        <figcaption><span class="inicial">A</span><div><b>Docente universitario</b><small>Carrera de Administración</small></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="bloque cierre oscuro" data-seccion="cierre">
+  <div class="caja">
+    <h2 data-ver="titulo"><span class="l"><span>Empieza a ahorrar</span></span><span class="l" style="--i:1"><span>horas <em>hoy mismo</em>.</span></span></h2>
+    <div class="cierre-pie">
+      <p class="bajada" data-ver>Elige tu plan, instala la extensión en un clic y arma tu primera aula esta misma tarde.</p>
+      <div class="fila-botones" data-ver style="--i:1">
+        <a href="/planes/" class="boton azul">Ver planes y precios
+          <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+        <a href="#como" class="boton linea">Cómo funciona</a>
+      </div>
+    </div>
+    <p class="fino mono" data-ver>Sin contratos · Cancela cuando quieras · Instalación en 1 clic · Soporte por email</p>
+  </div>
+</section>
+
+<!-- PIE -->
+<footer class="pie oscuro" style="border-top:1px solid var(--linea)" data-seccion="pie">
+  <div class="caja">
+    <div class="pie-rej">
+      <div>
+        <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+        <p class="pie-sobre">Software a medida y automatización con IA para instituciones educativas en Ecuador.</p>
+      </div>
+      <div class="pie-col"><h4>Producto</h4>
+        <a href="/aulas/">Generador de Aulas</a><a href="/planes/">Planes y precios</a><a href="/faq/">FAQ</a></div>
+      <div class="pie-col"><h4>Empresa</h4>
+        <a href="/">Sobre NEXBYTE</a><a href="mailto:soporte@nexbyte.pro">Contacto</a></div>
+      <div class="pie-col"><h4>Legal</h4>
+        <a href="/privacidad/">Privacidad</a><a href="/terminos/">Términos</a></div>
+    </div>
+    <div class="pie-fin">
+      <span>© 2026 NEXBYTE.pro · Hecho en Ecuador</span>
+      <span><img src="/nx/buho.png" alt="" width="20" height="20" style="border-radius:24%"> Generador de Aulas Virtuales</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="/nx/sitio.js"></script>
 </body>
 </html>

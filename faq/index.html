@@ -6,289 +6,53 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Preguntas frecuentes &mdash; Generador de Aulas Virtuales | NEXBYTE.pro</title>
 <meta name="description" content="Respuestas a las dudas m&aacute;s comunes sobre el Generador de Aulas Virtuales: producto, pagos, instalaci&oacute;n y soporte.">
+<meta name="theme-color" content="#0a1020">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', sans-serif;
-    color: #E2E8F0;
-    background: #0F172A;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-  }
-
-  /* ===== NAV ===== */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    padding: 18px 32px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .nav-left { display: flex; align-items: center; gap: 14px; }
-  .back-arrow {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 10px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-    color: #94A3B8; text-decoration: none; font-size: 17px;
-    transition: all 0.3s;
-  }
-  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
-  .nav-logo { font-size: 20px; font-weight: 900; color: white; text-decoration: none; }
-  .nav-links { display: flex; gap: 18px; align-items: center; font-size: 13px; }
-  .nav-links a { color: #94A3B8; text-decoration: none; transition: color 0.2s; font-weight: 500; }
-  .nav-links a:hover { color: white; }
-
-  /* ===== HEADER ===== */
-  header.page-header {
-    padding: 60px 24px 30px;
-    text-align: center;
-    max-width: 760px; margin: 0 auto;
-  }
-  header.page-header .badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
-    padding: 7px 16px; border-radius: 50px;
-    font-size: 12px; font-weight: 600; color: #3B82F6;
-    margin-bottom: 18px; letter-spacing: 0.5px; text-transform: uppercase;
-  }
-  header.page-header h1 {
-    font-size: 44px; font-weight: 800; color: white;
-    letter-spacing: -1px; margin-bottom: 14px;
-  }
-  header.page-header h1 .gradient {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  header.page-header p { font-size: 17px; color: #94A3B8; line-height: 1.6; }
-
-  /* ===== SEARCH ===== */
-  .search-wrap {
-    max-width: 600px; margin: 24px auto 0;
-    position: relative;
-  }
-  .search-wrap input {
-    width: 100%; padding: 14px 16px 14px 44px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    color: white; font-size: 15px; font-family: inherit;
-    transition: border-color 0.2s;
-  }
-  .search-wrap input:focus { outline: none; border-color: #22D3EE; }
-  .search-wrap input::placeholder { color: #475569; }
-  .search-wrap .search-icon {
-    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    color: #64748B; font-size: 18px; pointer-events: none;
-  }
-
-  /* ===== TABS (chips) ===== */
-  .tabs {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-    margin: 28px auto 0; max-width: 760px;
-  }
-  .tab-chip {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #94A3B8;
-    padding: 8px 18px; border-radius: 999px;
-    font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s;
-    font-family: inherit;
-  }
-  .tab-chip:hover { color: white; border-color: rgba(34,211,238,0.4); }
-  .tab-chip.active {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white; border-color: transparent;
-  }
-
-  /* ===== MAIN ===== */
-  main {
-    flex: 1;
-    max-width: 780px; margin: 0 auto;
-    padding: 30px 24px 60px;
-    width: 100%;
-  }
-
-  /* ===== SECTION ===== */
-  .faq-section { margin-bottom: 36px; }
-  .faq-section h2 {
-    font-size: 13px; font-weight: 800; color: #22D3EE;
-    letter-spacing: 2px; text-transform: uppercase;
-    margin: 0 0 14px 4px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .faq-section h2 .num {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: rgba(34,211,238,0.15);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 11px; color: #22D3EE;
-  }
-
-  /* ===== FAQ ITEM (acordeón) ===== */
-  details {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  details[open] {
-    border-color: rgba(34,211,238,0.3);
-    background: rgba(255,255,255,0.04);
-  }
-  summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 18px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 16px;
-    font-size: 15px; font-weight: 600; color: white;
-    line-height: 1.45;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary::after {
-    content: '+';
-    flex-shrink: 0;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: rgba(34,211,238,0.12);
-    color: #22D3EE;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: 400;
-    transition: transform 0.2s, background 0.2s;
-  }
-  details[open] summary::after {
-    content: '−';
-    background: rgba(34,211,238,0.2);
-    transform: rotate(180deg);
-  }
-  .answer {
-    padding: 0 24px 22px;
-    font-size: 14px; line-height: 1.65; color: #CBD5E1;
-  }
-  .answer p { margin: 8px 0; }
-  .answer ul, .answer ol { margin: 10px 0 10px 20px; }
-  .answer li { margin: 4px 0; }
-  .answer code {
-    background: #0F172A;
-    color: #22D3EE; padding: 2px 6px; border-radius: 4px;
-    font-family: 'SF Mono', Menlo, monospace;
-    font-size: 12.5px;
-  }
-  .answer a { color: #22D3EE; text-decoration: none; font-weight: 600; }
-  .answer a:hover { text-decoration: underline; }
-  .answer strong { color: white; }
-
-  /* ===== CTA FINAL ===== */
-  .cta-final {
-    max-width: 780px; margin: 50px auto 0;
-    padding: 32px;
-    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,211,238,0.05));
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 20px;
-    text-align: center;
-  }
-  .cta-final h3 { color: white; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-  .cta-final p { color: #94A3B8; font-size: 14px; margin-bottom: 18px; }
-  .cta-final .ctas { display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .cta-final a {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 22px; border-radius: 10px;
-    text-decoration: none; font-size: 14px; font-weight: 700;
-    transition: transform 0.2s;
-  }
-  .cta-final .btn-primary {
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white;
-  }
-  .cta-final .btn-secondary {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: white;
-  }
-  .cta-final a:hover { transform: translateY(-2px); }
-
-  /* ===== FOOTER ===== */
-  footer {
-    text-align: center; padding: 28px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-size: 12px; color: #475569;
-  }
-  footer a { color: #64748B; text-decoration: none; margin: 0 8px; }
-  footer a:hover { color: #22D3EE; }
-
-  /* Logo v4 NEXBYTE.pro — X palpitante (oficial) */
-  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
-  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
-  .nx-brand { display: inline-block; line-height: 1; letter-spacing: -0.5px; }
-  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
-  .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
-
-  /* Mobile */
-  @media (max-width: 600px) {
-    nav { padding: 14px 18px; }
-    .nav-links { display: none; }
-    header.page-header { padding: 36px 16px 20px; }
-    header.page-header h1 { font-size: 30px; }
-    header.page-header p { font-size: 15px; }
-    main { padding: 20px 14px 40px; }
-    summary { padding: 16px 18px; font-size: 14px; }
-    .answer { padding: 0 18px 18px; font-size: 13px; }
-    .tab-chip { padding: 6px 14px; font-size: 12px; }
-  }
-
-  /* Hidden when filtered out */
-  details.hidden, .faq-section.hidden { display: none !important; }
-  .no-results {
-    text-align: center; padding: 40px 20px;
-    color: #64748B; font-size: 14px;
-    display: none;
-  }
-  .no-results.show { display: block; }
-</style>
-  <link rel="stylesheet" href="/nx-logo.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nx-logo.css">
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<nav>
-  <div class="nav-left">
-    <a href="/" class="back-arrow" title="Volver al inicio">&larr;</a>
-    <a href="/" class="nav-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
-  </div>
-  <div class="nav-links">
-    <a href="/planes/">Planes</a>
-    <a href="/instalar/">Instalar</a>
-    <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+<nav class="barra con-menu" aria-label="Principal">
+  <div class="caja barra-in">
+    <div class="barra-izq">
+      <a href="/" class="volver" title="Volver al inicio" aria-label="Volver al inicio"><svg viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+      <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+    </div>
+    <div class="menu" id="menu">
+      <a href="/planes/">Planes</a>
+      <a href="/instalar/">Instalar</a>
+      <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+    </div>
+    <button class="abre-menu" type="button" aria-label="Abrir el men&uacute;" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </nav>
 
-<header class="page-header">
-  <div class="badge"><span>?</span> Preguntas frecuentes</div>
-  <h1>Resolvemos tus <span class="gradient">dudas</span></h1>
-  <p>Todo lo que necesitas saber sobre el Generador de Aulas Virtuales: producto, pagos, instalaci&oacute;n y soporte.</p>
+<header class="cab-pagina" data-seccion="cabecera">
+  <div class="caja">
+    <p class="rotulo mono" data-ver><span class="byte" data-n="1"></span> <b>Preguntas frecuentes</b></p>
+    <h1 data-ver="titulo"><span class="l"><span>Resolvemos</span></span><span class="l" style="--i:1"><span>tus <em>dudas</em></span></span></h1>
+    <p class="bajada" data-ver style="--i:2">Todo lo que necesitas saber sobre el Generador de Aulas Virtuales: producto, pagos, instalaci&oacute;n y soporte.</p>
 
-  <div class="search-wrap">
-    <span class="search-icon">&#128269;</span>
-    <input type="text" id="faq-search" placeholder="Busca una pregunta &mdash; ej. &quot;cancelar&quot;, &quot;factura&quot;, &quot;Chrome&quot;...">
-  </div>
+    <div class="buscador" data-ver style="--i:3">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="11" height="11"/><path d="M13 13l5.5 5.5"/></svg>
+      <input type="text" id="faq-search" aria-label="Buscar una pregunta" placeholder="Busca una pregunta &mdash; ej. &quot;cancelar&quot;, &quot;factura&quot;, &quot;Chrome&quot;...">
+    </div>
 
-  <div class="tabs">
-    <button type="button" class="tab-chip active" data-cat="all">Todas</button>
-    <button type="button" class="tab-chip" data-cat="producto">Producto</button>
-    <button type="button" class="tab-chip" data-cat="pagos">Planes y pagos</button>
-    <button type="button" class="tab-chip" data-cat="instalacion">Instalaci&oacute;n</button>
-    <button type="button" class="tab-chip" data-cat="soporte">Soporte y privacidad</button>
+    <div class="tabs" data-ver style="--i:4">
+      <button type="button" class="tab-chip active" data-cat="all">Todas</button>
+      <button type="button" class="tab-chip" data-cat="producto">Producto</button>
+      <button type="button" class="tab-chip" data-cat="pagos">Planes y pagos</button>
+      <button type="button" class="tab-chip" data-cat="instalacion">Instalaci&oacute;n</button>
+      <button type="button" class="tab-chip" data-cat="soporte">Soporte y privacidad</button>
+    </div>
   </div>
 </header>
 
-<main>
+<main class="caja faq-cuerpo" data-seccion="preguntas">
 
   <!-- ============ PRODUCTO ============ -->
   <section class="faq-section" data-cat="producto">
@@ -534,31 +298,30 @@
 
   <div class="no-results" id="no-results">
     No encontramos preguntas que coincidan con tu b&uacute;squeda.<br>
-    Escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro" style="color:#22D3EE;font-weight:600;">soporte@nexbyte.pro</a> y te respondemos directo.
+    Escr&iacute;benos a <a href="mailto:soporte@nexbyte.pro">soporte@nexbyte.pro</a> y te respondemos directo.
   </div>
 
-  <div class="cta-final">
-    <h3>&iquest;Tu pregunta no est&aacute; aqu&iacute;?</h3>
-    <p>Escr&iacute;benos. Documentamos cada caso real reportado para mejorar este FAQ.</p>
-    <div class="ctas">
-      <a href="mailto:soporte@nexbyte.pro" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Escribir a soporte
-      </a>
-      <a href="/planes/" class="btn-secondary">
-        Ver planes
-      </a>
+  <div class="cta-final oscuro" data-ver data-seccion="cierre">
+    <div>
+      <h3>&iquest;Tu pregunta no est&aacute; aqu&iacute;?</h3>
+      <p>Escr&iacute;benos. Documentamos cada caso real reportado para mejorar este FAQ.</p>
+    </div>
+    <div class="fila-botones">
+      <a href="mailto:soporte@nexbyte.pro" class="boton azul">Escribir a soporte <svg class="fl" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+      <a href="/planes/" class="boton linea">Ver planes</a>
     </div>
   </div>
 
 </main>
 
-<footer>
-  &copy; 2026 NEXBYTE.pro &middot;
-  <a href="/">Inicio</a> &middot;
-  <a href="/planes/">Planes</a> &middot;
-  <a href="/instalar/">Instalar</a> &middot;
-  <a href="/privacidad/">Privacidad</a>
+<footer class="pie-min">
+  <div class="caja">
+    <span>&copy; 2026 NEXBYTE.pro</span>
+    <a href="/">Inicio</a>
+    <a href="/planes/">Planes</a>
+    <a href="/instalar/">Instalar</a>
+    <a href="/privacidad/">Privacidad</a>
+  </div>
 </footer>
 
 <script>
@@ -630,5 +393,6 @@
     });
   })();
 </script>
+<script defer src="/nx/sitio.js"></script>
 </body>
 </html>

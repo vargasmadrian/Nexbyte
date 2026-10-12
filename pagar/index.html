@@ -7,268 +7,29 @@
 <title>Pagar Plan Completo &mdash; Generador de Aulas Virtuales | NEXBYTE.pro</title>
 <meta name="description" content="Checkout seguro del Plan Completo del Generador de Aulas Virtuales. Procesado por PayPhone Ecuador.">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a1020">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', sans-serif;
-    color: #E2E8F0;
-    background: #0F172A;
-    overflow-x: hidden;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-  }
-
-  /* ===== NAV mínimo (solo logo + back) ===== */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    padding: 18px 32px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .nav-left { display: flex; align-items: center; gap: 14px; }
-  .back-arrow {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 10px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-    color: #94A3B8; text-decoration: none; font-size: 17px;
-    transition: all 0.3s;
-  }
-  .back-arrow:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(59,130,246,0.3); }
-  .nav-logo { font-size: 20px; font-weight: 900; letter-spacing: 0; color: white; text-decoration: none; }
-  .secure-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; color: #94A3B8;
-    background: rgba(34,197,94,0.08);
-    border: 1px solid rgba(34,197,94,0.18);
-    padding: 6px 12px; border-radius: 999px;
-  }
-  .secure-pill .lock { color: #22C55E; font-size: 14px; }
-
-  /* ===== MAIN ===== */
-  main {
-    flex: 1; padding: 48px 24px 60px;
-    max-width: 1000px; margin: 0 auto; width: 100%;
-  }
-
-  .grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 28px; align-items: start;
-  }
-  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
-
-  /* ===== CARDS ===== */
-  .card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 32px;
-  }
-  .card h2 {
-    font-size: 14px; font-weight: 700; color: #94A3B8;
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .card h2 .num {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white; font-size: 13px; font-weight: 800;
-    display: inline-flex; align-items: center; justify-content: center;
-    letter-spacing: 0;
-  }
-
-  /* ===== Resumen del pedido ===== */
-  .summary-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .summary-row:last-of-type { border-bottom: none; }
-  .summary-row .lbl { color: #94A3B8; font-size: 14px; font-weight: 500; }
-  .summary-row .val { color: white; font-size: 14px; font-weight: 600; }
-  .summary-total {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-top: 18px; padding-top: 18px;
-    border-top: 2px solid rgba(255,255,255,0.1);
-  }
-  .summary-total .lbl { color: white; font-size: 16px; font-weight: 700; }
-  .summary-total .val {
-    font-size: 36px; font-weight: 900;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
-  }
-  .summary-total .currency { font-size: 14px; color: #64748B; margin-left: 4px; font-weight: 500; }
-
-  .summary-features { margin-top: 22px; }
-  .summary-features li {
-    list-style: none;
-    display: flex; align-items: center; gap: 10px;
-    padding: 6px 0; font-size: 13px; color: #CBD5E1;
-  }
-  .summary-features .check {
-    flex-shrink: 0; width: 18px; height: 18px; border-radius: 6px;
-    background: rgba(34,211,238,0.12); color: #22D3EE;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700;
-  }
-
-  .summary-note {
-    margin-top: 18px;
-    background: rgba(34,211,238,0.06);
-    border: 1px solid rgba(34,211,238,0.2);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 12px; color: #94A3B8; line-height: 1.5;
-  }
-  .summary-note strong { color: #22D3EE; }
-
-  /* ===== Form PayPhone ===== */
-  .pp-form { width: 100%; }
-  .pp-form label {
-    display: block; color: #CBD5E1; font-size: 12px; font-weight: 600;
-    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .pp-form input {
-    width: 100%; padding: 14px 16px; background: #0F172A;
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-    color: white; font-size: 15px; font-family: inherit;
-    transition: border-color 0.2s;
-  }
-  .pp-form input:focus { outline: none; border-color: #22D3EE; }
-  .pp-form .hint { color: #64748B; font-size: 12px; margin-top: 8px; line-height: 1.5; }
-
-  .pp-form .checkbox-row {
-    margin-top: 18px;
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: #94A3B8; line-height: 1.5;
-  }
-  .pp-form .checkbox-row input[type="checkbox"] {
-    width: 18px; height: 18px; margin-top: 2px;
-    accent-color: #22D3EE;
-  }
-  .pp-form .checkbox-row a { color: #22D3EE; text-decoration: none; font-weight: 600; }
-  .pp-form .checkbox-row a:hover { text-decoration: underline; }
-
-  .pp-form .error {
-    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
-    color: #FCA5A5; padding: 12px 14px; border-radius: 10px;
-    font-size: 13px; line-height: 1.5; margin-top: 14px; display: none;
-  }
-  .pp-form .error.show { display: block; }
-  .pp-form .error a { color: #22D3EE; }
-
-  .btn-pay-card {
-    width: 100%; margin-top: 20px;
-    background: linear-gradient(135deg, #3B82F6, #22D3EE);
-    color: white; border: none; padding: 16px 20px;
-    border-radius: 14px; font-size: 16px; font-weight: 700;
-    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-    font-family: inherit;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-pay-card:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(59,130,246,0.4); }
-  .btn-pay-card:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-  .btn-pay-card svg { width: 16px; height: 16px; }
-
-  .pay-meta {
-    margin-top: 14px;
-    display: flex; justify-content: center; align-items: center; gap: 8px;
-    font-size: 12px; color: #64748B;
-  }
-  .pay-meta .lock-mini { color: #22C55E; }
-
-  /* ===== Pago alternativo ===== */
-  .alt-payment {
-    margin-top: 36px;
-    text-align: center;
-    padding: 28px;
-    background: rgba(255,255,255,0.02);
-    border: 1px dashed rgba(255,255,255,0.1);
-    border-radius: 16px;
-  }
-  .alt-payment h3 {
-    font-size: 14px; font-weight: 700; color: #94A3B8;
-    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
-  }
-  .alt-payment p { font-size: 14px; color: #CBD5E1; margin-bottom: 16px; line-height: 1.5; }
-  .alt-payment .btn-alt {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: white; padding: 12px 22px; border-radius: 10px;
-    font-size: 14px; font-weight: 600; text-decoration: none;
-    transition: all 0.3s;
-  }
-  .alt-payment .btn-alt:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(34,211,238,0.3);
-  }
-  .alt-payment .timing { display: block; margin-top: 10px; font-size: 11px; color: #64748B; }
-
-  /* ===== Trust strip ===== */
-  .trust {
-    max-width: 700px; margin: 40px auto 0;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    text-align: center;
-  }
-  @media (max-width: 600px) { .trust { grid-template-columns: 1fr; } }
-  .trust-item {
-    padding: 14px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-  }
-  .trust-item .ico { font-size: 22px; margin-bottom: 6px; }
-  .trust-item .ttl { color: white; font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-  .trust-item .sub { color: #64748B; font-size: 11px; line-height: 1.4; }
-
-  /* ===== Footer mínimo ===== */
-  footer {
-    text-align: center; padding: 28px 24px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-size: 12px; color: #475569;
-  }
-  footer a { color: #64748B; text-decoration: none; margin: 0 8px; }
-  footer a:hover { color: #22D3EE; }
-
-  /* ===== Logo v4 NEXBYTE.pro — X palpitante (oficial) ===== */
-  @keyframes nbPearlHtml { 0%,100% {color:#FFFFFF;} 20% {color:#E0F7FA;} 40% {color:#FFFFFF;} 60% {color:#F3E8FF;} 80% {color:#FFF5E1;} }
-  @keyframes nbGlowHtml  { 0%,100% {text-shadow:0 0 2px rgba(255,255,255,0.3);} 50% {text-shadow:0 0 10px rgba(255,255,255,0.7),0 0 20px rgba(224,247,250,0.35);} }
-  .nx-brand { display: inline-block; line-height: 1; letter-spacing: -0.5px; }
-  .nx-brand .nx-x    { color: #FFFFFF; font-size: 1.8em; line-height: 1; margin: 0 -1px; display: inline-block; transform: translateY(0.15em); animation: nbPearlHtml 4s ease-in-out infinite, nbGlowHtml 4s ease-in-out infinite; }
-  .nx-brand .nx-byte { color: #22D3EE; }
-  .nx-brand .nx-pro  { color: #22D3EE; font-size: 0.55em; font-weight: 800; margin-left: 1px; }
-
-  /* Mobile */
-  @media (max-width: 600px) {
-    nav { padding: 14px 18px; }
-    main { padding: 28px 14px 40px; }
-    .card { padding: 24px 18px; }
-    .summary-total .val { font-size: 30px; }
-    .btn-pay-card { font-size: 15px; padding: 14px; }
-    .secure-pill { display: none; }
-  }
-</style>
-  <link rel="stylesheet" href="/nx-logo.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nx-logo.css">
+<link rel="stylesheet" href="/nx/sitio.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="oscuro cuerpo-pago">
 
-<!-- NAV minimal -->
-<nav>
-  <div class="nav-left">
-    <a href="/planes/" class="back-arrow" title="Volver a planes">&larr;</a>
-    <a href="/" class="nav-logo nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+<nav class="barra" aria-label="Principal">
+  <div class="caja barra-in">
+    <div class="barra-izq">
+      <a href="/planes/" class="volver" title="Volver a planes" aria-label="Volver a planes"><svg viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4"/></svg></a>
+      <a href="/" class="nx-brand">NE<span class="nx-x">X</span><span class="nx-byte">BYTE</span><span class="nx-pro">.pro</span></a>
+    </div>
+    <span class="seguro mono"><i class="chico" data-g="candado"></i> <span>Pago seguro</span></span>
   </div>
-  <span class="secure-pill"><span class="lock">&#128274;</span> Pago seguro</span>
 </nav>
 
-<main>
+<main class="caja caja-pago">
 
-  <div class="grid">
+  <div class="pago-rej" data-ver data-seccion="pago">
 
     <!-- RESUMEN DEL PEDIDO -->
     <div class="card">
@@ -317,48 +78,41 @@
       <form id="pp-form" class="pp-form">
 
         <!-- Estado: SIN sesión Google -->
-        <div id="pp-login-hint" class="hint" style="margin-bottom:18px;">
+        <div id="pp-login-hint" class="hint">
           Inicia sesi&oacute;n con tu cuenta <strong>Google</strong> (Gmail o Workspace).
           Ser&aacute; el <strong>mismo correo</strong> con el que uses la extensi&oacute;n, as&iacute; tu pago
           se vincula autom&aacute;ticamente &mdash; sin riesgo de errores de tipeo.
         </div>
 
         <!-- Estado: CON sesión Google -->
-        <div id="pp-account" style="display:none; align-items:center; gap:12px; margin-bottom:18px;
-             background:rgba(34,211,238,0.06); border:1px solid rgba(34,211,238,0.2);
-             border-radius:12px; padding:12px 14px;">
-          <span style="flex-shrink:0; width:38px; height:38px; border-radius:50%;
-               background:linear-gradient(135deg,#3B82F6,#22D3EE); color:white; font-weight:800; font-size:18px;
-               display:inline-flex; align-items:center; justify-content:center;">&#10003;</span>
-          <div style="min-width:0; flex:1;">
-            <div style="font-size:11px; color:#64748B; text-transform:uppercase; letter-spacing:0.5px;">Sesi&oacute;n iniciada como</div>
-            <div id="pp-account-email" style="font-size:14px; color:white; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></div>
+        <div id="pp-account" class="cuenta" style="display:none">
+          <span class="ok"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg></span>
+          <div class="quien">
+            <div class="mono">Sesi&oacute;n iniciada como</div>
+            <div id="pp-account-email"></div>
           </div>
-          <button type="button" id="pp-switch" style="flex-shrink:0; background:rgba(255,255,255,0.06);
-               border:1px solid rgba(255,255,255,0.12); color:#94A3B8; font-size:12px; font-weight:600;
-               padding:7px 12px; border-radius:9px; cursor:pointer; font-family:inherit;">Cambiar</button>
+          <button type="button" id="pp-switch">Cambiar</button>
         </div>
 
-        <label for="pp-code" style="display:block; color:#CBD5E1; font-size:12px; font-weight:600; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Código de descuento (opcional)</label>
-        <input type="text" id="pp-code" placeholder="Ej. JUAN10" autocomplete="off"
-          style="width:100%; padding:12px 14px; background:#0F172A; border:1px solid rgba(255,255,255,0.1); border-radius:12px; color:white; font-size:14px; font-family:inherit; text-transform:uppercase; letter-spacing:1px;">
-        <div id="pp-code-status" style="font-size:12px; margin-top:6px; min-height:14px;"></div>
+        <label for="pp-code">Código de descuento (opcional)</label>
+        <input type="text" id="pp-code" placeholder="Ej. JUAN10" autocomplete="off">
+        <div id="pp-code-status" style="font-size:13px; margin-top:8px; min-height:16px;"></div>
 
-        <label class="checkbox-row" for="pp-terms" style="margin-top:14px;">
+        <label class="checkbox-row" for="pp-terms">
           <input type="checkbox" id="pp-terms" required>
           <span>Acepto los <a href="/terminos/" target="_blank">t&eacute;rminos de uso</a> y la <a href="/privacidad/" target="_blank">pol&iacute;tica de privacidad</a>.</span>
         </label>
 
         <div id="pp-error" class="error"></div>
 
-        <button type="submit" class="btn-pay-card" id="pp-btn">
+        <button type="submit" class="boton btn-pay-card" id="pp-btn">
           <span id="pp-btn-icon" style="display:inline-flex; align-items:center;"></span>
           <span id="pp-btn-text">Continuar con Google &middot; Pagar $30</span>
         </button>
 
         <div class="pay-meta">
-          <span class="lock-mini">&#128274;</span>
-          <span>Procesado por <strong style="color:#94A3B8">PayPhone Ecuador</strong> &middot; Visa &middot; Mastercard</span>
+          <i class="chico" data-g="candado"></i>
+          <span>Procesado por <strong>PayPhone Ecuador</strong> &middot; Visa &middot; Mastercard</span>
         </div>
       </form>
 
@@ -366,10 +120,7 @@
       <div class="alt-payment">
         <h3>&iquest;Prefieres pago manual?</h3>
         <p>Paga con <strong>QR De Una</strong> desde tu app de Banco Pichincha.</p>
-        <a href="/planes/#qr-deuna" class="btn-alt">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
-          Ver instrucciones QR De Una
-        </a>
+        <a href="/planes/#qr-deuna" class="boton linea chico"><i class="chico" data-g="qr"></i> Ver instrucciones QR De Una</a>
         <span class="timing">Activaci&oacute;n manual en m&aacute;ximo 24 horas h&aacute;biles</span>
       </div>
     </div>
@@ -377,19 +128,19 @@
   </div>
 
   <!-- Trust strip -->
-  <div class="trust">
+  <div class="trust" data-ver data-seccion="confianza">
     <div class="trust-item">
-      <div class="ico">&#128274;</div>
+      <i class="medio" data-g="candado"></i>
       <div class="ttl">Tu tarjeta nunca pasa por NEXBYTE</div>
       <div class="sub">PayPhone Ecuador es PCI-DSS certified</div>
     </div>
     <div class="trust-item">
-      <div class="ico">&#9889;</div>
+      <i class="medio" data-g="rayo"></i>
       <div class="ttl">Activaci&oacute;n instant&aacute;nea</div>
       <div class="sub">Tu plan queda activo en menos de 1 minuto</div>
     </div>
     <div class="trust-item">
-      <div class="ico">&#128231;</div>
+      <i class="medio" data-g="sobre"></i>
       <div class="ttl">Confirmaci&oacute;n por email</div>
       <div class="sub">Recibes recibo + instrucciones de instalaci&oacute;n</div>
     </div>
@@ -397,12 +148,14 @@
 
 </main>
 
-<footer>
-  &copy; 2026 NEXBYTE.pro &middot;
-  <a href="/terminos/">T&eacute;rminos</a> &middot;
-  <a href="/privacidad/">Privacidad</a> &middot;
-  <a href="/faq/">FAQ</a> &middot;
-  <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+<footer class="pie-min">
+  <div class="caja">
+    <span>&copy; 2026 NEXBYTE.pro</span>
+    <a href="/terminos/">T&eacute;rminos</a>
+    <a href="/privacidad/">Privacidad</a>
+    <a href="/faq/">FAQ</a>
+    <a href="mailto:soporte@nexbyte.pro">Soporte</a>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -654,5 +407,6 @@
     })();
   })();
 </script>
+<script defer src="/nx/sitio.js"></script>
 </body>
 </html>
