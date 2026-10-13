@@ -105,7 +105,7 @@
     basico:{ name:"Plan Básico", desc:"Generador de aulas + calificación de prueba", calif:200,
       mensual:{key:"pucese_basico_mensual",price:10}, trimestral:{key:"pucese_basico_trimestral",price:30} },
     pro:{ name:"Plan Pro", desc:"Para calificar todo el semestre con IA", calif:2000,
-      mensual:{key:"pucese_pro_mensual",price:30}, trimestral:{key:"pucese_pro_trimestral",price:50} }
+      mensual:{key:"pucese_pro_mensual",price:30,calif:1000}, trimestral:{key:"pucese_pro_trimestral",price:50} }
   };
   var tier="basico", dur="mensual";
   function fmt(n){ return n.toLocaleString("es"); }
@@ -115,8 +115,9 @@
     document.getElementById("pDesc").textContent=t.desc;
     document.getElementById("pAmt").textContent="$"+d.price;
     document.getElementById("pPer").textContent = dur==="mensual" ? "al mes" : "cada 3 meses";
-    document.getElementById("califFeat").innerHTML="<b>"+fmt(t.calif)+" calificaciones con IA</b> (nota + retroalimentación)";
-    document.getElementById("tblCalif").textContent=fmt(t.calif);
+    var calif=d.calif||t.calif;
+    document.getElementById("califFeat").innerHTML="<b>"+fmt(calif)+" calificaciones con IA</b> (nota + retroalimentación)";
+    document.getElementById("tblCalif").textContent=fmt(calif);
     document.getElementById("ctaBtn").href="/pagar/?plan="+d.key+"&price="+d.price;
     document.getElementById("ctaPrice").textContent="$"+d.price;
     document.getElementById("recoTag").style.display = tier==="pro" ? "block" : "none";
