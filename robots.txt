@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /pagar/
+Disallow: /pago-resultado/
+Disallow: /dl/
+
+Sitemap: https://nexbyte.pro/sitemap.xml
